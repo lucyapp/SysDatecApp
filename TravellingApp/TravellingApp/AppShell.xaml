@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:local="clr-namespace:SysDatecScanApp.Views"
+       mc:Ignorable="d"
+       x:Class="SysDatecScanApp.AppShell"
+       FlyoutBehavior="Disabled">
+    <Shell.Resources>
+        
+        <Style TargetType="Tab">
+            <Setter Property="Shell.BackgroundColor" 
+                    Value="{StaticResource BlackColor}" />
+            <Setter Property="Shell.ForegroundColor" 
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="Shell.TitleColor" 
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="Shell.TabBarBackgroundColor" 
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="Shell.TabBarTitleColor" 
+                    Value="{StaticResource TabBarTextColor}" />
+            <Setter Property="Shell.UnselectedColor" 
+                    Value="{StaticResource TabBarUnselectedColor}" />
+        </Style>
+        
+    </Shell.Resources>
+    <TabBar>
+        <Tab
+            Icon="home.png"
+            Title="Inicio">
+            <ShellContent>
+                <local:ScanView />
+            </ShellContent>
+        </Tab>
+        <Tab         
+            Icon="bills.png"
+            Title="Archivos">
+            <ShellContent>
+                <local:ArchivosView />
+            </ShellContent>
+        </Tab>
+        <Tab    
+            Icon="pagos.png"
+            Title="Pagos"
+            >
+            <ShellContent>
+                <local:PagosView />
+            </ShellContent>
+        </Tab>
+        <Tab    
+            Icon="account.png"
+            Title="Cuenta">
+            <ShellContent>
+                <local:CuentaView />
+            </ShellContent>
+        </Tab>
+        <Tab                
+            Icon="tab_about.png"
+            Title="Ayuda">
+            <ShellContent>
+                <local:AyudaView />
+            </ShellContent>
+        </Tab>
+    </TabBar>
+</Shell>
