@@ -1,4 +1,6 @@
-﻿using SysDatecScanApp.ServicesHandler;
+﻿using SysDatecScanApp.Models;
+using SysDatecScanApp.RestAPIClient;
+using SysDatecScanApp.ServicesHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +20,9 @@ namespace SysDatecScanApp.Views
 
         private async void ButtonLogin_Clicked(object sender, EventArgs e)
         {
-            LoginService services = new LoginService();
-            var getLoginDetails = await services.CheckLoginIfExists(EntryUsername.Text, EntryPassword.Text);
+           
+            RestClient<UserDetailCredentials> _restClient = new RestClient<UserDetailCredentials>();
+            var getLoginDetails =  await _restClient.AuthenticateUser(EntryUsername.Text, EntryPassword.Text);
 
             if (getLoginDetails)
             {

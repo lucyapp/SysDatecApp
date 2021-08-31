@@ -15,7 +15,7 @@ namespace SysDatecScanApp.ServicesHandler
 
         public async Task<bool> CheckLoginIfExists(string username, string password)
         {
-            var check = await _restClient.checkLogin(username, password);
+            var check = await _restClient.AuthenticateUser(username, password);
 
             return check;
         }
