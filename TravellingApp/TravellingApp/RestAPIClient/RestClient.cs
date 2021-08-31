@@ -17,10 +17,10 @@ namespace SysDatecScanApp.RestAPIClient
 {
     public class RestClient<T>
     {
-        private string MainWebServiceUrl= "http://10.0.2.2:1039";
+        private string MainWebServiceUrl= "http://192.168.0.36:1039";
         //Crear un modelo para para cada url de servicio
-        private const string LoginWebServiceUrl = "http://127.0.0.1:1039/api/UserDetailCredentialsAPI/Login";
-        private const string ApiBaseAddress = "http://127.0.0.1:1039/UserDetailCredentialsAPI/Login";
+        private const string LoginWebServiceUrl = "http://192.168.0.36:1039/api/UserDetailCredentialsAPI/Login";
+        private const string ApiBaseAddress = "http://192.168.0.36:1039/UserDetailCredentialsAPI/Login";
 
 
         private HttpClient Service()
@@ -82,7 +82,7 @@ namespace SysDatecScanApp.RestAPIClient
 
             var content = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync("http://10.0.2.2/api/UserDetailCredentialsAPI/Login/",
+            var response = await client.PostAsync("http://192.168.0.36:1039/api/UserDetailCredentialsAPI/Login/",
               content);
 
             switch (response.StatusCode)
