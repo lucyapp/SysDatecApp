@@ -5,12 +5,25 @@ namespace SysDatecScanApp
 {
     public partial class App : Application
     {
-
+        public static bool IsUserLoggedIn { get; set; }
         public App()
         {
             InitializeComponent();
             // MainPage = new AppShell();
-            MainPage = new LoginPage();
+            //MainPage = new LoginPage();
+
+
+            if (!IsUserLoggedIn)
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new AppShell());
+            }
+
+
+
 
         }
 

@@ -16,7 +16,7 @@ namespace SysDatecScanApp.Views
 
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
-                    DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
+                    await DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
                     return;
                 }
 
@@ -34,7 +34,7 @@ namespace SysDatecScanApp.Views
                 if (file == null)
                     return;
 
-                DisplayAlert("Archivo guardado", file.Path, "OK");
+                await DisplayAlert("Archivo guardado", file.Path, "OK");
 
 
 
@@ -50,7 +50,7 @@ namespace SysDatecScanApp.Views
             {
                 if (!CrossMedia.Current.IsPickPhotoSupported)
                 {
-                    DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
+                    await DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
                     return;
                 }
                 var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions

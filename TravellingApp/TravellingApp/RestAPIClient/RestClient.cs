@@ -48,6 +48,17 @@ namespace SysDatecScanApp.RestAPIClient
                 password = password
             });
 
+            HttpClient client = Service();
+            using (client)
+            {
+                var responseString = await (await client.GetAsync($"http://192.168.0.36:1039/api/UserDetailCredentialsAPI/Login/").ConfigureAwait(false)).Content.ReadAsStringAsync().ConfigureAwait(false);
+                if ((await client.GetAsync($"http://192.168.0.36:1039/api/UserDetailCredentialsAPI/Login/").ConfigureAwait(false)).IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                
+            }
+
             /*     var httpClient = new HttpClient();
 
                  var json = JsonConvert.SerializeObject(data);
@@ -59,7 +70,7 @@ namespace SysDatecScanApp.RestAPIClient
                  var result = await httpClient.PostAsync(LoginWebServiceUrl, httpContent);
                  */
 
-            HttpClient client = new HttpClient();
+           
 
             client.DefaultRequestHeaders.Add("api-version", "1.0");
 
@@ -82,7 +93,7 @@ namespace SysDatecScanApp.RestAPIClient
 
             var content = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync("http://192.168.0.36:1039/api/UserDetailCredentialsAPI/Login/",
+            var response = await client.PostAsync("http://localhost:1039/api/UserDetailCredentialsAPI/Login/",
               content);
 
             switch (response.StatusCode)
