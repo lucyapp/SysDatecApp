@@ -19,7 +19,7 @@ namespace SysDatecScanApp.Views
 		public LoginPage()
         {
             InitializeComponent();
-			Routing.RegisterRoute("AppShell", typeof(AppShell));
+			//Routing.RegisterRoute("AppShell", typeof(AppShell));
 		}
 		
 
