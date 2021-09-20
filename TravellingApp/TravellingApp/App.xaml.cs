@@ -10,7 +10,7 @@ namespace SysDatecScanApp
         {
             InitializeComponent();
             // MainPage = new AppShell();
-            MainPage = new LoginPage();
+            MainPage = new NavigationPage(new LoginPage());
 
         }
 

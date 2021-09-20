@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SysDatecScanApp.Views.LoginPage" 
-             Title="Autenticación">
+             x:Class="SysDatecScanApp.Views.RecuperarClave"
+             Title="Recuperar clave"
+             >
     <ContentPage.Content>
         <StackLayout>
 
@@ -10,26 +11,14 @@
                  VerticalOptions="Start">
                 <Label Text="Nombre de usuario"
                HorizontalOptions="Start"/>
-                <Entry Text="" TextChanged="Label_BindingContextChanged"
-               x:Name="EntryUsername"/>
-                <Label Text="Contraseña de usuario"
+                <Entry Text="" TextChanged="Label_BindingContextChanged"  x:Name="EntryUsername"/>
+                <Label Text="Email de usuario"
                HorizontalOptions="Start"/>
                 <Entry Text=""
-               x:Name="EntryPassword" TextChanged="Label_BindingContextChanged"
-               IsPassword="True"/>
+               x:Name="EntryCorreo" TextChanged="Label_BindingContextChanged"
+               IsPassword="false"/>
 
-                <Button Text="Ingresar"
-                TextColor="White"
-                BackgroundColor="#22A7F0"
-                x:Name="ButtonLogin"
-                Clicked="ButtonLogin_Clicked"/>
-
-                <Button Text="Registrarse"
-                TextColor="White"
-                BackgroundColor="DodgerBlue"
-                x:Name="ButtonRegister" 
-                Clicked="ButtonRegistrarse_Clicked"/>
-
+                              
                 <Button Text="Recuperar clave"
                 TextColor="White"
                 BackgroundColor="LightGreen"
@@ -43,4 +32,3 @@
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
-    

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             x:Class="SysDatecScanApp.Views.RegistrarUsuario"
+             Title="Registro de usuario">
+   <!-- <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Registrar Usuarios"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+            
+        </StackLayout>
+    </ContentPage.Content>!-->
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid RowSpacing="{OnPlatform iOS=25,Android=20}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!--1-->
+                    <RowDefinition Height="Auto"/>
+                    <!--2-->
+                    <RowDefinition Height="Auto"/>
+                    <!--3-->
+                    <RowDefinition Height="Auto"/>
+                    <!--4-->
+                    <RowDefinition Height="Auto"/>
+                    <!--5-->
+                    <RowDefinition Height="Auto"/>
+                    <!--6-->
+                    <RowDefinition Height="Auto"/>
+                    <!--7-->
+                    <RowDefinition Height="Auto"/>
+                    <!--8-->
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+
+                <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                    <Label
+                    Text="Datos de usuario"
+                            TextColor="Black"
+                            Font="Montserrat-Medium.otf"
+                            FontSize="{OnPlatform Android=20,iOS=23}"
+                            WidthRequest="300"
+                    />
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
+                    <Label 
+                    Text="Email"
+                    FontSize="{OnPlatform Android=13}"
+                    TextColor="Black"
+                    />
+                    <Frame
+                    HasShadow="{OnPlatform Android=true,iOS=false}"
+                    Padding="{OnPlatform Android=6,iOS=0}"
+                    CornerRadius="{OnPlatform Android=7}"
+                    BorderColor="DarkBlue"
+                    >
+                    <Entry  x:Name="txtEmail"
+                    Placeholder="correo@sysdatec.com"
+                    Keyboard="Email"
+                    MaxLength="25"
+                    FontSize="{OnPlatform Android=15,iOS=16}"
+                    Text="{Binding EmailTxt, Mode=TwoWay}"
+                    IsEnabled="{Binding IsEnabledTxt}"
+                    />
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Grid.Row="4" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+
+                    <Label 
+                    Text="Contraseña"
+                    FontSize="{OnPlatform Android=13}"
+                    TextColor="Black"
+                    />
+
+                    <Frame
+                     HasShadow="{OnPlatform Android=true,iOS=false}"
+                     Padding="{OnPlatform Android=6,iOS=0}"
+                    CornerRadius="{OnPlatform Android=7}"
+                     BorderColor="DarkBlue"
+                     >
+
+                        <Entry x:Name="txtContrasena"
+                    Placeholder="******************"
+                    MaxLength="25"
+                    IsPassword="True"
+                    FontSize="{OnPlatform Android=15,iOS=16}"
+                    Text="{Binding PasswordTxt, Mode=TwoWay}"
+                    IsEnabled="{Binding IsEnabledTxt}"
+                    />
+
+                    </Frame>
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="5" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical" >
+                    <Label
+                     Text="Nombre de usuario"
+                     FontSize="{OnPlatform Android=13}"
+                     TextColor="Black"/>
+
+                    <Frame
+                     HasShadow="{OnPlatform Android=true,iOS=false}"
+                     Padding="{OnPlatform Android=6,iOS=0}"
+                     CornerRadius="{OnPlatform Android=7}"
+                     BorderColor="DarkBlue"
+                     >
+
+                        <Entry x:Name="txtUsername"
+                    Placeholder="Usuario1"
+                    MaxLength="25"
+                    Keyboard="Text"
+                    FontSize="{OnPlatform Android=15,iOS=16}"
+                    Text="{Binding NameTxt, Mode=TwoWay}"
+                    IsEnabled="{Binding IsEnabledTxt}"
+                    />
+
+                    </Frame>
+                </StackLayout>
+                <StackLayout Grid.Row="6" HorizontalOptions="Center" WidthRequest="300" Orientation="Vertical">
+                   
+
+                        <Label
+                     Text="Nombres"
+                     FontSize="{OnPlatform Android=13}"
+                     TextColor="Black"/>
+
+                        <Frame
+                     HasShadow="{OnPlatform Android=true,iOS=false}"
+                     Padding="{OnPlatform Android=6,iOS=0}"
+                     CornerRadius="{OnPlatform Android=7}"
+                     >
+
+                            <Entry x:Name="txtName"
+                    Placeholder="Carlos perez .."
+                    MaxLength="30"
+                    FontSize="{OnPlatform Android=15,iOS=16}"
+                    Keyboard="Text"
+                    Text="{Binding AgeTxt, Mode=TwoWay}"
+                    IsEnabled="{Binding IsEnabledTxt}"
+                    />
+
+                        </Frame>
+                   
+                </StackLayout>
+
+
+                <StackLayout Grid.Row="7" HorizontalOptions="Center" Orientation="Vertical" >
+
+                    <Button
+                     Text="Registrarse"
+                            TextColor="Black"
+                            Font="Montserrat-Medium.otf"
+                            FontSize="{OnPlatform Android=15}"
+                            BackgroundColor="DodgerBlue"
+                            BorderColor="#f2f2f2"
+                            BorderWidth="1.5"
+                            d:TextColor="White"
+                            WidthRequest="300"
+                            HeightRequest="50"
+                            CornerRadius="7"
+                            Clicked="Button_Clicked_2"
+                           
+                            
+                    />
+                    <Button
+                            Text="¿Ya estoy registrado?"
+                            d:TextColor="White"
+                            TextColor="{OnPlatform iOS=Black}"
+                            FontSize="{OnPlatform Android=11,iOS=12}"
+                            BackgroundColor="LightGreen"
+                            Clicked="Button_Clicked"
+                          
+                            />
+
+                </StackLayout>
+                <StackLayout Grid.Row="8" HorizontalOptions="Center">
+                    <Label
+                    Text="Formulario de datos"
+                            TextColor="Black"
+                            Font="Montserrat-Medium.otf"
+                            FontSize="{OnPlatform Android=20,iOS=23}"
+                            WidthRequest="300" 
+                    />
+                    <Button
+                     Text="Diligenciar formulario"
+                            TextColor="Black"
+                            Font="Montserrat-Medium.otf"
+                            FontSize="{OnPlatform Android=15}"
+                            BackgroundColor="#22A7F0"
+                            BorderColor="#f2f2f2"
+                            BorderWidth="1.5"
+                            d:TextColor="White"
+                            WidthRequest="300"
+                            HeightRequest="50"
+                            CornerRadius="7"
+                            Clicked="Button_Clicked_1"
+                            Command="{Binding RegisterCommand}"
+                            IsEnabled="{Binding IsEnabledTxt, Mode=TwoWay}"
+                    />
+                </StackLayout>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+
+</ContentPage>

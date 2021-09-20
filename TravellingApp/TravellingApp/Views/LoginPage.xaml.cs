@@ -1,11 +1,17 @@
 ﻿using SysDatecScanApp.ServicesHandler;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using SysDatecScanApp.Data;
+using SysDatecScanApp.Models;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using System.Net.Http;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json;
+using SQLite;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+using SysDatecScanApp.Views;
 
 namespace SysDatecScanApp.Views
 {
@@ -16,19 +22,111 @@ namespace SysDatecScanApp.Views
             InitializeComponent();
         }
 
-        private async void ButtonLogin_Clicked(object sender, EventArgs e)
-        {
-            LoginService services = new LoginService();
-            var getLoginDetails = await services.CheckLoginIfExists(EntryUsername.Text, EntryPassword.Text);
+		private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+		private readonly HttpClient client = new HttpClient();
+		private ObservableCollection<UsuarioModel> _post;
+		private UsuarioModel user;
+		public bool resultado;
 
-            if (getLoginDetails)
-            {
-                await DisplayAlert("Autenticacion exitosa", "Autenticacion de usuarios", "Ok", "Cancelar");
-            }
-            else
-            {
-                await DisplayAlert("Autenticacion erronea", "Username or Password son incorrectos o no existen", "Ok", "Cancelar");
-            }
-        }
-    }
+		
+
+		async void OnSaveClicked()
+		{
+			var todoItem = (UsuarioModel)BindingContext;
+			UsuarioDatabase database = await UsuarioDatabase.Instance;
+			await database.SaveItemAsync(todoItem);
+			await Navigation.PopAsync();
+
+
+		}
+
+		async void OnDeleteClicked()
+		{
+			var todoItem = (UsuarioModel)BindingContext;
+			UsuarioDatabase database = await UsuarioDatabase.Instance;
+			await database.DeleteItemAsync(todoItem);
+			await Navigation.PopAsync();
+		}
+
+		async void OnCancelClicked()
+		{
+			await Navigation.PopAsync();
+		}
+
+
+
+
+		void ButtonLogin_Clicked(object sender, EventArgs e)
+		{
+			user = new UsuarioModel
+			{
+				Username = EntryUsername.Text,
+				Password = EntryPassword.Text
+			};
+
+			AreCredentialsCorrect(user);
+
+		}
+
+		void ButtonRegistrarse_Clicked(object sender, EventArgs e)
+		{
+			Navigation.PushAsync(new RegistrarUsuario());
+		}
+
+		public async void Llamada()
+		{
+
+			string content = await client.GetStringAsync(Url).ConfigureAwait(true);
+			List<UsuarioModel> posts = JsonConvert.DeserializeObject<List<UsuarioModel>>(content);
+			_post = new ObservableCollection<UsuarioModel>(posts);
+			var xx = _post.Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
+			if (xx is null)
+			{
+				//messageLabel.Text = "Login fallido";
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					await DisplayAlert("Register", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
+
+				});
+				resultado = false;
+			}
+			else
+			{
+				//messageLabel.Text = "Login exitoso";
+				//await Navigation.PushAsync(new CarpetaListPage());
+				resultado = true;
+
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					await DisplayAlert("Register", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(true);
+					await Task.Delay(2000).ConfigureAwait(true);
+					//await Navigation.PopAsync().ConfigureAwait(true); //para el main 
+					//await Navigation.PushAsync(new CarpetaListPage());   //para una nueva ventana                
+
+				});
+				Application.Current.MainPage = new AppShell();
+			}
+
+		}
+
+
+		bool AreCredentialsCorrect(UsuarioModel user)
+		{
+			Llamada();
+			return resultado;
+		}
+
+
+
+		private void Label_BindingContextChanged(object sender, EventArgs e)
+		{
+			messageLabel.Text = "";
+
+		}
+
+		private void ButtonRecuperarClave_Clicked(object sender, EventArgs e)
+		{
+			Navigation.PushAsync(new RecuperarClave());
+		}
+	}
 }
