@@ -40,15 +40,15 @@
 
 
 
-                <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                <!--<StackLayout Grid.Row="2" HorizontalOptions="Center">
                     <Label
                     Text="Datos de usuario"
                             TextColor="Black"
                             Font="Montserrat-Medium.otf"
                             FontSize="{OnPlatform Android=20,iOS=23}"
                             WidthRequest="300"
-                    />
-                </StackLayout>
+                   
+                </StackLayout> -->
 
                 <StackLayout Grid.Row="3" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
                     <Label 
@@ -137,9 +137,10 @@
                      HasShadow="{OnPlatform Android=true,iOS=false}"
                      Padding="{OnPlatform Android=6,iOS=0}"
                      CornerRadius="{OnPlatform Android=7}"
+                             BorderColor="DarkBlue"
                      >
 
-                            <Entry x:Name="txtName"
+                     <Entry x:Name="txtName"
                     Placeholder="Carlos perez .."
                     MaxLength="30"
                     FontSize="{OnPlatform Android=15,iOS=16}"

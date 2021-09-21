@@ -1,60 +1,90 @@
 ﻿using System;
 using System.Collections.Generic;
-using SysDatecScanApp.Data;
-using SysDatecScanApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Net.Http;
-using System.Collections.ObjectModel;
-using Newtonsoft.Json;
-using SQLite;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
+using Xamarin.Essentials;
 
 namespace SysDatecScanApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Formulario : ContentPage
     {
+        private string fileContents;
+
         public Formulario()
         {
+            ArchivosCarpetas();
             InitializeComponent();
         }
 
+        public static List<string> GetAllFilesFromFolder(string root, bool searchSubfolders)
+        {
+            Queue<string> folders = new Queue<string>();
+            List<string> files = new List<string>();
+            folders.Enqueue(root);
+            while (folders.Count != 0)
+            {
+                string currentFolder = folders.Dequeue();
+                try
+                {
+                    string[] filesInCurrent = System.IO.Directory.GetFiles(currentFolder, "*.*", System.IO.SearchOption.TopDirectoryOnly);
+                    files.AddRange(filesInCurrent);
+                }
+                catch
+                {
+                    // Do Nothing
+                }
+                try
+                {
+                    if (searchSubfolders)
+                    {
+                        string[] foldersInCurrent = System.IO.Directory.GetDirectories(currentFolder, "*.*", System.IO.SearchOption.TopDirectoryOnly);
+                        foreach (string _current in foldersInCurrent)
+                        {
+                            folders.Enqueue(_current);
+                        }
+                    }
+                }
+                catch
+                {
+                    // Do Nothing
+                }
+            }
+            return files;
+        }
+        public static void DirectorySearch(string dir)
+        {/// storage / emulated / 0 / Android / data / com.companyname.app / files / count.txt
+
+
+            var lista = GetAllFilesFromFolder("/storage/emulated/0/Android/data/com.mult/SysDatec/", true);
+
+            try
+            {
+                foreach (string f in Directory.GetFiles(dir))
+                {
+                    Console.WriteLine(Path.GetFileName(f));
+                }
+                foreach (string d in Directory.GetDirectories(dir))
+                {
+                    Console.WriteLine(Path.GetFileName(d));
+                    DirectorySearch(d);
+                }
+            }
+            catch (System.Exception ex)
+            {
+               
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         void ArchivosCarpetas() 
         {
-            string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/Pictures"; // Documents folder  
-            var path = Path.Combine(documentsPath, "/SysDatec/");
-
-        
-            if (!System.IO.Directory.Exists(documentsPath + path))
-            {
-                Console.WriteLine("\n carpeta ya Sysdatec ya existe: " + path);
-
-                string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/Pictures/SysDatec/";
-
-                List<string> dirs = new List<string>(Directory.EnumerateDirectories(docPath));
-
-                foreach (var dir in dirs)
-                {
-                    Console.WriteLine($"{dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1)}");
-                }
-                Console.WriteLine($"{dirs.Count} directories found.");
+          
 
 
+            DirectorySearch("SysDatec");
 
-            }
-            else
-            {
-                //aqui arrojar mensaje de que no existe y que se va crear
-                //verificar si en la nube hay datos de usuario de documentos y carpetas 
-
-                Console.WriteLine("\ncarpeta no existente SysDatec : " + path);
-
-
-            }
         }
 
         private void btnGuardarFormulario_Clicked(object sender, EventArgs e)

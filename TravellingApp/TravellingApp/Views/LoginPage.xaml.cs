@@ -1,4 +1,4 @@
-﻿using SysDatecScanApp.ServicesHandler;
+﻿
 using System.Collections.Generic;
 using SysDatecScanApp.Data;
 using SysDatecScanApp.Models;
@@ -27,8 +27,6 @@ namespace SysDatecScanApp.Views
 		private ObservableCollection<UsuarioModel> _post;
 		private UsuarioModel user;
 		public bool resultado;
-
-		
 
 		async void OnSaveClicked()
 		{
@@ -85,7 +83,7 @@ namespace SysDatecScanApp.Views
 				//messageLabel.Text = "Login fallido";
 				Device.BeginInvokeOnMainThread(async () =>
 				{
-					await DisplayAlert("Register", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
+					await DisplayAlert("Autenticacion", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
 
 				});
 				resultado = false;
@@ -98,7 +96,7 @@ namespace SysDatecScanApp.Views
 
 				Device.BeginInvokeOnMainThread(async () =>
 				{
-					await DisplayAlert("Register", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(true);
+					await DisplayAlert("Autenticacion", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(true);
 					await Task.Delay(2000).ConfigureAwait(true);
 					//await Navigation.PopAsync().ConfigureAwait(true); //para el main 
 					//await Navigation.PushAsync(new CarpetaListPage());   //para una nueva ventana                

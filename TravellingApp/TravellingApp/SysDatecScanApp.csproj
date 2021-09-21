@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="RestAPIClient\**" />
+    <EmbeddedResource Remove="RestAPIClient\**" />
+    <None Remove="RestAPIClient\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\LoginService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.10" />
     <PackageReference Include="Microsoft.VisualStudio.OLE.Interop" Version="17.0.0-previews-3-31605-261" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
