@@ -10,14 +10,7 @@
             
              x:Class="SysDatecScanApp.Views.ArchivosView"
              Title="Archivos">
-    <!--<lottie:AnimationView 
-	    Animation="empty.json" 
-	    AutoPlay="true"
-	    VerticalOptions="FillAndExpand" 
-	    HorizontalOptions="FillAndExpand" >
-    </lottie:AnimationView>
--->
-
+   
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -35,7 +28,7 @@
                         <ImageButton Grid.Column="0" Grid.RowSpan="2" Source="Men" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start" BackgroundColor="#f1f0f4" CornerRadius="10"/>
                         <!--Welcome & Name-->
                         <Label Grid.Column="1" Grid.Row="0" Text="Bienvenido" TextColor="Silver" FontAttributes="Bold" Margin="20,0,0,0"/>
-                        <Label Grid.Column="1" Grid.Row="1" Text="Darwin Aguiño" FontAttributes="Bold" Margin="20,0,0,0"/>
+                        <Label x:Name="Nombre" Grid.Column="1" Grid.Row="1" Text="{Binding Nombre}" FontAttributes="Bold" Margin="20,0,0,0"/>
                         <!--Bell-->
                         <Image Grid.Column="2" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="End" Source="Bell" TranslationX="-10"/>
                     </Grid>
@@ -62,7 +55,7 @@
                                             </Frame>
                                             <Label Grid.Column="0" Grid.Row="1" Text="{Binding Name}" FontAttributes="Bold" Padding="0,10,0,0"/>
                                             <Label Grid.Column="0" Grid.Row="2" Text="{Binding FechaCreacion}" TextColor="{StaticResource MainColor}" FontAttributes="Bold"/>
-                                            <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" ImageSource="Heart" HorizontalOptions="End" WidthRequest="35" HeightRequest="35" CornerRadius="8" VerticalOptions="Center"  BackgroundColor="{StaticResource MainColor}"/>
+                                            <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" ImageSource="Heart" HorizontalOptions="End" WidthRequest="35" HeightRequest="35" CornerRadius="8" VerticalOptions="Center"  BackgroundColor="{StaticResource MainColor}" IsVisible="false"/>
                                         </Grid>
                                     </Frame>
                                 </StackLayout>

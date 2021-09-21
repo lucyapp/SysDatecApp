@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.OLE.Interop;
 using NuGet.Common;
 using SQLite;
 using SysDatecScanApp.Models;
-using SysDatecScanApp.Models;
+
 
 namespace SysDatecScanApp.Data
 {

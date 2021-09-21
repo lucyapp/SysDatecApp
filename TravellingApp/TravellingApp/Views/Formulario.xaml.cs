@@ -57,7 +57,7 @@ namespace SysDatecScanApp.Views
         {/// storage / emulated / 0 / Android / data / com.companyname.app / files / count.txt
 
 
-            var lista = GetAllFilesFromFolder("/storage/emulated/0/Android/data/com.mult/SysDatec/", true);
+            var lista = GetAllFilesFromFolder("/storage/emulated/0/Android/data/Pictures/SysDatec/", true);
 
             try
             {

@@ -8,15 +8,18 @@ namespace SysDatecScanApp.Views
 {
     public partial class ArchivosView : ContentPage
     {
+        public string Name { get; private set; }
         public ArchivosView()
         {
             InitializeComponent();
+            Name = Application.Current.Properties["name"].ToString();
+            Nombre.Text = Name;
             takePhoto.Clicked += async (sender, args) =>
             {
 
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
-                    DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
+                    _ = DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
                     return;
                 }
 
@@ -34,7 +37,7 @@ namespace SysDatecScanApp.Views
                 if (file == null)
                     return;
 
-                DisplayAlert("Archivo guardado", file.Path, "OK");
+                _ = DisplayAlert("Archivo guardado", file.Path, "OK");
 
 
 
@@ -50,7 +53,7 @@ namespace SysDatecScanApp.Views
             {
                 if (!CrossMedia.Current.IsPickPhotoSupported)
                 {
-                    DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
+                    _ = DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
                     return;
                 }
                 var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
@@ -59,7 +62,7 @@ namespace SysDatecScanApp.Views
 
                 });
 
-
+              
                 if (file == null)
                     return;
 
@@ -112,6 +115,6 @@ namespace SysDatecScanApp.Views
             BindingContext = new ArchivosViewModel();
         }
 
-        
+       
     }
 }

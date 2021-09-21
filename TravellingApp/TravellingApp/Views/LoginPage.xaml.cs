@@ -86,6 +86,7 @@ namespace SysDatecScanApp.Views
 					await DisplayAlert("Autenticacion", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
 
 				});
+				Application.Current.Properties["IsLoggedIn"] = false;
 				resultado = false;
 			}
 			else
@@ -97,11 +98,21 @@ namespace SysDatecScanApp.Views
 				Device.BeginInvokeOnMainThread(async () =>
 				{
 					await DisplayAlert("Autenticacion", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(true);
-					await Task.Delay(2000).ConfigureAwait(true);
+					
 					//await Navigation.PopAsync().ConfigureAwait(true); //para el main 
-					//await Navigation.PushAsync(new CarpetaListPage());   //para una nueva ventana                
+					//await Navigation.PushAsync(new CarpetaListPage());   //para una nueva ventana
+					
+					Application.Current.Properties["username"] = user.Username;
+					Application.Current.Properties["password"] = user.Password;
+					Application.Current.Properties["name"] = xx.Name;
+					Application.Current.Properties["email"] = xx.Email;
+					Application.Current.Properties["IsLoggedIn"] = true;
+					await Task.Delay(2000).ConfigureAwait(true);                                                                                                                                                                                                                       
 
 				});
+
+				
+
 				Application.Current.MainPage = new AppShell();
 			}
 
