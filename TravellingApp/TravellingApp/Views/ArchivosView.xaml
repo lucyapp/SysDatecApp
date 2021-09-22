@@ -94,8 +94,7 @@
                 <Image x:Name="image" IsVisible="false"/>
             </StackLayout>
            
-               
-            
+ 
         </ScrollView>
         <Button Grid.Row="0" x:Name="pickPhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30"  VerticalOptions ="End" HorizontalOptions ="EndAndExpand"  Image="file2.png"  />
         <Button Grid.Row="1" x:Name="takePhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30" Image="camara.png" VerticalOptions ="End"  HorizontalOptions ="EndAndExpand"/>

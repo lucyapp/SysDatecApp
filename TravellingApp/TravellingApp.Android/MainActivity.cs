@@ -4,9 +4,10 @@ using Android.Runtime;
 using Android.OS;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
 using SysDatecScanApp;
-using Lottie.Forms;
 using Plugin.Permissions;
-using Resource = Lottie.Forms.Resource;
+using Android.Support.V7.App;
+using Android.Util;
+using Android.Content;
 
 namespace ScanApp.Droid
 {
@@ -19,12 +20,15 @@ namespace ScanApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            //SetContentView(Resource.Layout.Main); //este pedazo muestra el menu 
 
-            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            FormsVideoPlayer.Init();
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+
+
+           
+           
         }
 
        
@@ -35,4 +39,6 @@ namespace ScanApp.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
+
 }
