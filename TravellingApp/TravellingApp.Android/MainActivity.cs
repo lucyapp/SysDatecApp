@@ -20,13 +20,9 @@ namespace ScanApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            //SetContentView(Resource.Layout.Main); //este pedazo muestra el menu 
-
+           
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-
-
-
            
            
         }
