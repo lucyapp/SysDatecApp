@@ -17,19 +17,19 @@ namespace SysDatecScanApp.Helpers
 
         public bool IsBorderErrorVisible
         {
-            get => (bool) GetValue(IsBorderErrorVisibleProperty);
+            get => (bool)GetValue(IsBorderErrorVisibleProperty);
             set => SetValue(IsBorderErrorVisibleProperty, value);
         }
 
         public Color BorderErrorColor
         {
-            get => (Color) GetValue(BorderErrorColorProperty);
+            get => (Color)GetValue(BorderErrorColorProperty);
             set => SetValue(BorderErrorColorProperty, value);
         }
 
         public string ErrorText
         {
-            get => (string) GetValue(ErrorTextProperty);
+            get => (string)GetValue(ErrorTextProperty);
             set => SetValue(ErrorTextProperty, value);
         }
     }

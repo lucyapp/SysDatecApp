@@ -1,6 +1,6 @@
-﻿using System;
-using SysDatecScanApp.Data;
+﻿using SysDatecScanApp.Data;
 using SysDatecScanApp.Models;
+using System;
 using Xamarin.Forms;
 
 namespace SysDatecScanApp.Views

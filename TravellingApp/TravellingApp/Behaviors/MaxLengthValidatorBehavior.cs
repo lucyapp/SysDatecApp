@@ -9,7 +9,7 @@ namespace SysDatecScanApp.Behaviors
 
         public int MaxLength
         {
-            get => (int) GetValue(MaxLengthProperty);
+            get => (int)GetValue(MaxLengthProperty);
             set => SetValue(MaxLengthProperty, value);
         }
 
@@ -20,9 +20,9 @@ namespace SysDatecScanApp.Behaviors
 
         private void bindable_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
             if (e.NewTextValue != null && e.NewTextValue.Length >= MaxLength)
-                ((Entry) sender).Text = e.NewTextValue.Substring(0, MaxLength);
+                ((Entry)sender).Text = e.NewTextValue.Substring(0, MaxLength);
         }
 
         protected override void OnDetachingFrom(Entry bindable)

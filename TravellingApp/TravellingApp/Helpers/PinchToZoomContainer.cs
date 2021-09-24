@@ -1,6 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 
 namespace SysDatecScanApp.Helpers
 {
@@ -133,7 +132,7 @@ namespace SysDatecScanApp.Helpers
             var targetX = _xOffset - (originX * Content.Width) * (_currentScale - _startScale);
             var targetY = _yOffset - (originY * Content.Height) * (_currentScale - _startScale);
 
-           
+
 
             Content.Scale = _currentScale;
         }

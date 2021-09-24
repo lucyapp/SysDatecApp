@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.OLE.Interop;
-using NuGet.Common;
+﻿using NuGet.Common;
 using SQLite;
 using SysDatecScanApp.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 
 namespace SysDatecScanApp.Data

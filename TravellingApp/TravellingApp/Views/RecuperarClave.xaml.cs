@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
+using SysDatecScanApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using SysDatecScanApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -41,65 +40,66 @@ namespace SysDatecScanApp.Views
             AreCredentialsCorrect(user);
 
         }
-		public async void Llamada()
-		{
-		
-			string content = await client.GetStringAsync(Url).ConfigureAwait(true);
-			List<UsuarioModel> posts = JsonConvert.DeserializeObject<List<UsuarioModel>>(content);
-			_post = new ObservableCollection<UsuarioModel>(posts);
-			var xx = _post.Where(x => x.Username == user.Username && x.Email == user.Email).FirstOrDefault();
-			if (xx is null)
-			{
-				//messageLabel.Text = "Login fallido";
-				Device.BeginInvokeOnMainThread(async () =>
-				{
-					await DisplayAlert("Recuperacion", "Su nombre de usuario o email son incorrectos, debe colocar datos validos.", "Ok").ConfigureAwait(true);
-					await Task.Delay(2000).ConfigureAwait(true);
-					
+        public async void Llamada()
+        {
+
+            string content = await client.GetStringAsync(Url).ConfigureAwait(true);
+            List<UsuarioModel> posts = JsonConvert.DeserializeObject<List<UsuarioModel>>(content);
+            _post = new ObservableCollection<UsuarioModel>(posts);
+            var xx = _post.Where(x => x.Username == user.Username && x.Email == user.Email).FirstOrDefault();
+            if (xx is null)
+            {
+                //messageLabel.Text = "Login fallido";
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await DisplayAlert("Recuperacion", "Su nombre de usuario o email son incorrectos, debe colocar datos validos.", "Ok").ConfigureAwait(true);
+                    await Task.Delay(2000).ConfigureAwait(true);
 
 
-				});
-				resultado = false;
-			}
-			else
-			{
-				//messageLabel.Text = "Login exitoso";
-				//await Navigation.PushAsync(new CarpetaListPage());
-				var url2 = Url += "/" + EntryUsername.Text + "/" + EntryCorreo.Text + "/1";
-				content = await client.GetStringAsync(url2).ConfigureAwait(true);
+
+                });
+                resultado = false;
+            }
+            else
+            {
+                //messageLabel.Text = "Login exitoso";
+                //await Navigation.PushAsync(new CarpetaListPage());
+                var url2 = Url += "/" + EntryUsername.Text + "/" + EntryCorreo.Text + "/1";
+                content = await client.GetStringAsync(url2).ConfigureAwait(true);
                 //posts = JsonConvert.DeserializeObject<List<UsuarioModel>>(content);
                 //_post = new ObservableCollection<UsuarioModel>(posts);
                 if (content is null)
-				{ 
-					
-				}else
                 {
-					Device.BeginInvokeOnMainThread(async () =>
-					{
-						await DisplayAlert("Recuperacion", "El sistema le ha enviado un correo con las nuevas credenciales, ingrese nuevamente!", "Ok").ConfigureAwait(true);
-						await Task.Delay(2000).ConfigureAwait(true);
+
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await DisplayAlert("Recuperacion", "El sistema le ha enviado un correo con las nuevas credenciales, ingrese nuevamente!", "Ok").ConfigureAwait(true);
+                        await Task.Delay(2000).ConfigureAwait(true);
 
 
-					});
-				}
-				resultado = true;
-			}
+                    });
+                }
+                resultado = true;
+            }
 
-		}
-
-
-		bool AreCredentialsCorrect(UsuarioModel user)
-		{
-			Llamada();
-			return resultado;
-		}
+        }
 
 
+        bool AreCredentialsCorrect(UsuarioModel user)
+        {
+            Llamada();
+            return resultado;
+        }
 
-		private void Label_BindingContextChanged(object sender, EventArgs e)
-		{
-			messageLabel.Text = "";
 
-		}
-	}
+
+        private void Label_BindingContextChanged(object sender, EventArgs e)
+        {
+            messageLabel.Text = "";
+
+        }
+    }
 }

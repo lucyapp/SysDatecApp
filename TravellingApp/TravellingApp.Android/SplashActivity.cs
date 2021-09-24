@@ -1,17 +1,15 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
 using ScanApp.Droid;
-using SysDatecScanApp;
+using System.Threading.Tasks;
 
 namespace ScanApp
 {
-    [Activity(Label = "LucyApp", Icon = "@mipmap/icon",Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "LucyApp", Icon = "@mipmap/icon", Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class SplashActivity : AppCompatActivity
     {
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;
@@ -44,6 +42,6 @@ namespace ScanApp
 
         // Launches the startup task
 
-  
-  }
+
+    }
 }

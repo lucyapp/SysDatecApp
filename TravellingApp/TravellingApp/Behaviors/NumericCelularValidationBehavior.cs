@@ -1,7 +1,4 @@
-﻿
-
-using System;
-using SysDatecScanApp.Helpers;
+﻿using SysDatecScanApp.Helpers;
 using Xamarin.Forms;
 
 namespace SysDatecScanApp.Behaviors
@@ -41,7 +38,7 @@ namespace SysDatecScanApp.Behaviors
                 IsValid = e.NewTextValue.Length < MinLength;
                 ((EntryExtender)sender).IsBorderErrorVisible = IsValid;
             }
-           
+
         }
 
         protected override void OnDetachingFrom(EntryExtender bindable)

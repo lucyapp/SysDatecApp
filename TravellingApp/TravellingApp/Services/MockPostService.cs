@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using SysDatecScanApp.Models;
+﻿using SysDatecScanApp.Models;
+using System.Collections.Generic;
 
 namespace SysDatecScanApp.Services
 {

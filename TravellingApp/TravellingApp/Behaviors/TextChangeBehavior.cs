@@ -1,12 +1,11 @@
-﻿using System;
-using SysDatecScanApp.Renderers;
+﻿using SysDatecScanApp.Renderers;
 using Xamarin.Forms;
 
 namespace SysDatecScanApp.Behaviors
 {
     public class TextChangeBehavior : Behavior<BorderlessEntry>
     {
-       
+
         protected override void OnAttachedTo(BorderlessEntry entry)
         {
             entry.TextChanged += OnEntryTextChanged;

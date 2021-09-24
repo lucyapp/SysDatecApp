@@ -6,7 +6,7 @@ namespace SysDatecScanApp.Helpers
 {
     public class ToLowerUperValueConverter : IValueConverter
     {
-       
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             switch (parameter)
@@ -23,7 +23,7 @@ namespace SysDatecScanApp.Helpers
                     return value;
                     break;
             }
-            
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

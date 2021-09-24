@@ -1,15 +1,13 @@
 ﻿using Newtonsoft.Json;
+using SysDatecScanApp.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
-using SysDatecScanApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -74,22 +72,22 @@ namespace SysDatecScanApp.Views
             switch (response.StatusCode)
             {
                 case (System.Net.HttpStatusCode.OK):
-                  
+
                     break;
 
                 case (System.Net.HttpStatusCode.BadRequest):
-                  
+
                     break;
 
                 case (System.Net.HttpStatusCode.Forbidden):
-                   
+
                     break;
 
             }
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await DisplayAlert("Datos", "Ocurrio un error al registrar, por lo tanto verifique correctamente que los datos esten correctamente y que tenga acceso a internet", "OK").ConfigureAwait(true);
@@ -98,7 +96,8 @@ namespace SysDatecScanApp.Views
                 });
 
             }
-            else {
+            else
+            {
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
@@ -113,8 +112,8 @@ namespace SysDatecScanApp.Views
                 });
 
 
-              
-              
+
+
             }
 
 

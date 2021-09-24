@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using Plugin.Settings;
+﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System;
+using System.Diagnostics;
 
 namespace SysDatecScanApp.Helpers
 {
@@ -65,7 +65,7 @@ namespace SysDatecScanApp.Helpers
         {
             AppSettings.Clear();
             Settings.jwtToken = string.Empty;
-           
+
             Debug.WriteLine("Session Closed");
         }
 
@@ -92,7 +92,7 @@ namespace SysDatecScanApp.Helpers
         private static readonly int IDCuentaDefault = 0;
 
         private const string IdRolKey = "idrol_key";
-        
+
         private const string SessionDateKey = "sessiondate_key";
         private static readonly DateTime SessionDateDefault = DateTime.Now;
 

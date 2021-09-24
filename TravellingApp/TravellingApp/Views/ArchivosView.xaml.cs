@@ -1,68 +1,59 @@
-﻿using EnvDTE;
+﻿
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using SysDatecScanApp.ViewModels;
-using System;
-using System.Buffers.Text;
-using System.IO;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using Xamarin.Forms.PlatformConfiguration;
 
 namespace SysDatecScanApp.Views
 {
     public partial class ArchivosView : ContentPage
     {
-        public string Name { get; private set; }
-        static string DEFAULTPATH = "storage/emulated/0/Android/data/com.plugin.mediatest/files/Pictures/SysDatec/";
-        private Stream stream;
 
         public ArchivosView()
         {
             InitializeComponent();
-            Name = Application.Current.Properties["name"].ToString();
-            Nombre.Text = Name;
+
+            Nombre.Text = Application.Current.Properties["name"].ToString(); ;
             takePhoto.Clicked += async (sender, args) =>
-            {
+           {
 
-                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                {
-                    _ = DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
-                    return;
-                }
+               if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+               {
+                   DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
+                   return;
+               }
 
-                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                {
-                    Directory = "SysDatec",
-                    SaveToAlbum = true,
-                    CompressionQuality = 75,
-                    CustomPhotoSize = 50,
-                    PhotoSize = PhotoSize.MaxWidthHeight,
-                    MaxWidthHeight = 2000,
-                    DefaultCamera = CameraDevice.Front
-                });
+               var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+               {
+                   Directory = "SysDatec",
+                   SaveToAlbum = true,
+                   CompressionQuality = 75,
+                   CustomPhotoSize = 50,
+                   PhotoSize = PhotoSize.MaxWidthHeight,
+                   MaxWidthHeight = 2000,
+                   DefaultCamera = CameraDevice.Front
+               });
 
-                if (file == null)
-                    return;
+               if (file == null)
+                   return;
 
-                _ = DisplayAlert("Archivo guardado", file.Path, "OK");
+               DisplayAlert("Archivo guardado", file.Path, "OK");
 
 
 
-                image.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
-            };
+               image.Source = ImageSource.FromStream(() =>
+               {
+                   var stream = file.GetStream();
+                   file.Dispose();
+                   return stream;
+               });
+           };
 
             pickPhoto.Clicked += async (sender, args) =>
             {
                 if (!CrossMedia.Current.IsPickPhotoSupported)
                 {
-                    _ = DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
+                    DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
                     return;
                 }
                 var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
@@ -71,13 +62,13 @@ namespace SysDatecScanApp.Views
 
                 });
 
-              
+
                 if (file == null)
                     return;
 
                 image.Source = ImageSource.FromStream(() =>
                 {
-                    stream = file.GetStream();
+                    var stream = file.GetStream();
                     file.Dispose();
                     return stream;
                 });
@@ -142,13 +133,12 @@ namespace SysDatecScanApp.Views
 
             //var byteArray = Convert.FromBase64String("IMG_20210922_200031.jpg");
             //stream = new MemoryStream(byteArray);
-            //var imageSource = ImageSource.FromStream(() => stream);
+            //var imageSource = ImageSource.FromStream(() => stream);                                           
 
 
 
-           SaveCountAsync(1); 
-
-
+            //_ = SaveCountAsync(1);
+            //var xx = PCLStorageSample();
             //var filePath = Path.Combine(DEFAULTPATH, "SharingImage.png");
             //if (!File.Exists(filePath)) {
             //    File.Delete(filePath);
@@ -156,21 +146,30 @@ namespace SysDatecScanApp.Views
             //} else {
             //    Console.WriteLine("Si Archivo >" + filePath);
             //}
-                
-           
+
+
             BindingContext = new ArchivosViewModel();
         }
 
+
+        /*public async Task PCLStorageSample()
+        {
+            IFolder rootFolder = FileSystem.Current.LocalStorage;
+            IFolder folder = await rootFolder.CreateFolderAsync("PruebaCarpeta", CreationCollisionOption.OpenIfExists);
+            IFile file = await folder.CreateFileAsync("ArchivoPrueba.txt",
+                CreationCollisionOption.ReplaceExisting);
+            await file.WriteAllTextAsync("42");
+        }
         public async Task SaveCountAsync(int count)
         {
             var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "count.txt");
-         
+
             using (var writer = File.CreateText(backingFile))
             {
                 await writer.WriteLineAsync(count.ToString());
             }
 
-             backingFile = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "count1.txt");
+            backingFile = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "count1.txt");
             using (var writer = File.CreateText(backingFile))
             {
                 await writer.WriteLineAsync(count.ToString());
@@ -179,13 +178,13 @@ namespace SysDatecScanApp.Views
 
         private void SaveBytes(string fileName, byte[] data)
         {
-            var filePath = Path.Combine(DEFAULTPATH, fileName);
+            var filePath = Path.Combine("/storage/emulated/0/Android/data/com.plugin.mediatest/files/Pictures/SysDatec", fileName);
             if (!File.Exists(filePath))
                 File.Delete(filePath);
             File.WriteAllBytes(filePath, data);
         }
-       
-       
+
+
         public byte[] ImageSourceToBytes(ImageSource imageSource)
         {
             StreamImageSource streamImageSource = (StreamImageSource)imageSource;
@@ -196,7 +195,7 @@ namespace SysDatecScanApp.Views
             byte[] bytesAvailable = new byte[stream.Length];
             stream.Read(bytesAvailable, 0, bytesAvailable.Length);
             return bytesAvailable;
-        }
+        }*/
 
     }
 }

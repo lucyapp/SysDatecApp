@@ -20,7 +20,7 @@ namespace SysDatecScanApp.Behaviors
         private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
             var isValid = !string.IsNullOrWhiteSpace(args.NewTextValue);
-            ((EntryExtender) sender).IsBorderErrorVisible = !isValid;
+            ((EntryExtender)sender).IsBorderErrorVisible = !isValid;
         }
     }
 
@@ -41,7 +41,7 @@ namespace SysDatecScanApp.Behaviors
         private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
             var isValid = !string.IsNullOrWhiteSpace(args.NewTextValue);
-            ((EntryPasswordExtender) sender).IsBorderErrorVisible = !isValid;
+            ((EntryPasswordExtender)sender).IsBorderErrorVisible = !isValid;
         }
     }
 }

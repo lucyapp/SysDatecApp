@@ -1,13 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
+using SysDatecScanApp.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
-using SysDatecScanApp.Models;
-using SysDatecScanApp.Data;
 using Xamarin.Forms;
-using SysDatecScanApp.Helper;
 
 namespace SysDatecScanApp
 {
@@ -16,10 +12,10 @@ namespace SysDatecScanApp
         public static ApiRest Instance;
         private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
-        public ObservableCollection<UsuarioModel> _post { get; private  set; } //cambiar este por model ubicacion para poder traer el post de los datos de mapas ofertas
+        public ObservableCollection<UsuarioModel> _post { get; private set; } //cambiar este por model ubicacion para poder traer el post de los datos de mapas ofertas
         //private ObservableCollection<Model_Ubicacion> _post;
         public ApiRest()
-        {   
+        {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "");
             OnAppearing();

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.IO;
-using Xamarin.Essentials;
 
 namespace SysDatecScanApp.Views
 {
@@ -73,14 +72,14 @@ namespace SysDatecScanApp.Views
             }
             catch (System.Exception ex)
             {
-               
+
                 Console.WriteLine(ex.Message);
             }
         }
 
-        void ArchivosCarpetas() 
+        void ArchivosCarpetas()
         {
-          
+
 
 
             DirectorySearch("SysDatec");
@@ -89,7 +88,7 @@ namespace SysDatecScanApp.Views
 
         private void btnGuardarFormulario_Clicked(object sender, EventArgs e)
         {
-          
+
         }
 
         private void btnCancelar_Clicked(object sender, EventArgs e)

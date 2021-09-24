@@ -1,11 +1,10 @@
 ﻿
 
+using SQLite;
+using SysDatecScanApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
-using SQLite;
-using SysDatecScanApp.Models;
-using SysDatecScanApp;
 
 namespace SysDatecScanApp.Helper
 {

@@ -1,13 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
 using Android.OS;
+using Android.Runtime;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
 using SysDatecScanApp;
-using Plugin.Permissions;
-using Android.Support.V7.App;
-using Android.Util;
-using Android.Content;
 
 namespace ScanApp.Droid
 {
@@ -20,18 +16,20 @@ namespace ScanApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-           
+            Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            FormsVideoPlayer.Init();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-           
-           
+
+
         }
 
-       
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

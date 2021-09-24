@@ -6,7 +6,7 @@ namespace SysDatecScanApp.Helpers
 {
     public class CustomLabel : Label
     {
-        public static readonly BindableProperty IsUnderlinedProperty = BindableProperty.Create("IsUnderlined", typeof(bool), typeof(CustomLabel), false, BindingMode.TwoWay,null, OnEventNameChanged);
+        public static readonly BindableProperty IsUnderlinedProperty = BindableProperty.Create("IsUnderlined", typeof(bool), typeof(CustomLabel), false, BindingMode.TwoWay, null, OnEventNameChanged);
 
 
         static void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue)

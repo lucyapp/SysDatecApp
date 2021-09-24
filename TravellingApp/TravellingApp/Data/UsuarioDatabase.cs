@@ -1,10 +1,8 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NuGet.Common;
+using SQLite;
 using SysDatecScanApp.Models;
-using NuGet.Common;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SysDatecScanApp.Data
 {

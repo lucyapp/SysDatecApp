@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SysDatecScanApp.Helpers
+﻿namespace SysDatecScanApp.Helpers
 {
     public enum InvokerQrCode
     {

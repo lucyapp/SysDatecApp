@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SysDatecScanApp.Helpers;
+using System;
 using System.Text.RegularExpressions;
-using SysDatecScanApp.Helpers;
 using Xamarin.Forms;
 
 namespace SysDatecScanApp.Behaviors

@@ -2,7 +2,7 @@
 
 namespace SysDatecScanApp.Helpers
 {
-    public class EditorExtender: Editor
+    public class EditorExtender : Editor
     {
         public static readonly BindableProperty IsBorderErrorVisibleProperty =
             BindableProperty.Create(nameof(IsBorderErrorVisible), typeof(bool), typeof(EditorExtender), false,

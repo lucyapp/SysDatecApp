@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace SysDatecScanApp.Renderers
 {
-  public  class ButtonRendererC : Button
+    public class ButtonRendererC : Button
     {
     }
 }

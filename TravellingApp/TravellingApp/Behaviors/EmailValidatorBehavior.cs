@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SysDatecScanApp.Helpers;
+using System;
 using System.Text.RegularExpressions;
-using SysDatecScanApp.Helpers;
 using Xamarin.Forms;
 
 namespace SysDatecScanApp.Behaviors
@@ -18,7 +18,7 @@ namespace SysDatecScanApp.Behaviors
 
         public bool IsValid
         {
-            get => (bool) GetValue(IsValidProperty);
+            get => (bool)GetValue(IsValidProperty);
             private set => SetValue(IsValidPropertyKey, value);
         }
 
@@ -35,7 +35,7 @@ namespace SysDatecScanApp.Behaviors
               TimeSpan.FromMilliseconds(250));
                 ((EntryExtender)sender).IsBorderErrorVisible = !IsValid;
             }
-          
+
         }
 
         protected override void OnDetachingFrom(EntryExtender bindable)

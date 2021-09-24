@@ -27,6 +27,6 @@ namespace SysDatecScanApp.Models
         public string Picture { get; set; }
         public int CantidadArchivos { get; set; }
     }
-    public class responseLogin{ public int result { get; set; } }
+    public class responseLogin { public int result { get; set; } }
 
 }

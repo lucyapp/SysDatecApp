@@ -20,7 +20,7 @@ namespace SysDatecScanApp.Behaviors
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
-            var entry = (Entry) sender;
+            var entry = (Entry)sender;
             var isValid = int.TryParse(args.NewTextValue, out var result);
             entry.TextColor = isValid ? Color.Default : Color.Red;
             entry.Text = isValid && int.Parse(entry.Text) < 11 ? entry.Text : "";
