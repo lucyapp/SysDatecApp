@@ -3,15 +3,19 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+       xmlns:renderers="clr-namespace:SysDatecScanApp.Renderers"
        xmlns:local="clr-namespace:SysDatecScanApp.Views"
-       mc:Ignorable="d"
+       mc:Ignorable="d"  
+       NavigationPage.HasNavigationBar="True"
        x:Class="SysDatecScanApp.AppShell"
-       FlyoutBehavior="Disabled">
+       Title="LucyApp"
+       FlyoutBehavior="Flyout">
     <Shell.Resources>
         
         <Style TargetType="Tab">
             <Setter Property="Shell.BackgroundColor" 
-                    Value="{StaticResource BlackColor}" />
+                    Value="#4A96FA" />
             <Setter Property="Shell.ForegroundColor" 
                     Value="{StaticResource WhiteColor}" />
             <Setter Property="Shell.TitleColor" 
@@ -19,7 +23,7 @@
             <Setter Property="Shell.TabBarBackgroundColor" 
                     Value="{StaticResource WhiteColor}" />
             <Setter Property="Shell.TabBarTitleColor" 
-                    Value="{StaticResource TabBarTextColor}" />
+                    Value="Blue" />
             <Setter Property="Shell.UnselectedColor" 
                     Value="{StaticResource TabBarUnselectedColor}" />
         </Style>

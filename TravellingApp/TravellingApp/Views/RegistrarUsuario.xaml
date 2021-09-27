@@ -191,7 +191,7 @@
                             FontSize="{OnPlatform Android=20,iOS=23}"
                             WidthRequest="300" 
                     />
-                    <Button
+                    <Button IsVisible="false"
                      Text="Diligenciar formulario"
                             TextColor="Black"
                             Font="Montserrat-Medium.otf"

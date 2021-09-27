@@ -126,7 +126,7 @@ namespace SysDatecScanApp.Views
 
         private void Label_BindingContextChanged(object sender, EventArgs e)
         {
-            messageLabel.Text = "";
+            //messageLabel.Text = "";
 
         }
 

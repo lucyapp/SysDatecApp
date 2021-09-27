@@ -3,15 +3,266 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:renderers="clr-namespace:SysDatecScanApp.Renderers"
              mc:Ignorable="d"
              x:Class="SysDatecScanApp.Views.ScanView"
-             Background="black"
-             Title="SysDatec - Scan"
-            >
-    <lottie:AnimationView 
-	    Animation="empty.json" 
-	    AutoPlay="true"
-	    VerticalOptions="FillAndExpand" 
-	    HorizontalOptions="FillAndExpand" />
+             Padding="0,0,0,0"
+             BackgroundColor="#4A96FA"
+             NavigationPage.HasNavigationBar="False">
+    <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+
+        <StackLayout>
+            <Grid Margin="0,0,0,0">
+                <StackLayout Margin="20,0,20,0" Spacing="20">
+                    <Image
+                        HeightRequest="30"
+                        HorizontalOptions="Start"
+                        Source="hamburgerMenu"
+                        VerticalOptions="Start"
+                        WidthRequest="30" IsVisible="False"  />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="28"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Datos de informacion"
+                        TextColor="White"
+                        VerticalOptions="StartAndExpand"
+                        WidthRequest="200" />
+                </StackLayout>
+                <Image
+                    HorizontalOptions="EndAndExpand"
+                    Source="bgImage"
+                    WidthRequest="200" />
+                <yummy:PancakeView
+                    Margin="20,0,20,-20"
+                    Padding="10,0,0,0"
+                    BackgroundColor="White"
+                    BorderThickness="1"
+                    CornerRadius="25"
+                  
+                    HeightRequest="50"
+                    VerticalOptions="EndAndExpand">
+                    <StackLayout Orientation="Horizontal">
+                        <Image
+                            HeightRequest="25"
+                            HorizontalOptions="Start"
+                            Source="search"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25" />
+                        <renderers:BorderlessEntry
+                            ClearButtonVisibility="WhileEditing"
+                            FontSize="18"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Text"
+                            Placeholder="Buscar aqui "
+                            PlaceholderColor="#99A1B3"
+                            TextColor="#484848" />
+                    </StackLayout>
+                </yummy:PancakeView>
+            </Grid>
+            <yummy:PancakeView
+                Margin="0,30,0,0"
+                Padding="30,0,30,30"
+                BackgroundColor="White"
+                CornerRadius="40,40,0,0"
+                VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label
+                        Margin="20"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Text="¿Como comenzar?"
+                        TextColor="DarkBlue"
+                        VerticalOptions="Center" />
+                    <Grid Margin="10" ColumnSpacing="20" RowSpacing="30">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="230" />
+                            <RowDefinition Height="230" />
+                            <RowDefinition Height="230" />
+                            <RowDefinition Height="230" />
+
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <yummy:PancakeView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im1" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Crear un perfil?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im2" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Auto pago?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+
+                        </yummy:PancakeView>
+
+                        <yummy:PancakeView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im3" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Pagar vehiculos?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im4" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Pagos del hogar?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+
+                        <yummy:PancakeView
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im5" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Nucleo familiar?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im6" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Pagas educacion?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+
+                        <yummy:PancakeView
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im7" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Tienes mascotas?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+                        <yummy:PancakeView
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Padding="10"
+                            BackgroundColor="White"
+                            BorderThickness="1"
+                            CornerRadius="15"
+                            Elevation="3">
+                            <StackLayout>
+                                <Image Source="im8" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HorizontalTextAlignment="Center"
+                                    Text="¿Cuentas bancarias?"
+                                    TextColor="Black"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </yummy:PancakeView>
+
+
+                    </Grid>
+                </StackLayout>
+
+            </yummy:PancakeView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

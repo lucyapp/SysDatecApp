@@ -1,7 +1,10 @@
 ﻿
+using PCLStorage;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using SysDatecScanApp.ViewModels;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SysDatecScanApp.Views
@@ -147,19 +150,24 @@ namespace SysDatecScanApp.Views
             //    Console.WriteLine("Si Archivo >" + filePath);
             //}
 
-
+            var res=PCLStorageSample();
             BindingContext = new ArchivosViewModel();
         }
 
 
-        /*public async Task PCLStorageSample()
+        public async Task PCLStorageSample()
         {
+
+            
             IFolder rootFolder = FileSystem.Current.LocalStorage;
             IFolder folder = await rootFolder.CreateFolderAsync("PruebaCarpeta", CreationCollisionOption.OpenIfExists);
             IFile file = await folder.CreateFileAsync("ArchivoPrueba.txt",
                 CreationCollisionOption.ReplaceExisting);
             await file.WriteAllTextAsync("42");
         }
+        
+       
+        /*
         public async Task SaveCountAsync(int count)
         {
             var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "count.txt");
