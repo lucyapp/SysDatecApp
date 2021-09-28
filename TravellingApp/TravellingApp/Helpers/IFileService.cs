@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public interface IFileService
     {

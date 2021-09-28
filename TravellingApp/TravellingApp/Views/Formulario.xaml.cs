@@ -4,7 +4,7 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Formulario : ContentPage

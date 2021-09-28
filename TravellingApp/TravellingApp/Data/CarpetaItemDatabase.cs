@@ -1,11 +1,11 @@
 ﻿using NuGet.Common;
 using SQLite;
-using SysDatecScanApp.Models;
+using ScanApp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace SysDatecScanApp.Data
+namespace ScanApp.Data
 {
     public class CarpetaItemDatabase
     {

@@ -1,7 +1,7 @@
-﻿using SysDatecScanApp.Models;
+﻿using ScanApp.Models;
 using System.Collections.Generic;
 
-namespace SysDatecScanApp.Services
+namespace ScanApp.Services
 {
     public class MockPostService
     {

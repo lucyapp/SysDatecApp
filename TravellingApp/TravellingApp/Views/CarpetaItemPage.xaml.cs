@@ -1,9 +1,9 @@
-﻿using SysDatecScanApp.Data;
-using SysDatecScanApp.Models;
+﻿using ScanApp.Data;
+using ScanApp.Models;
 using System;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     public partial class CarpetaItemPage : ContentPage
     {

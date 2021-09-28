@@ -5,7 +5,7 @@
              NavigationPage.HasNavigationBar="True"
              BackgroundColor="#220F3A"
              
-             x:Class="SysDatecScanApp.ApiRest">
+             x:Class="ScanApp.ApiRest">
     <StackLayout>
         <ListView x:Name="ListViewSelected" BackgroundColor="MediumPurple">
             <ListView.ItemTemplate>

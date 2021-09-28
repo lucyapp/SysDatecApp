@@ -8,7 +8,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              mc:Ignorable="d"
              Background="white"
-             x:Class="SysDatecScanApp.Views.ArchivosView"
+             x:Class="ScanApp.Views.ArchivosView"
              Title="Archivos">
    
     <Grid >

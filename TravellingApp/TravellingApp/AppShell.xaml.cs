@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace SysDatecScanApp
+namespace ScanApp
 {
     public partial class AppShell : Shell
     {

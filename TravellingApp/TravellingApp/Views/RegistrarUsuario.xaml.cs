@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SysDatecScanApp.Models;
+using ScanApp.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrarUsuario : ContentPage

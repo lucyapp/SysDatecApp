@@ -1,9 +1,9 @@
-﻿using SysDatecScanApp.Models;
+﻿using ScanApp.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.ViewModels
+namespace ScanApp.ViewModels
 {
     public class PagosViewModel : BindableObject
     {

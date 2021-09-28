@@ -2,7 +2,7 @@
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class ToLowerUperValueConverter : IValueConverter
     {

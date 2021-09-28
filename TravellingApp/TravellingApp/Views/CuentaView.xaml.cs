@@ -1,7 +1,7 @@
-﻿using SysDatecScanApp.ViewModels;
+﻿using ScanApp.ViewModels;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     public partial class CuentaView : ContentPage
     {

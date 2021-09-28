@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class CarouselIndicators : Grid
     {

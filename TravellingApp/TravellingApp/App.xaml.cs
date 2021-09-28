@@ -1,7 +1,7 @@
-﻿using SysDatecScanApp.Views;
+﻿using ScanApp.Views;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp
+namespace ScanApp
 {
     public partial class App : Application
     {

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class EntryExtender : Entry
     {

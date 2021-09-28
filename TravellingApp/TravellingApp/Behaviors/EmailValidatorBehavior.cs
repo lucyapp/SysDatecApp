@@ -1,9 +1,9 @@
-﻿using SysDatecScanApp.Helpers;
+﻿using ScanApp.Helpers;
 using System;
 using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Behaviors
+namespace ScanApp.Behaviors
 {
     public class EmailValidatorBehavior : Behavior<EntryExtender>
     {

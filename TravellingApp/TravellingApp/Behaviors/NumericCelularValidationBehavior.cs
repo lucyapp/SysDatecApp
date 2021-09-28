@@ -1,7 +1,7 @@
-﻿using SysDatecScanApp.Helpers;
+﻿using ScanApp.Helpers;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Behaviors
+namespace ScanApp.Behaviors
 {
     public class NumericCelularValidationBehavior : Behavior<EntryExtender>
     {

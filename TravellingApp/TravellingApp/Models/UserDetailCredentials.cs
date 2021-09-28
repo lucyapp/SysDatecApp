@@ -1,4 +1,4 @@
-﻿namespace SysDatecScanApp.Models
+﻿namespace ScanApp.Models
 {
     public class UserDetailCredentials
     {

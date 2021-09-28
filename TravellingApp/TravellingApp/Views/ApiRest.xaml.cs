@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using SysDatecScanApp.Models;
+using ScanApp.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp
+namespace ScanApp
 {
     public partial class ApiRest : ContentPage
     {

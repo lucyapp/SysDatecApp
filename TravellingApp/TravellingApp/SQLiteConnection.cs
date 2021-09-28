@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace SysDatecScanApp
+namespace ScanApp
 {
     public interface ISQLiteInterface
     {

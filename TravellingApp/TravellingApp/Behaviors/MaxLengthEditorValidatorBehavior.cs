@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace SysDatecScanApp.Behaviors
+namespace ScanApp.Behaviors
 {
     public class MaxLengthEditorValidatorBehavior : Behavior<Editor>
     {

@@ -3,11 +3,11 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
-using SysDatecScanApp;
+using ScanApp;
 
 namespace ScanApp.Droid
 {
-    [Activity(Label = "LucyApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "LucyApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

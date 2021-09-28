@@ -149,9 +149,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\TravellingApp\SysDatecScanApp.csproj">
+    <ProjectReference Include="..\TravellingApp\ScanApp.csproj">
       <Project>{C0850E68-7D52-46E5-9FE9-53979749E1D9}</Project>
-      <Name>SysDatecScanApp</Name>
+      <Name>ScanApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

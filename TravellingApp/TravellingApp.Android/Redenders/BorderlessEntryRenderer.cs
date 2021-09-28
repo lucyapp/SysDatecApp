@@ -1,11 +1,11 @@
 ﻿using Android.Content;
-using SysDatecScanApp.Droid.Renderers;
-using SysDatecScanApp.Renderers;
+using ScanApp.Droid.Renderers;
+using ScanApp.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntryRenderer))]
-namespace SysDatecScanApp.Droid.Renderers
+namespace ScanApp.Droid.Renderers
 {
     public class BorderlessEntryRenderer : EntryRenderer
     {

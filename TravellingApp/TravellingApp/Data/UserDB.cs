@@ -1,12 +1,12 @@
 ﻿
 
 using SQLite;
-using SysDatecScanApp.Models;
+using ScanApp.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Helper
+namespace ScanApp.Helper
 {
 
     public class UserDB

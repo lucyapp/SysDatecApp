@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class ListViewExtender : ListView
     {

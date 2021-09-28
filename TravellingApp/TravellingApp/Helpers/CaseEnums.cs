@@ -1,4 +1,4 @@
-﻿namespace SysDatecScanApp.Helpers
+﻿namespace ScanApp.Helpers
 {
     public enum InvokerQrCode
     {

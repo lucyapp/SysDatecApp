@@ -1,7 +1,7 @@
-﻿using SysDatecScanApp.Renderers;
+﻿using ScanApp.Renderers;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Behaviors
+namespace ScanApp.Behaviors
 {
     public class TextChangeBehavior : Behavior<BorderlessEntry>
     {

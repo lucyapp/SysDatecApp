@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Behaviors
+namespace ScanApp.Behaviors
 {
     public class BehaviorBase<T> : Behavior<T> where T : BindableObject
     {

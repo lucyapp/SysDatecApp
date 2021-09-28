@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace SysDatecScanApp.ViewModels
+namespace ScanApp.ViewModels
 {
     public class CuentaViewModel : BindableObject
     {

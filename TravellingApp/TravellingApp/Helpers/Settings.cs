@@ -3,7 +3,7 @@ using Plugin.Settings.Abstractions;
 using System;
 using System.Diagnostics;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class Settings
     {

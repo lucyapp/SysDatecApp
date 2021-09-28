@@ -1,7 +1,7 @@
 ﻿
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Renderers
+namespace ScanApp.Renderers
 {
     public class MyWebview : WebView
     {

@@ -7,7 +7,7 @@
              xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mc:Ignorable="d"
-             x:Class="SysDatecScanApp.Views.PagosView"
+             x:Class="ScanApp.Views.PagosView"
              Title="Pagos">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -109,11 +109,11 @@
             FillMode="Resize"
             Source="{Binding CurrentPost.Video}"></videoplayer:VideoPlayer>
         
-        <!--<pancakeview:PancakeView
+        <pancakeview:PancakeView
             BackgroundGradientAngle="180"
             BackgroundGradientStartColor="{StaticResource BlackColor}"
             BackgroundGradientEndColor="Transparent"></pancakeview:PancakeView>
-      -->
+      
             <Grid>
                 <Grid.Behaviors>
                     <xamanimation:EntranceTransition 

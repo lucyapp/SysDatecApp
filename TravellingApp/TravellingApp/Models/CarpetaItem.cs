@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace SysDatecScanApp.Models
+namespace ScanApp.Models
 {
     public class CarpetaItem
     {

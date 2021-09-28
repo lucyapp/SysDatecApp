@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Behaviors
+namespace ScanApp.Behaviors
 {
     public class EventToCommandBehavior : BehaviorBase<View>
     {

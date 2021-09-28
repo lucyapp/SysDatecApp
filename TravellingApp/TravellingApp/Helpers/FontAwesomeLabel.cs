@@ -1,10 +1,10 @@
 ﻿using Xamarin.Forms;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class FontAwesomeLabel : Label
     {
-        public static readonly string FontAwesomeName = "SysDatecScanApp-icons";
+        public static readonly string FontAwesomeName = "ScanApp-icons";
 
         //Parameterless constructor for XAML
         public FontAwesomeLabel()

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SysDatecScanApp.Views.Formulario"
-             xmlns:local="clr-namespace:SysDatecScanApp.ViewModels"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"  xmlns:controls="clr-namespace:Todo.Renderers"
+             x:Class="ScanApp.Views.Formulario"
+             xmlns:local="clr-namespace:ScanApp.ViewModels"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"  xmlns:controls="clr-namespace:ScanApp.Renderers"
              Title="Registro de formulario"
              ios:Page.UseSafeArea="true">
             <ContentPage.Padding>

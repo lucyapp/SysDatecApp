@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace SysDatecScanApp.Styles
+namespace ScanApp.Styles
 {
     public partial class Fonts : ResourceDictionary
     {

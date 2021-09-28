@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanApp.Android", "Travelli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanApp.iOS", "TravellingApp\TravellingApp.iOS\ScanApp.iOS.csproj", "{B49122A6-7890-482B-A0B8-EEA5D02A01FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysDatecScanApp", "TravellingApp\TravellingApp\SysDatecScanApp.csproj", "{C0850E68-7D52-46E5-9FE9-53979749E1D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScanApp", "TravellingApp\TravellingApp\ScanApp.csproj", "{C0850E68-7D52-46E5-9FE9-53979749E1D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

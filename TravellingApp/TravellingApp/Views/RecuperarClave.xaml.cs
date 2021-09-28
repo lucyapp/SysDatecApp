@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using SysDatecScanApp.Models;
+using ScanApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RecuperarClave : ContentPage

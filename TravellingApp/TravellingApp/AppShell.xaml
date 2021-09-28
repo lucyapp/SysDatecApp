@@ -4,11 +4,11 @@
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
-       xmlns:renderers="clr-namespace:SysDatecScanApp.Renderers"
-       xmlns:local="clr-namespace:SysDatecScanApp.Views"
+       xmlns:renderers="clr-namespace:ScanApp.Renderers"
+       xmlns:local="clr-namespace:ScanApp.Views"
        mc:Ignorable="d"  
        NavigationPage.HasNavigationBar="True"
-       x:Class="SysDatecScanApp.AppShell"
+       x:Class="ScanApp.AppShell"
        Title="LucyApp"
        FlyoutBehavior="Flyout">
     <Shell.Resources>
@@ -27,13 +27,36 @@
             <Setter Property="Shell.UnselectedColor" 
                     Value="{StaticResource TabBarUnselectedColor}" />
         </Style>
+
         
+
+
+
+
     </Shell.Resources>
+
+    <Shell.TitleView>
+        <Image Source="Logo.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+    </Shell.TitleView>
+
+
+    <MenuItem Text="Mi perfil" Command="{Binding NavigateCommand}" CommandParameter="perfil" IconImageSource="usuario.png"/>
+    <MenuItem Text="Carpetas" Command="{Binding SettingsCommand}" CommandParameter="carpetas" IconImageSource="carpeta.png"/>
+    <MenuItem Text="Documentos" Command="{Binding NavigateCommand}" CommandParameter="documentos" IconImageSource="documentos.png"/>
+    <MenuItem Text="Imagenes" Command="{Binding NavigateCommand}" CommandParameter="imagenes" IconImageSource="pictures.png"/>
+    <MenuItem Text="Agenda" Command="{Binding NavigateCommand}" CommandParameter="agendas" IconImageSource="agenda2.png"/>
+    <MenuItem Text="Cuentas" Command="{Binding NavigateCommand}" CommandParameter="cuentas" IconImageSource="cuentas.png"/>
+    <MenuItem Text="Transacciones" Command="{Binding NavigateCommand}" CommandParameter="transacciones" IconImageSource="transaccion.png"/>
+    <MenuItem Text="Configuracion" Command="{Binding SettingsCommand}" CommandParameter="configuracion" IconImageSource="configuracion2.png"/>
+    <MenuItem Text="Cerrar session" Command="{Binding SettingsCommand}" CommandParameter="logout" IconImageSource="cerrarsesion2.png"/>
+
     <TabBar>
-        <Tab
+        <Tab 
             Icon="home.png"
             Title="Inicio">
-            <ShellContent>
+            <ShellContent NavigationPage.HasNavigationBar="False">
                 <local:ScanView />
             </ShellContent>
         </Tab>
@@ -46,8 +69,7 @@
         </Tab>
         <Tab    
             Icon="pagos.png"
-            Title="Pagos"
-            >
+            Title="Pagos">
             <ShellContent>
                 <local:PagosView />
             </ShellContent>

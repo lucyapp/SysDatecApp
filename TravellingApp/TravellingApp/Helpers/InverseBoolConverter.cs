@@ -3,7 +3,7 @@ using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SysDatecScanApp.Helpers
+namespace ScanApp.Helpers
 {
     public class InverseBoolConverter : IValueConverter, IMarkupExtension
     {

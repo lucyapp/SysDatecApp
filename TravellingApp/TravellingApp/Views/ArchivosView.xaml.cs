@@ -1,13 +1,9 @@
-﻿
-using PCLStorage;
-using Plugin.Media;
+﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
-using SysDatecScanApp.ViewModels;
-using System;
-using System.Threading.Tasks;
+using ScanApp.ViewModels;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     public partial class ArchivosView : ContentPage
     {
@@ -150,60 +146,60 @@ namespace SysDatecScanApp.Views
             //    Console.WriteLine("Si Archivo >" + filePath);
             //}
 
-            var res=PCLStorageSample();
+
             BindingContext = new ArchivosViewModel();
         }
 
-
-        public async Task PCLStorageSample()
-        {
-
-            
-            IFolder rootFolder = FileSystem.Current.LocalStorage;
-            IFolder folder = await rootFolder.CreateFolderAsync("PruebaCarpeta", CreationCollisionOption.OpenIfExists);
-            IFile file = await folder.CreateFileAsync("ArchivoPrueba.txt",
-                CreationCollisionOption.ReplaceExisting);
-            await file.WriteAllTextAsync("42");
-        }
-        
-       
         /*
-        public async Task SaveCountAsync(int count)
-        {
-            var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "count.txt");
-
-            using (var writer = File.CreateText(backingFile))
-            {
-                await writer.WriteLineAsync(count.ToString());
-            }
-
-            backingFile = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "count1.txt");
-            using (var writer = File.CreateText(backingFile))
-            {
-                await writer.WriteLineAsync(count.ToString());
-            }
-        }
-
-        private void SaveBytes(string fileName, byte[] data)
-        {
-            var filePath = Path.Combine("/storage/emulated/0/Android/data/com.plugin.mediatest/files/Pictures/SysDatec", fileName);
-            if (!File.Exists(filePath))
-                File.Delete(filePath);
-            File.WriteAllBytes(filePath, data);
-        }
+       public async Task PCLStorageSample()
+       {
 
 
-        public byte[] ImageSourceToBytes(ImageSource imageSource)
-        {
-            StreamImageSource streamImageSource = (StreamImageSource)imageSource;
-            System.Threading.CancellationToken cancellationToken =
-            System.Threading.CancellationToken.None;
-            System.Threading.Tasks.Task<Stream> task = streamImageSource.Stream(cancellationToken);
-            Stream stream = task.Result;
-            byte[] bytesAvailable = new byte[stream.Length];
-            stream.Read(bytesAvailable, 0, bytesAvailable.Length);
-            return bytesAvailable;
-        }*/
+           IFolder rootFolder = FileSystem.Current.LocalStorage;
+           IFolder folder = await rootFolder.CreateFolderAsync("PruebaCarpeta", CreationCollisionOption.OpenIfExists);
+           IFile file = await folder.CreateFileAsync("ArchivoPrueba.txt",
+               CreationCollisionOption.ReplaceExisting);
+           await file.WriteAllTextAsync("42");
+       }
+
+
+
+       public async Task SaveCountAsync(int count)
+       {
+           var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "count.txt");
+
+           using (var writer = File.CreateText(backingFile))
+           {
+               await writer.WriteLineAsync(count.ToString());
+           }
+
+           backingFile = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "count1.txt");
+           using (var writer = File.CreateText(backingFile))
+           {
+               await writer.WriteLineAsync(count.ToString());
+           }
+       }
+
+       private void SaveBytes(string fileName, byte[] data)
+       {
+           var filePath = Path.Combine("/storage/emulated/0/Android/data/com.plugin.mediatest/files/Pictures/SysDatec", fileName);
+           if (!File.Exists(filePath))
+               File.Delete(filePath);
+           File.WriteAllBytes(filePath, data);
+       }
+
+
+       public byte[] ImageSourceToBytes(ImageSource imageSource)
+       {
+           StreamImageSource streamImageSource = (StreamImageSource)imageSource;
+           System.Threading.CancellationToken cancellationToken =
+           System.Threading.CancellationToken.None;
+           System.Threading.Tasks.Task<Stream> task = streamImageSource.Stream(cancellationToken);
+           Stream stream = task.Result;
+           byte[] bytesAvailable = new byte[stream.Length];
+           stream.Read(bytesAvailable, 0, bytesAvailable.Length);
+           return bytesAvailable;
+       }*/
 
     }
 }

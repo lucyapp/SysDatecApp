@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SysDatecScanApp.Views.LoginPage" 
-             xmlns:renderers="clr-namespace:SysDatecScanApp.Renderers"
+             x:Class="ScanApp.Views.LoginPage" 
+             xmlns:renderers="clr-namespace:ScanApp.Renderers"
              NavigationPage.HasNavigationBar="False"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="#4A96FA"

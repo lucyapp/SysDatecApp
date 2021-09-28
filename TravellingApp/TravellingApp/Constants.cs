@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SysDatecScanApp
+namespace ScanApp
 {
     public static class Constants
     {

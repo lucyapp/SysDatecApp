@@ -5,16 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
-             xmlns:renderers="clr-namespace:SysDatecScanApp.Renderers"
+             xmlns:renderers="clr-namespace:ScanApp.Renderers"
              mc:Ignorable="d"
-             x:Class="SysDatecScanApp.Views.ScanView"
+             x:Class="ScanApp.Views.ScanView"
              Padding="0,0,0,0"
+             Title="Inicio"
              BackgroundColor="#4A96FA"
              NavigationPage.HasNavigationBar="False">
     <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-
-        <StackLayout>
+        <StackLayout >
             <Grid Margin="0,0,0,0">
                 <StackLayout Margin="20,0,20,0" Spacing="20">
                     <Image
@@ -52,7 +51,7 @@
                             Source="search"
                             VerticalOptions="CenterAndExpand"
                             WidthRequest="25" />
-                        <renderers:BorderlessEntry
+                           <renderers:BorderlessEntry
                             ClearButtonVisibility="WhileEditing"
                             FontSize="18"
                             HorizontalOptions="FillAndExpand"
@@ -261,7 +260,6 @@
 
                     </Grid>
                 </StackLayout>
-
             </yummy:PancakeView>
         </StackLayout>
     </ScrollView>

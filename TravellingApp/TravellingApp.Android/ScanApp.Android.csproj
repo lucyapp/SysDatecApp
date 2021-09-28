@@ -40,6 +40,7 @@
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidCreatePackagePerAbi>true</AndroidCreatePackagePerAbi>
     <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidHttpClientHandlerType />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,9 +164,9 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TravellingApp\SysDatecScanApp.csproj">
+    <ProjectReference Include="..\TravellingApp\ScanApp.csproj">
       <Project>{C0850E68-7D52-46E5-9FE9-53979749E1D9}</Project>
-      <Name>SysDatecScanApp</Name>
+      <Name>ScanApp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +278,19 @@
     <AndroidResource Include="Resources\drawable\im5.png" />
     <AndroidResource Include="Resources\drawable\im6.png" />
     <AndroidResource Include="Resources\drawable\im7.png" />
+    <AndroidResource Include="Resources\drawable\Logo.png" />
+    <AndroidResource Include="Resources\drawable\documentos.png" />
+    <AndroidResource Include="Resources\drawable\agenda.png" />
+    <AndroidResource Include="Resources\drawable\agenda2.png" />
+    <AndroidResource Include="Resources\drawable\cuentas.png" />
+    <AndroidResource Include="Resources\drawable\transaccion.png" />
+    <AndroidResource Include="Resources\drawable\configuracion.png" />
+    <AndroidResource Include="Resources\drawable\help2.png" />
+    <AndroidResource Include="Resources\drawable\usuario.png" />
+    <AndroidResource Include="Resources\drawable\pictures.png" />
+    <AndroidResource Include="Resources\drawable\cerrarsesion.png" />
+    <AndroidResource Include="Resources\drawable\configuracion2.png" />
+    <AndroidResource Include="Resources\drawable\cerrarsesion2.png" />
     <Content Include="res\xml\network_security_config..xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

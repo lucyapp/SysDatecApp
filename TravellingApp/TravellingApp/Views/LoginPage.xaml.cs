@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
-using SysDatecScanApp.Data;
-using SysDatecScanApp.Models;
+using ScanApp.Data;
+using ScanApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SysDatecScanApp.Views
+namespace ScanApp.Views
 {
     public partial class LoginPage : ContentPage
     {

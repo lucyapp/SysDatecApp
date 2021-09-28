@@ -6,7 +6,7 @@
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
              mc:Ignorable="d"
              Background="black"
-             x:Class="SysDatecScanApp.Views.CuentaView"
+             x:Class="ScanApp.Views.CuentaView"
              Title="Cuenta">
     <lottie:AnimationView 
 	    Animation="empty.json" 
