@@ -1,28 +1,37 @@
 ﻿using Plugin.Media;
 using Plugin.Media.Abstractions;
+using ScanApp.Models;
 using ScanApp.ViewModels;
+using System;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.IO;
 using Xamarin.Forms;
 
 namespace ScanApp.Views
 {
     public partial class ArchivosView : ContentPage
     {
-
+       
         public ArchivosView()
         {
             InitializeComponent();
+            CrossMedia.Current.Initialize();
+            Nombre.Text = Application.Current.Properties["name"].ToString();
+           
 
-            Nombre.Text = Application.Current.Properties["name"].ToString(); ;
             takePhoto.Clicked += async (sender, args) =>
            {
 
                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                {
-                   DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
+                   _ = DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
                    return;
                }
+              
+               
 
-               var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+               var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                {
                    Directory = "SysDatec",
                    SaveToAlbum = true,
@@ -30,13 +39,19 @@ namespace ScanApp.Views
                    CustomPhotoSize = 50,
                    PhotoSize = PhotoSize.MaxWidthHeight,
                    MaxWidthHeight = 2000,
-                   DefaultCamera = CameraDevice.Front
+                   DefaultCamera = CameraDevice.Rear
                });
 
                if (file == null)
                    return;
-
-               DisplayAlert("Archivo guardado", file.Path, "OK");
+             
+               //DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Android/data/XamarinCamera.XamarinCamera/files/Pictures/sample/");
+               //Console.WriteLine("No search pattern returns:");
+               //foreach (var fi in di.GetFiles())
+               //{
+               //    Console.WriteLine(fi.Name);
+               //}
+               _ = DisplayAlert("Archivo guardado", file.Path, "OK");
 
 
 
@@ -52,7 +67,7 @@ namespace ScanApp.Views
             {
                 if (!CrossMedia.Current.IsPickPhotoSupported)
                 {
-                    DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
+                    _ = DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
                     return;
                 }
                 var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions

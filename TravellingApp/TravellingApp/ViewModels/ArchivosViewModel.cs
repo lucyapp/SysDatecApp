@@ -1,6 +1,7 @@
 ﻿using ScanApp.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using Xamarin.Forms;
 
 namespace ScanApp.ViewModels
@@ -9,6 +10,10 @@ namespace ScanApp.ViewModels
     {
         public ObservableCollection<ArchivosRecientes> ArchivosRecientes { get; set; }
         public ObservableCollection<NombresCarpetas> NombresCarpetas { get; set; }
+
+        ObservableCollection<ArchivosRecientes> ListaArchivosSysdatec = new ObservableCollection<ArchivosRecientes>();
+        ObservableCollection<NombresCarpetas> ListaCarpetasSysdatec = new ObservableCollection<NombresCarpetas>();
+
         public string Nombre { get; }
 
         public ArchivosViewModel()
@@ -16,20 +21,42 @@ namespace ScanApp.ViewModels
 
             Nombre = Application.Current.Properties["name"].ToString();
 
+            DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
+            Console.WriteLine("No search pattern returns:");
 
-            NombresCarpetas = new ObservableCollection<NombresCarpetas>
-                {
-                   new NombresCarpetas { Name="SysDatec", FechaCreacion=DateTime.Now, Picture="carpeta", CantidadArchivos=4 },
-                   new NombresCarpetas { Name="Hijos", FechaCreacion=DateTime.Now, Picture="carpeta", CantidadArchivos=3 },
-                   new NombresCarpetas { Name="Mascotas", FechaCreacion=DateTime.Now, Picture="carpeta", CantidadArchivos=2 },
-                   new NombresCarpetas { Name="Servicios", FechaCreacion=DateTime.Now, Picture="carpeta", CantidadArchivos=2 }
-                };
-
-            ArchivosRecientes = new ObservableCollection<ArchivosRecientes>
+            foreach (var fi in di.GetFiles())
             {
-                new ArchivosRecientes { Name="Empopasto", Description="Agua", Picture="file", Fecha=DateTime.Now },
-                new ArchivosRecientes { Name="Energia del valle", Description="Luz", Picture="file" , Fecha=DateTime.Now }
-            };
+               
+                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = fi.Name, Fecha= fi.CreationTime, Picture= "file", Description = fi.Extension });
+                Console.WriteLine(fi.Name);
+            }
+
+            try
+            {
+                DirectoryInfo[] dirs = di.GetDirectories();
+                Console.WriteLine("The number of directories containing the letter p is {0}.", dirs.Length);
+
+                foreach (DirectoryInfo fi in dirs)
+                {
+                    ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = fi.Name, FechaCreacion = fi.CreationTime, Picture = "carpeta", CantidadArchivos = fi.GetFiles().Length });
+                    Console.WriteLine(fi.Name);
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+
+            //Console.WriteLine("realizar filtros de los archivos");
+            //foreach (var fi in di.GetFiles("*", SearchOption.AllDirectories))
+            //{
+            //    Console.WriteLine(fi.Name);
+            //}
+
+            NombresCarpetas = new ObservableCollection<NombresCarpetas>(ListaCarpetasSysdatec);
+            ArchivosRecientes = new ObservableCollection<ArchivosRecientes>(ListaArchivosSysdatec);
+            
         }
     }
 }

@@ -44,7 +44,7 @@
                                  ItemsSource="{Binding NombresCarpetas}"
                                  Margin="-20,0,-25,0"
                                  ItemsLayout="HorizontalList"
-                                 HeightRequest="380">
+                                 HeightRequest="320">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Padding="2,10,20,30">
@@ -70,7 +70,7 @@
                     <CollectionView Grid.ColumnSpan="2" Grid.Row="5" Margin="-20,20,-25,0" HorizontalScrollBarVisibility="Never"
                               ItemsSource="{Binding ArchivosRecientes}"
                               ItemsLayout="VerticalList"
-                              HeightRequest="150">
+                              HeightRequest="300">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
