@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,6 +18,30 @@ namespace ScanApp.Views
         public LoginPage()
         {
             InitializeComponent();
+           
+        }
+
+        protected override void OnAppearing()
+        {
+           
+            ActivarLoading();
+
+            if (Application.Current.Properties["IsLoggedIn"].Equals(true))
+            {   EntryUsername.Text = (string)Application.Current.Properties["username"];
+                EntryPassword.Text = (string)Application.Current.Properties["password"];
+
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+
+                    await DisplayAlert("Autenticacion", "usuario ya autenticado redirecionaremos a la pantalla principal", "Ok").ConfigureAwait(true);
+                    await Task.Delay(2000).ConfigureAwait(true);
+                    DesactivarLoading();
+
+                    Application.Current.MainPage = new AppShell();
+                });
+             
+            }
+            base.OnAppearing();
         }
 
         private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
@@ -67,10 +92,21 @@ namespace ScanApp.Views
         {
             Navigation.PushAsync(new RegistrarUsuario());
         }
+       public void ActivarLoading() 
+        {
+            popupLoadingView.IsVisible = true;
+            activityIndicator.IsRunning = true;
+        }
+
+        public void DesactivarLoading()
+        {
+            popupLoadingView.IsVisible = false;
+            activityIndicator.IsRunning = false;
+        }
 
         public async void Llamada()
         {
-
+            ActivarLoading();
             string content = await client.GetStringAsync(Url).ConfigureAwait(true);
             List<UsuarioModel> posts = JsonConvert.DeserializeObject<List<UsuarioModel>>(content);
             _post = new ObservableCollection<UsuarioModel>(posts);
@@ -80,7 +116,8 @@ namespace ScanApp.Views
                 //messageLabel.Text = "Login fallido";
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await DisplayAlert("Autenticacion", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
+                     DesactivarLoading();
+                     await DisplayAlert("Autenticacion", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
 
                 });
                 Application.Current.Properties["IsLoggedIn"] = false;
@@ -94,6 +131,7 @@ namespace ScanApp.Views
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    DesactivarLoading();
                     await DisplayAlert("Autenticacion", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(true);
 
                     //await Navigation.PopAsync().ConfigureAwait(true); //para el main 
@@ -131,7 +169,7 @@ namespace ScanApp.Views
         }
 
         private void ButtonRecuperarClave_Clicked(object sender, EventArgs e)
-        {
+        {   
             Navigation.PushAsync(new RecuperarClave());
         }
     }

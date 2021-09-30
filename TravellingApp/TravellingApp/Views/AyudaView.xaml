@@ -8,10 +8,30 @@
              Background="black"
              x:Class="ScanApp.Views.AyudaView"
              Title="Ayuda">
-    <lottie:AnimationView 
+    <ContentPage.Content>
+        <!--<AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="Azure" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+                    <Label Text="Estrada Web Group" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium"></Label>
+                    <Image x:Name="imgEstradaWebGroup" Source="Logo.png" HeightRequest="200" WidthRequest="200"></Image>
+                    <Button HorizontalOptions="Center" VerticalOptions="Center" Clicked="btnPopupButton_Clicked" Text="Mostrar Popup"></Button>
+                </StackLayout>
+            </StackLayout>
+            <ContentView x:Name="popupLoadingView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical" HeightRequest="150" WidthRequest="200" BackgroundColor="Transparent">
+                        <ActivityIndicator x:Name="activityIndicator" Margin="0,50,0,0" VerticalOptions="Center" HorizontalOptions="Center" Color="Black" WidthRequest="30" HeightRequest="30" ></ActivityIndicator>
+                        <Label x:Name="lblLoadingText" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Cargando..."></Label>
+                    </StackLayout>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
+    </ContentPage.Content>-->
+        <lottie:AnimationView 
 	    Animation="empty.json" 
 	    
 	    AutoPlay="true"
 	    VerticalOptions="FillAndExpand" 
 	    HorizontalOptions="FillAndExpand" />
+    </ContentPage.Content>
 </ContentPage>

@@ -9,7 +9,8 @@
              Padding="0,0,0,0"
              Title="Autenticación">
     <ContentPage.Content>
-   <!--     <StackLayout>
+        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <!--     <StackLayout>
 
             <StackLayout Padding="30"
                  VerticalOptions="Start">
@@ -47,34 +48,34 @@
             </StackLayout>
         </StackLayout>-->
 
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <StackLayout >
-                <StackLayout  Margin="0,0,0,0"  Orientation="Horizontal">
-                    <StackLayout Margin="20,0,20,0" Spacing="0">
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout >
+                    <StackLayout  Margin="0,0,0,0"  Orientation="Horizontal">
+                        <StackLayout Margin="20,0,20,0" Spacing="0">
 
-                        <Label
+                            <Label
                     FontAttributes="Bold"
                     FontSize="30"
                     Text="Autenticacion"
                     TextColor="White"
                     VerticalOptions="CenterAndExpand" />
+                        </StackLayout>
+                        <Image Source="bgImage1" WidthRequest="80" />
                     </StackLayout>
-                    <Image Source="bgImage1" WidthRequest="80" />
-                </StackLayout>
-                <yummy:PancakeView
+                    <yummy:PancakeView
             Margin="0,20,0,0"
             Padding="30,10,30,30"
             BackgroundColor="White"
             CornerRadius="40,40,0,0"
             VerticalOptions="FillAndExpand">
-                    <StackLayout Spacing="30">
-                        <StackLayout Spacing="20">
-                            <Label
+                        <StackLayout Spacing="30">
+                            <StackLayout Spacing="20">
+                                <Label
                         Margin="20,0,0,0"
                         FontSize="20"
                         Text="Username"
                         TextColor="#99A1B3" />
-                            <yummy:PancakeView
+                                <yummy:PancakeView
                         Padding="10,0,0,0"
                         BackgroundColor="White"
                         BorderColor="#4A96FA"
@@ -82,21 +83,21 @@
                         CornerRadius="15"
                         Elevation="3"
                         HeightRequest="50">
-                                <renderers:BorderlessEntry
+                                    <renderers:BorderlessEntry
                             FontSize="20"
                             ClearButtonVisibility="WhileEditing"
                             Keyboard="Text"
                             x:Name="EntryUsername"
                             TextColor="#484848" />
-                            </yummy:PancakeView>
-                        </StackLayout>
-                        <StackLayout Spacing="10">
-                            <Label
+                                </yummy:PancakeView>
+                            </StackLayout>
+                            <StackLayout Spacing="10">
+                                <Label
                         Margin="20,0,0,0"
                         FontSize="20"
                         Text="Password"
                         TextColor="#99A1B3" />
-                            <yummy:PancakeView
+                                <yummy:PancakeView
                         Padding="10,0,0,0"
                         BackgroundColor="White"
                         BorderColor="#4A96FA"
@@ -104,31 +105,31 @@
                         CornerRadius="15"
                         Elevation="3"
                         HeightRequest="50">
-                                <renderers:BorderlessEntry
+                                    <renderers:BorderlessEntry
                             FontSize="25"
                              ClearButtonVisibility="WhileEditing"
                             IsPassword="True"
                             x:Name="EntryPassword"
                             TextColor="#484848" />
-                            </yummy:PancakeView>
-                        </StackLayout>
-                        <Label
+                                </yummy:PancakeView>
+                            </StackLayout>
+                            <Label
                         FontAttributes="None"
                         FontSize="18"
                         HorizontalOptions="CenterAndExpand"
                         TextColor="#99A1B3" 
                         VerticalOptions="End" >
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="¿Olvide mi contarsena?" ></Span>
-                                    <Span TextColor="#791AE5" Text="  Recuperar" ></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ButtonRecuperarClave_Clicked"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <yummy:PancakeView
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="¿Olvide mi contarsena?" ></Span>
+                                        <Span TextColor="#791AE5" Text="  Recuperar" ></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ButtonRecuperarClave_Clicked"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <yummy:PancakeView
                     BackgroundColor="MediumSeaGreen"
                     BorderThickness="1"
                     CornerRadius="25"
@@ -136,7 +137,7 @@
                     HeightRequest="50"
                     HorizontalOptions="CenterAndExpand"
                     WidthRequest="150">
-                            <Label
+                                <Label
                         FontAttributes="Bold"
                         FontSize="20"
                         HorizontalOptions="CenterAndExpand"
@@ -144,19 +145,19 @@
                         Text="Ingresar"
                         TextColor="White"
                         VerticalOptions="CenterAndExpand" >
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ButtonLogin_Clicked"></TapGestureRecognizer>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </yummy:PancakeView>
-                        <Label
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ButtonLogin_Clicked"></TapGestureRecognizer>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </yummy:PancakeView>
+                            <Label
                     FontAttributes="None"
                     FontSize="20"
                     HorizontalOptions="CenterAndExpand"
                     Text="Or"
                     TextColor="#99A1B3" />
-                        <StackLayout Spacing="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                            <yummy:PancakeView
+                            <StackLayout Spacing="10" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                                <yummy:PancakeView
                         BackgroundColor="#FF5A00"
                         BorderThickness="1"
                         CornerRadius="20"
@@ -164,14 +165,14 @@
                         HeightRequest="60"
                         HorizontalOptions="Center"
                         WidthRequest="60">
-                                <Image
+                                    <Image
                             Margin="15"
                             Aspect="AspectFit"
                             HeightRequest="20"
                             Source="google"
                             WidthRequest="20" />
-                            </yummy:PancakeView>
-                            <yummy:PancakeView
+                                </yummy:PancakeView>
+                                <yummy:PancakeView
                         BackgroundColor="#4359AC"
                         BorderThickness="1"
                         CornerRadius="20"
@@ -179,14 +180,14 @@
                         HeightRequest="60"
                         HorizontalOptions="Center"
                         WidthRequest="60">
-                                <Image
+                                    <Image
                             Margin="15"
                             Aspect="AspectFit"
                             HeightRequest="20"
                             Source="facebook"
                             WidthRequest="20" />
-                            </yummy:PancakeView>
-                            <yummy:PancakeView
+                                </yummy:PancakeView>
+                                <yummy:PancakeView
                         BackgroundColor="#1DA1F2"
                         BorderThickness="1"
                         CornerRadius="20"
@@ -194,37 +195,46 @@
                         HeightRequest="60"
                         HorizontalOptions="Center"
                         WidthRequest="60">
-                                <Image
+                                    <Image
                             Margin="15"
                             Aspect="AspectFit"
                             HeightRequest="20"
                             Source="twitter"
                             WidthRequest="20" />
-                            </yummy:PancakeView>
-                        </StackLayout>
-                        <Label
+                                </yummy:PancakeView>
+                            </StackLayout>
+                            <Label
                         FontAttributes="None"
                         FontSize="18"
                         HorizontalOptions="CenterAndExpand"
                         TextColor="#99A1B3"
                         VerticalOptions="CenterAndExpand" >
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="¿No tengo una cuenta? " ></Span>
-                                    <Span TextColor="#791AE5" Text="Registrarme" >
-                                        
-                                    </Span>
-                                </FormattedString>
-                               
-                            </Label.FormattedText>
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ButtonRegistrarse_Clicked"></TapGestureRecognizer>
-                            </Label.GestureRecognizers>
-                        </Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="¿No tengo una cuenta? " ></Span>
+                                        <Span TextColor="#791AE5" Text="Registrarme" >
+
+                                        </Span>
+                                    </FormattedString>
+
+                                </Label.FormattedText>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ButtonRegistrarse_Clicked"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </yummy:PancakeView>
+                </StackLayout>
+            </ScrollView>
+            <ContentView x:Name="popupLoadingView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical" HeightRequest="150" WidthRequest="200" BackgroundColor="Transparent">
+                        <ActivityIndicator x:Name="activityIndicator" Margin="0,50,0,0" VerticalOptions="Center" HorizontalOptions="Center" Color="Black" WidthRequest="30" HeightRequest="30" ></ActivityIndicator>
+                        <Label x:Name="lblLoadingText" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center" VerticalTextAlignment="Center" Text="Cargando..."></Label>
                     </StackLayout>
-                </yummy:PancakeView>
-            </StackLayout>
-        </ScrollView>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
     

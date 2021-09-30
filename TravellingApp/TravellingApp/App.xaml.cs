@@ -9,9 +9,9 @@ namespace ScanApp
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
+            //MainPage = new AppShell();
             Plugin.Media.CrossMedia.Current.Initialize();
-            //MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new LoginPage());
 
         }
 

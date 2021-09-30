@@ -1,4 +1,5 @@
 ﻿using ScanApp.ViewModels;
+using System;
 using Xamarin.Forms;
 
 namespace ScanApp.Views
@@ -10,5 +11,13 @@ namespace ScanApp.Views
             InitializeComponent();
             BindingContext = new AyudaViewModel();
         }
+        private void btnPopupButton_Clicked(object sender, EventArgs e)
+        {
+            //popupLoadingView.IsVisible = true;
+           // activityIndicator.IsRunning = true;
+
+        }
+
+        
     }
 }

@@ -67,10 +67,10 @@
                     <!--5. Recommended-->
                     <Label Grid.Column="0" Grid.Row="4" Text="Archivos recientes" TextColor="#858788" FontSize="20" FontAttributes="Bold" />
                     <Label Grid.Column="1" Grid.Row="4" Text="Mostrar todos" HorizontalTextAlignment="End" FontAttributes="Bold" TextColor="Silver" VerticalTextAlignment="Center"/>
-                    <CollectionView Grid.ColumnSpan="2" Grid.Row="5" Margin="-20,20,-25,0" HorizontalScrollBarVisibility="Never"
+                    <CollectionView Grid.ColumnSpan="2" Grid.Row="5" Margin="-20,10,-25,0" HorizontalScrollBarVisibility="Never"
                               ItemsSource="{Binding ArchivosRecientes}"
                               ItemsLayout="VerticalList"
-                              HeightRequest="300">
+                              HeightRequest="350">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>

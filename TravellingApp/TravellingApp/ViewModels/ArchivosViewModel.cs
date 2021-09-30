@@ -15,7 +15,8 @@ namespace ScanApp.ViewModels
         ObservableCollection<NombresCarpetas> ListaCarpetasSysdatec = new ObservableCollection<NombresCarpetas>();
 
         public string Nombre { get; }
-
+        public string FileImage { get; }
+        public DirectoryInfo[] dirs { get; }
         public ArchivosViewModel()
         {
 
@@ -23,18 +24,34 @@ namespace ScanApp.ViewModels
 
             DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
             Console.WriteLine("No search pattern returns:");
-
-            foreach (var fi in di.GetFiles())
+            
+           foreach (var fi in di.GetFiles())
             {
+                if (fi.Extension.Contains("jpg"))
+                {
+                    FileImage = "jpg";
+                }
+                else if (fi.Extension.Contains("png"))
+                {
+                    FileImage = "png";
+                }
+                else if (fi.Extension.Contains("pdf"))
+                {
+                    FileImage = "pdf";
+                }
+                else {
+                    FileImage = "file";
+                }
                
-                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = fi.Name, Fecha= fi.CreationTime, Picture= "file", Description = fi.Extension });
+                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = fi.Name, Fecha= fi.CreationTime, Picture= FileImage, Description = fi.Extension });
+                FileImage = "";
                 Console.WriteLine(fi.Name);
             }
 
             try
             {
-                DirectoryInfo[] dirs = di.GetDirectories();
-                Console.WriteLine("The number of directories containing the letter p is {0}.", dirs.Length);
+                dirs = di.GetDirectories();
+                Console.WriteLine("el numero de directorios encontrados es de {0}.", dirs.Length);
 
                 foreach (DirectoryInfo fi in dirs)
                 {
@@ -45,7 +62,9 @@ namespace ScanApp.ViewModels
             }
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}", e.ToString());
+                Console.WriteLine("El proceso fallo y no hay carpetas en SysDatec directorio, se mostrara el Directorio raiz {0}", e.ToString());
+                
+
             }
 
             //Console.WriteLine("realizar filtros de los archivos");
@@ -54,6 +73,11 @@ namespace ScanApp.ViewModels
             //    Console.WriteLine(fi.Name);
             //}
 
+            if (dirs.Length<=0) 
+            {
+                ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = "SysDatec", FechaCreacion = di.CreationTime, Picture = "carpeta", CantidadArchivos = di.GetFiles().Length });
+            }
+           
             NombresCarpetas = new ObservableCollection<NombresCarpetas>(ListaCarpetasSysdatec);
             ArchivosRecientes = new ObservableCollection<ArchivosRecientes>(ListaArchivosSysdatec);
             

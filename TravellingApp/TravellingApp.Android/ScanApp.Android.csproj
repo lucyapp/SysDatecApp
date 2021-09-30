@@ -291,6 +291,12 @@
     <AndroidResource Include="Resources\drawable\cerrarsesion.png" />
     <AndroidResource Include="Resources\drawable\configuracion2.png" />
     <AndroidResource Include="Resources\drawable\cerrarsesion2.png" />
+    <AndroidResource Include="Resources\drawable\pdf.png" />
+    <AndroidResource Include="Resources\drawable\jpg.png" />
+    <AndroidResource Include="Resources\drawable\png.png" />
+    <AndroidResource Include="Resources\drawable\pdf1.png" />
+    <AndroidResource Include="Resources\drawable\txt.png" />
+    <AndroidResource Include="Resources\drawable\txt1.png" />
     <Content Include="res\xml\network_security_config..xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
