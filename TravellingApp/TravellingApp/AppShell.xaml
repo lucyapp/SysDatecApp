@@ -12,7 +12,7 @@
        Title="LucyApp"
        FlyoutBehavior="Flyout">
     <Shell.Resources>
-        
+   
         <Style TargetType="Tab">
             <Setter Property="Shell.BackgroundColor" 
                     Value="#4A96FA" />
@@ -27,32 +27,8 @@
             <Setter Property="Shell.UnselectedColor" 
                     Value="{StaticResource TabBarUnselectedColor}" />
         </Style>
-
-        
-
-
-
-
     </Shell.Resources>
-
-    <Shell.TitleView>
-        <Image Source="Logo.png"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
-    </Shell.TitleView>
-
-
-    <MenuItem Text="Mi perfil" Command="{Binding NavigateCommand}" CommandParameter="perfil" IconImageSource="usuario.png"/>
-    <MenuItem Text="Carpetas" Command="{Binding SettingsCommand}" CommandParameter="carpetas" IconImageSource="carpeta.png"/>
-    <MenuItem Text="Documentos" Command="{Binding NavigateCommand}" CommandParameter="documentos" IconImageSource="documentos.png"/>
-    <MenuItem Text="Imagenes" Command="{Binding NavigateCommand}" CommandParameter="imagenes" IconImageSource="pictures.png"/>
-    <MenuItem Text="Agenda" Command="{Binding NavigateCommand}" CommandParameter="agendas" IconImageSource="agenda2.png"/>
-    <MenuItem Text="Cuentas" Command="{Binding NavigateCommand}" CommandParameter="cuentas" IconImageSource="cuentas.png"/>
-    <MenuItem Text="Transacciones" Command="{Binding NavigateCommand}" CommandParameter="transacciones" IconImageSource="transaccion.png"/>
-    <MenuItem Text="Configuracion" Command="{Binding SettingsCommand}" CommandParameter="configuracion" IconImageSource="configuracion2.png"/>
-    <MenuItem Text="Cerrar session" Command="{Binding SettingsCommand}" CommandParameter="logout" IconImageSource="cerrarsesion2.png"/>
-
-    <TabBar>
+    <TabBar >
         <Tab 
             Icon="home.png"
             Title="Inicio">
@@ -89,4 +65,46 @@
             </ShellContent>
         </Tab>
     </TabBar>
+
+    <FlyoutItem Title="Inicio" Icon="home.png" >
+        <ShellContent ContentTemplate="{DataTemplate local:ScanView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Mi perfil"  Icon="usuario.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Carpetas" Icon="carpeta.png" >
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Documentos"  Icon="documentos.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Imagenes"  Icon="pictures.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Agenda"  Icon="agenda2.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Cuentas"  Icon="cuentas.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Transacciones"  Icon="transaccion.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Configuracion"  Icon="configuracion2.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Cerrar session"  Icon="cerrarsesion2.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    </FlyoutItem>
+
+    
 </Shell>

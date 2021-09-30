@@ -33,14 +33,15 @@ namespace ScanApp.Views
                 Device.BeginInvokeOnMainThread(async () =>
                 {
 
-                    await DisplayAlert("Autenticacion", "usuario ya autenticado redirecionaremos a la pantalla principal", "Ok").ConfigureAwait(true);
-                    await Task.Delay(2000).ConfigureAwait(true);
+                   
+                    await Task.Delay(1000).ConfigureAwait(true);
                     DesactivarLoading();
 
                     Application.Current.MainPage = new AppShell();
                 });
              
             }
+            DisplayAlert("Autenticacion", "El usuario '"+ Application.Current.Properties["name"]+ "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
             base.OnAppearing();
         }
 

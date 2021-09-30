@@ -5,12 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:ScanApp.Controls" xmlns:viewmodel="clr-namespace:ScanApp.ViewModels"
              mc:Ignorable="d"
              Background="white"
              x:Class="ScanApp.Views.ArchivosView"
              Title="Archivos">
-   
+    <ContentPage.BindingContext>
+        <viewmodel:PopupDown/>
+    </ContentPage.BindingContext>
+
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -50,12 +53,13 @@
                                 <StackLayout Padding="2,10,20,30">
                                     <Frame Padding="20,10,20,30" WidthRequest="220" HeightRequest="320" VerticalOptions="FillAndExpand" CornerRadius="20" HorizontalOptions="Start" HasShadow="False" >
                                         <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*,Auto">
+                                           
                                             <Frame Grid.ColumnSpan="2" Grid.Row="0" IsClippedToBounds="True" CornerRadius="25" HasShadow="False" Padding="0" >
-                                                <Image Source="{Binding Picture}" Aspect="AspectFill" />
+                                                <Image Source="{Binding Picture}" Aspect="AspectFill"/>
                                             </Frame>
-                                            <Label Grid.Column="0" Grid.Row="1" Text="{Binding Name}" FontAttributes="Bold" Padding="0,10,0,0"/>
+                                            <Label Grid.Column="0" Grid.Row="1" Text="{Binding CantidadArchivos}" HorizontalTextAlignment="Center" TextColor="Brown" FontAttributes="Bold"/>
+                                            <Label Grid.Column="0" Grid.Row="1" Text="{Binding Name}" FontAttributes="Bold" Padding="0,15,0,0"/>
                                             <Label Grid.Column="0" Grid.Row="2" Text="{Binding FechaCreacion}" TextColor="{StaticResource MainColor}" FontAttributes="Bold"/>
-                                            <Button Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" ImageSource="Heart" HorizontalOptions="End" WidthRequest="35" HeightRequest="35" CornerRadius="8" VerticalOptions="Center"  BackgroundColor="{StaticResource MainColor}" IsVisible="false"/>
                                         </Grid>
                                     </Frame>
                                 </StackLayout>
@@ -76,30 +80,70 @@
                                 <StackLayout>
                                     <Frame Margin="0,0,10,0" HasShadow="False" CornerRadius="20"  >
                                         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto">
-                                            <Frame Grid.Column="0" Grid.RowSpan="3" Margin="0,0,20,0"  VerticalOptions="CenterAndExpand" WidthRequest="75" HeightRequest="85" HasShadow="False" CornerRadius="10" Padding="0" IsClippedToBounds="True">
-                                                <Image Source="{Binding Picture}" Aspect="AspectFill"/>
+                                            <Frame Grid.Column="0" Grid.RowSpan="3" Margin="0,0,5,0"  VerticalOptions="CenterAndExpand" WidthRequest="75" HeightRequest="70" HasShadow="False" CornerRadius="10" Padding="0" IsClippedToBounds="True">
+                                                <Image Source="{Binding Picture}" Aspect="Fill"/>
                                             </Frame>
-                                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold"/>
+                                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" FontSize="13"/>
                                             <Label Grid.Column="1" Grid.Row="1" Text="{Binding Description}" TextColor="Silver" FontAttributes="Bold"/>
-                                            <Label Grid.Column="1" Grid.Row="2" Text="{Binding Fecha}"  FontSize="13" />
-                                            <Image Grid.Column="2" Grid.RowSpan="3" Source="DetailsArrow"/>
+                                            <Label Grid.Column="1" Grid.Row="2" Text="{Binding Fecha}"  FontSize="12" />
+                                            <ImageButton  Grid.Column="2" Grid.RowSpan="3" BackgroundColor="Transparent" Aspect="AspectFit" Source="DetailsArrow" Clicked="Button_Clicked" />
                                         </Grid>
                                     </Frame>
                                 </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
-                  
+
+                    
+
                 </Grid>
-                <Image x:Name="image" IsVisible="false"/>
+              
             </StackLayout>
            
  
         </ScrollView>
+        
+        <controls:BottomSheetControl x:Name="Sheet"  SheetHeight="350">
+            <controls:BottomSheetControl.SheetContent>
+                <StackLayout>
+
+                    <OnPlatform x:TypeArguments="View">
+                        <On Platform="iOS">
+                            <Grid>
+                                <BoxView CornerRadius="2.5"
+                                     BackgroundColor="Gray"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Start"
+                                     HeightRequest="5"
+                                     WidthRequest="40"/>
+                            </Grid>
+                        </On>
+                        <On Platform="Android">
+                            <Grid>
+                                <Image Source="chevrondown"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Start"
+                                    WidthRequest="27"/>
+                            </Grid>
+                        </On>
+                    </OnPlatform>
+
+                    <Label HorizontalTextAlignment="Center"
+                           Margin="0,20"
+                           Text="Imagen seleccionada"
+                           FontSize="18"/>
+
+                    <Image x:Name="image" IsVisible="true"/>
+
+                </StackLayout>
+            </controls:BottomSheetControl.SheetContent>
+        </controls:BottomSheetControl>
         <Button Grid.Row="0" x:Name="pickPhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30"  VerticalOptions ="End" HorizontalOptions ="EndAndExpand"  Image="file2.png"  />
         <Button Grid.Row="1" x:Name="takePhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30" Image="camara.png" VerticalOptions ="End"  HorizontalOptions ="EndAndExpand"/>
-       
-   </Grid>
+
+
+
+    </Grid>
 
 
 </ContentPage>

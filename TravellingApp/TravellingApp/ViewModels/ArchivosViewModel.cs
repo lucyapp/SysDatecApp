@@ -16,6 +16,7 @@ namespace ScanApp.ViewModels
 
         public string Nombre { get; }
         public string FileImage { get; }
+        public string NameImage { get; }
         public DirectoryInfo[] dirs { get; }
         public ArchivosViewModel()
         {
@@ -30,21 +31,25 @@ namespace ScanApp.ViewModels
                 if (fi.Extension.Contains("jpg"))
                 {
                     FileImage = "jpg";
+                    NameImage = fi.Name.Replace(".jpg", " ");
                 }
                 else if (fi.Extension.Contains("png"))
                 {
                     FileImage = "png";
+                    NameImage = fi.Name.Replace(".png", " ");
                 }
                 else if (fi.Extension.Contains("pdf"))
                 {
                     FileImage = "pdf";
+                    NameImage = fi.Name.Replace(".pdf", " ");
                 }
                 else {
                     FileImage = "file";
                 }
                
-                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = fi.Name, Fecha= fi.CreationTime, Picture= FileImage, Description = fi.Extension });
+                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = NameImage, Fecha= fi.CreationTime, Picture= FileImage, Description = fi.Extension });
                 FileImage = "";
+                NameImage = "";
                 Console.WriteLine(fi.Name);
             }
 
@@ -55,7 +60,7 @@ namespace ScanApp.ViewModels
 
                 foreach (DirectoryInfo fi in dirs)
                 {
-                    ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = fi.Name, FechaCreacion = fi.CreationTime, Picture = "carpeta", CantidadArchivos = fi.GetFiles().Length });
+                    ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = fi.Name, FechaCreacion = fi.CreationTime, Picture = "carpeta", CantidadArchivos = fi.GetFiles().Length.ToString() + " Archivos" });
                     Console.WriteLine(fi.Name);
 
                 }
@@ -75,7 +80,7 @@ namespace ScanApp.ViewModels
 
             if (dirs.Length<=0) 
             {
-                ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = "SysDatec", FechaCreacion = di.CreationTime, Picture = "carpeta", CantidadArchivos = di.GetFiles().Length });
+                ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = "SysDatec", FechaCreacion = di.CreationTime, Picture = "carpeta", CantidadArchivos = di.GetFiles().Length.ToString() + " Archivos" });
             }
            
             NombresCarpetas = new ObservableCollection<NombresCarpetas>(ListaCarpetasSysdatec);

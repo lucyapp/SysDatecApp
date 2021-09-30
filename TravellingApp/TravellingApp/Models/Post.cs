@@ -25,7 +25,7 @@ namespace ScanApp.Models
         public string Name { get; set; }
         public DateTime FechaCreacion { get; set; }
         public string Picture { get; set; }
-        public int CantidadArchivos { get; set; }
+        public string CantidadArchivos { get; set; }
     }
     public class responseLogin { public int result { get; set; } }
 

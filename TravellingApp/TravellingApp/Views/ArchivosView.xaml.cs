@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using DarkIce.Toolkit.Core.Utilities;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using ScanApp.Models;
 using ScanApp.ViewModels;
@@ -6,7 +7,9 @@ using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+
 
 namespace ScanApp.Views
 {
@@ -44,15 +47,16 @@ namespace ScanApp.Views
 
                if (file == null)
                    return;
-             
+
                //DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Android/data/XamarinCamera.XamarinCamera/files/Pictures/sample/");
                //Console.WriteLine("No search pattern returns:");
                //foreach (var fi in di.GetFiles())
                //{
                //    Console.WriteLine(fi.Name);
                //}
+               BindingContext = new ArchivosViewModel();
                _ = DisplayAlert("Archivo guardado", file.Path, "OK");
-
+            
 
 
                image.Source = ImageSource.FromStream(() =>
@@ -163,6 +167,21 @@ namespace ScanApp.Views
 
 
             BindingContext = new ArchivosViewModel();
+        }
+
+
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                await Sheet.OpenSheet();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         /*
