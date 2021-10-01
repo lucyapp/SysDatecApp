@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -18,30 +17,31 @@ namespace ScanApp.Views
         public LoginPage()
         {
             InitializeComponent();
-           
+
         }
 
         protected override void OnAppearing()
         {
-           
+
             ActivarLoading();
 
             if (Application.Current.Properties["IsLoggedIn"].Equals(true))
-            {   EntryUsername.Text = (string)Application.Current.Properties["username"];
+            {
+                EntryUsername.Text = (string)Application.Current.Properties["username"];
                 EntryPassword.Text = (string)Application.Current.Properties["password"];
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
 
-                   
+
                     await Task.Delay(1000).ConfigureAwait(true);
                     DesactivarLoading();
 
                     Application.Current.MainPage = new AppShell();
                 });
-             
+
             }
-            DisplayAlert("Autenticacion", "El usuario '"+ Application.Current.Properties["name"]+ "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
+            DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
             base.OnAppearing();
         }
 
@@ -93,7 +93,7 @@ namespace ScanApp.Views
         {
             Navigation.PushAsync(new RegistrarUsuario());
         }
-       public void ActivarLoading() 
+        public void ActivarLoading()
         {
             popupLoadingView.IsVisible = true;
             activityIndicator.IsRunning = true;
@@ -117,8 +117,8 @@ namespace ScanApp.Views
                 //messageLabel.Text = "Login fallido";
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                     DesactivarLoading();
-                     await DisplayAlert("Autenticacion", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
+                    DesactivarLoading();
+                    await DisplayAlert("Autenticacion", "Su nombre de usuario o contrasena son incorrectos, verifique bien antes de acceder", "Ok").ConfigureAwait(true);
 
                 });
                 Application.Current.Properties["IsLoggedIn"] = false;
@@ -170,7 +170,7 @@ namespace ScanApp.Views
         }
 
         private void ButtonRecuperarClave_Clicked(object sender, EventArgs e)
-        {   
+        {
             Navigation.PushAsync(new RecuperarClave());
         }
     }

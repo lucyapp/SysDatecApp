@@ -3,7 +3,6 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
-using ScanApp;
 
 namespace ScanApp.Droid
 {

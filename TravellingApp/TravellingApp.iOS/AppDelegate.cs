@@ -1,6 +1,5 @@
 ﻿using Foundation;
 using Octane.Xamarin.Forms.VideoPlayer.iOS;
-using ScanApp;
 using UIKit;
 
 namespace ScanApp.iOS

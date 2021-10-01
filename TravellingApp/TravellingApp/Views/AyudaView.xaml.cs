@@ -14,10 +14,10 @@ namespace ScanApp.Views
         private void btnPopupButton_Clicked(object sender, EventArgs e)
         {
             //popupLoadingView.IsVisible = true;
-           // activityIndicator.IsRunning = true;
+            // activityIndicator.IsRunning = true;
 
         }
 
-        
+
     }
 }

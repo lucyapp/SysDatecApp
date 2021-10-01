@@ -1,4 +1,9 @@
-﻿using ScanApp.Models;
+﻿using Prism.Commands;
+using Prism.Events;
+using Prism.Navigation;
+using Prism.Services;
+using Prism.Services.Dialogs;
+using ScanApp.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -6,8 +11,21 @@ using Xamarin.Forms;
 
 namespace ScanApp.ViewModels
 {
-    public class ArchivosViewModel : BindableObject
+    public class ArchivosViewModel : BindableObject, INavigationAware
     {
+        //navegacion
+        private readonly IPageDialogService _dialogService;
+        private readonly IEventAggregator _ea;
+        private readonly IDialogService _PopUpService;
+        private readonly INavigationService _navigationService;
+
+        public static ArchivosViewModel Instance;
+        public DelegateCommand ImageSeleccionCommand { get; set; }
+        //fin navegacion
+
+
+
+
         public ObservableCollection<ArchivosRecientes> ArchivosRecientes { get; set; }
         public ObservableCollection<NombresCarpetas> NombresCarpetas { get; set; }
 
@@ -18,6 +36,22 @@ namespace ScanApp.ViewModels
         public string FileImage { get; }
         public string NameImage { get; }
         public DirectoryInfo[] dirs { get; }
+
+        public ArchivosViewModel(INavigationService navigationService, IPageDialogService dialogService, IEventAggregator ea, IDialogService PopUpService)
+        {
+            _ea = ea;
+            _navigationService = navigationService;
+            _dialogService = dialogService;
+            _PopUpService = PopUpService;
+            Instance = this;
+            ImageSeleccionCommand = new DelegateCommand(OnSelectActionImage);
+        }
+
+        private void OnSelectActionImage()
+        {
+            Console.WriteLine("");
+        }
+
         public ArchivosViewModel()
         {
 
@@ -25,8 +59,8 @@ namespace ScanApp.ViewModels
 
             DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
             Console.WriteLine("No search pattern returns:");
-            
-           foreach (var fi in di.GetFiles())
+
+            foreach (var fi in di.GetFiles())
             {
                 if (fi.Extension.Contains("jpg"))
                 {
@@ -43,11 +77,12 @@ namespace ScanApp.ViewModels
                     FileImage = "pdf";
                     NameImage = fi.Name.Replace(".pdf", " ");
                 }
-                else {
+                else
+                {
                     FileImage = "file";
                 }
-               
-                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = NameImage, Fecha= fi.CreationTime, Picture= FileImage, Description = fi.Extension });
+
+                ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = NameImage, Fecha = fi.CreationTime, Picture = FileImage, Description = fi.Extension });
                 FileImage = "";
                 NameImage = "";
                 Console.WriteLine(fi.Name);
@@ -68,7 +103,7 @@ namespace ScanApp.ViewModels
             catch (Exception e)
             {
                 Console.WriteLine("El proceso fallo y no hay carpetas en SysDatec directorio, se mostrara el Directorio raiz {0}", e.ToString());
-                
+
 
             }
 
@@ -78,14 +113,24 @@ namespace ScanApp.ViewModels
             //    Console.WriteLine(fi.Name);
             //}
 
-            if (dirs.Length<=0) 
+            if (dirs.Length <= 0)
             {
                 ListaCarpetasSysdatec.Add(new NombresCarpetas() { Name = "SysDatec", FechaCreacion = di.CreationTime, Picture = "carpeta", CantidadArchivos = di.GetFiles().Length.ToString() + " Archivos" });
             }
-           
+
             NombresCarpetas = new ObservableCollection<NombresCarpetas>(ListaCarpetasSysdatec);
             ArchivosRecientes = new ObservableCollection<ArchivosRecientes>(ListaArchivosSysdatec);
-            
+
+        }
+
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            throw new NotImplementedException();
         }
     }
 }

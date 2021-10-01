@@ -1,12 +1,11 @@
 ﻿using DarkIce.Toolkit.Core.Utilities;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Prism.Navigation;
 using ScanApp.Models;
 using ScanApp.ViewModels;
 using System;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.IO;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,13 +14,13 @@ namespace ScanApp.Views
 {
     public partial class ArchivosView : ContentPage
     {
-       
+
         public ArchivosView()
         {
             InitializeComponent();
             CrossMedia.Current.Initialize();
             Nombre.Text = Application.Current.Properties["name"].ToString();
-           
+
 
             takePhoto.Clicked += async (sender, args) =>
            {
@@ -31,8 +30,8 @@ namespace ScanApp.Views
                    _ = DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
                    return;
                }
-              
-               
+
+
 
                var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                {
@@ -56,7 +55,7 @@ namespace ScanApp.Views
                //}
                BindingContext = new ArchivosViewModel();
                _ = DisplayAlert("Archivo guardado", file.Path, "OK");
-            
+
 
 
                image.Source = ImageSource.FromStream(() =>
@@ -173,7 +172,7 @@ namespace ScanApp.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            
+
             try
             {
                 await Sheet.OpenSheet();
@@ -182,6 +181,39 @@ namespace ScanApp.Views
             {
                 ex.Log();
             }
+        }
+
+
+
+       
+        
+
+
+
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+
+
+            //aqui se coloca cuando le da en el frame
+
+            ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
+
+            //image.Source = tmpData.Name.Trim() + tmpData.Description;
+            try
+            {
+                await Sheet.OpenSheet();
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
+
+
+
+
+
+
         }
 
         /*

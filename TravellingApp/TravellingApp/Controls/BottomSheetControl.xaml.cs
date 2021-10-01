@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DarkIce.Toolkit.Core.Utilities;
+using System;
 using System.Threading.Tasks;
-using DarkIce.Toolkit.Core.Utilities;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
