@@ -18,7 +18,7 @@ namespace ScanApp.Models
         public string Description { get; set; }
         public DateTime Fecha { get; set; }
 
-        
+
     }
     public class NombresCarpetas
     {

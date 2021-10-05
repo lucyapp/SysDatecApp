@@ -39,9 +39,13 @@ namespace ScanApp.Views
 
                     Application.Current.MainPage = new AppShell();
                 });
-
+                DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
             }
-            DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
+            else
+            {
+
+                DesactivarLoading();
+            }
             base.OnAppearing();
         }
 

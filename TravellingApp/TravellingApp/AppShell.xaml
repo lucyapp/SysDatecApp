@@ -74,8 +74,8 @@
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Carpetas" Icon="carpeta.png" >
-        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+    <FlyoutItem Title="Carpetas" Icon="carpeta.png"  NavigationPage.HasNavigationBar="True" >
+        <ShellContent ContentTemplate="{DataTemplate local:CarpetaListPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Documentos"  Icon="documentos.png">
@@ -103,7 +103,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="Cerrar session"  Icon="cerrarsesion2.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
+        <ShellContent ContentTemplate="{DataTemplate local:Logout}" />
     </FlyoutItem>
 
     

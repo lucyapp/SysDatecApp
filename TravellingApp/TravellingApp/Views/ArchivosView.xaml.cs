@@ -5,22 +5,43 @@ using Prism.Navigation;
 using ScanApp.Models;
 using ScanApp.ViewModels;
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using System.IO;
 using Xamarin.Forms;
 
 
 namespace ScanApp.Views
 {
-    public partial class ArchivosView : ContentPage
+    public partial class ArchivosView : ContentPage, INavigatedAware
     {
+        public static ArchivosView Instance;
+
+        public async void SeleccionarImagen(string location)
+        {
+            var memoryStream = new MemoryStream();
+
+
+            using (var source = System.IO.File.OpenRead(location))
+            {
+                await source.CopyToAsync(memoryStream);
+                try
+                {
+                    image.Source = ImageSource.FromStream(() => memoryStream);
+                }
+                catch (Exception e)
+                {
+                }
+            }
+        }
+
+
 
         public ArchivosView()
         {
             InitializeComponent();
             CrossMedia.Current.Initialize();
             Nombre.Text = Application.Current.Properties["name"].ToString();
-
+            NavigationPage.SetBackButtonTitle(this, "");
+            Instance = this;
 
             takePhoto.Clicked += async (sender, args) =>
            {
@@ -175,97 +196,56 @@ namespace ScanApp.Views
 
             try
             {
+
                 await Sheet.OpenSheet();
             }
             catch (Exception ex)
             {
+                //image.Source = null;
                 ex.Log();
             }
         }
-
-
-
-       
-        
-
-
 
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
 
-
             //aqui se coloca cuando le da en el frame
 
             ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
+            //ScanApp.Views.ArchivosView.Instance.SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + NameImage.Trim() + "." + FileImage);
 
+
+            Uri resourceUri = new Uri("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + "." + tmpData.Description, UriKind.Relative);
+
+            //ScanApp.ViewModels.ArchivosViewModel.Instance= 
             //image.Source = tmpData.Name.Trim() + tmpData.Description;
             try
             {
+                Sheet.HeightRequest = 700;
                 await Sheet.OpenSheet();
             }
             catch (Exception ex)
             {
+                image.IsVisible = false;
                 ex.Log();
             }
 
 
 
-
-
-
         }
 
-        /*
-       public async Task PCLStorageSample()
-       {
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            //throw new NotImplementedException();
+        }
 
 
-           IFolder rootFolder = FileSystem.Current.LocalStorage;
-           IFolder folder = await rootFolder.CreateFolderAsync("PruebaCarpeta", CreationCollisionOption.OpenIfExists);
-           IFile file = await folder.CreateFileAsync("ArchivoPrueba.txt",
-               CreationCollisionOption.ReplaceExisting);
-           await file.WriteAllTextAsync("42");
-       }
-
-
-
-       public async Task SaveCountAsync(int count)
-       {
-           var backingFile = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyPictures), "count.txt");
-
-           using (var writer = File.CreateText(backingFile))
-           {
-               await writer.WriteLineAsync(count.ToString());
-           }
-
-           backingFile = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "count1.txt");
-           using (var writer = File.CreateText(backingFile))
-           {
-               await writer.WriteLineAsync(count.ToString());
-           }
-       }
-
-       private void SaveBytes(string fileName, byte[] data)
-       {
-           var filePath = Path.Combine("/storage/emulated/0/Android/data/com.plugin.mediatest/files/Pictures/SysDatec", fileName);
-           if (!File.Exists(filePath))
-               File.Delete(filePath);
-           File.WriteAllBytes(filePath, data);
-       }
-
-
-       public byte[] ImageSourceToBytes(ImageSource imageSource)
-       {
-           StreamImageSource streamImageSource = (StreamImageSource)imageSource;
-           System.Threading.CancellationToken cancellationToken =
-           System.Threading.CancellationToken.None;
-           System.Threading.Tasks.Task<Stream> task = streamImageSource.Stream(cancellationToken);
-           Stream stream = task.Result;
-           byte[] bytesAvailable = new byte[stream.Length];
-           stream.Read(bytesAvailable, 0, bytesAvailable.Length);
-           return bytesAvailable;
-       }*/
 
     }
 }

@@ -66,6 +66,9 @@ namespace ScanApp.ViewModels
                 {
                     FileImage = "jpg";
                     NameImage = fi.Name.Replace(".jpg", " ");
+
+
+
                 }
                 else if (fi.Extension.Contains("png"))
                 {
@@ -76,6 +79,7 @@ namespace ScanApp.ViewModels
                 {
                     FileImage = "pdf";
                     NameImage = fi.Name.Replace(".pdf", " ");
+
                 }
                 else
                 {
@@ -83,8 +87,8 @@ namespace ScanApp.ViewModels
                 }
 
                 ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = NameImage, Fecha = fi.CreationTime, Picture = FileImage, Description = fi.Extension });
-                FileImage = "";
-                NameImage = "";
+                //FileImage = "";
+                //NameImage = "";
                 Console.WriteLine(fi.Name);
             }
 
@@ -123,14 +127,19 @@ namespace ScanApp.ViewModels
 
         }
 
+
+
+
+
+
         public void OnNavigatedFrom(INavigationParameters parameters)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
