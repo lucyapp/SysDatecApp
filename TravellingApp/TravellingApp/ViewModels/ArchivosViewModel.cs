@@ -66,9 +66,6 @@ namespace ScanApp.ViewModels
                 {
                     FileImage = "jpg";
                     NameImage = fi.Name.Replace(".jpg", " ");
-
-
-
                 }
                 else if (fi.Extension.Contains("png"))
                 {

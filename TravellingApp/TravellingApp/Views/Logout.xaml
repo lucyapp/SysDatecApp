@@ -13,7 +13,7 @@
             <StackLayout BackgroundColor="Azure" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
                     <Label Text="Saliendo de la APP" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Medium"></Label>
-                    <Image x:Name="imgEstradaWebGroup" Source="Logo.png" HeightRequest="200" WidthRequest="200"></Image>
+                    <Image x:Name="imgEstradaWebGroup" Source="splash_logo.png" HeightRequest="200" WidthRequest="200"></Image>
                    
                 </StackLayout>
             </StackLayout>

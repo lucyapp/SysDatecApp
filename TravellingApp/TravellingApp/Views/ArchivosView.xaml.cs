@@ -1,11 +1,16 @@
 ﻿using DarkIce.Toolkit.Core.Utilities;
+using OpenPdf;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
 using ScanApp.Models;
 using ScanApp.ViewModels;
 using System;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Reflection;
+using System.Threading;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
@@ -15,7 +20,7 @@ namespace ScanApp.Views
     {
         public static ArchivosView Instance;
 
-        public async void SeleccionarImagen(string location)
+        public async void SeleccionarImagen(string location,Image img)
         {
             var memoryStream = new MemoryStream();
 
@@ -96,7 +101,7 @@ namespace ScanApp.Views
                 }
                 var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
                 {
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+                    PhotoSize = PhotoSize.Medium,
 
                 });
 
@@ -193,7 +198,8 @@ namespace ScanApp.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-
+            image.IsVisible = true;
+            image1.IsVisible = false;
             try
             {
 
@@ -206,6 +212,92 @@ namespace ScanApp.Views
             }
         }
 
+        public void LoadImagenCopy(string nombreArchivo) {
+         
+         string FileImage="";
+         string NameImage="";
+        
+        DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
+        Console.WriteLine("No search pattern returns:");
+
+            foreach (var fi in di.GetFiles())
+            {
+                if (nombreArchivo.Contains(fi.Name))
+                {
+                    if (fi.Extension.Contains("jpg"))
+                    {
+                        FileImage = "jpg";
+                        NameImage = fi.Name.Replace(".jpg", " ");
+                    }
+                    else if (fi.Extension.Contains("png"))
+                    {
+                        FileImage = "png";
+                        NameImage = fi.Name.Replace(".png", " ");
+                    }
+                    else if (fi.Extension.Contains("pdf"))
+                    {
+                        FileImage = "pdf";
+                        NameImage = fi.Name.Replace(".pdf", " ");
+
+                    }
+                    else
+                    {
+                       NameImage = fi.Name;
+                       FileImage = "file";
+                    }
+
+                    //aqui realizar el copiado de un archivo a temporal
+
+                    //var imagenTemp = new Image
+                    //{
+                    //    Source = ImageSource.FromUri(new Uri("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo))
+                    //};
+
+                    Uri OrigenFile = new Uri("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo, UriKind.RelativeOrAbsolute);
+                    
+                    Image assignImageFromFile = new Image
+                    {
+                        Source = (Device.RuntimePlatform == Device.Android) ? ImageSource.FromFile(OrigenFile.LocalPath) : ImageSource.FromFile(OrigenFile.LocalPath),
+                        Aspect = Aspect.AspectFit
+                    };
+                    image.IsVisible = false;
+                    image1.IsVisible = true;
+                    image1.Source = OrigenFile;
+
+                    Application.Current.MainPage = new NavigationPage(new WebViewPage(OrigenFile.LocalPath, false));
+
+
+                    //image.HeightRequest = 500;
+                    //image.WidthRequest = 300;
+                    // image.Source = OrigenFile;
+
+                    //image.Source = new UriImageSource
+                    //{
+                    //    Uri = OrigenFile,
+                    //    CachingEnabled = false,
+                    //    CacheValidity = new TimeSpan(5, 0, 0, 0)
+                    //};
+                    //var fileName = System.IO.Path.GetFileName(fi.Name);
+                    //Image embeddedImage = new Image
+                    //{  
+                    //    Source = ImageSource.FromResource(nombreArchivo, typeof(ArchivosView).GetTypeInfo().Assembly)
+                    //};
+
+                    //var  destFile = System.IO.Path.Combine("/storage/emulated/0/Pictures/SysDatec/", fileName);
+                    //System.IO.File.Copy(nombreArchivo,"/storage/emulated/0/Pictures/SysDatec/", true);
+                }
+               
+            }
+            if (FileImage.Length == 0)
+            {
+                Console.WriteLine("El archivo no se encontro : " + nombreArchivo);
+            }
+            else {
+                Console.WriteLine("Archivo encontrado : " + nombreArchivo);
+
+            }
+    }  
+
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
@@ -213,10 +305,10 @@ namespace ScanApp.Views
             //aqui se coloca cuando le da en el frame
 
             ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
+            LoadImagenCopy(tmpData.Name.Trim()+ tmpData.Description.Trim());
+
             //ScanApp.Views.ArchivosView.Instance.SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + NameImage.Trim() + "." + FileImage);
-
-
-            Uri resourceUri = new Uri("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + "." + tmpData.Description, UriKind.Relative);
+            //Uri resourceUri = new Uri("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + "." + tmpData.Description, UriKind.Relative);
 
             //ScanApp.ViewModels.ArchivosViewModel.Instance= 
             //image.Source = tmpData.Name.Trim() + tmpData.Description;
