@@ -56,7 +56,7 @@ namespace OpenPdf.Droid
                     // Control.LoadUrl(uri);
                     //uri.AbsolutePath = customWebView.Uri.ToString();
                     //Control.LoadUrl(string.Format("file:///android_asset/pdfjs/web/viewer.html?file={0}", customWebView.Uri));
-                    Control.LoadUrl(uri.AbsolutePath);
+                    Control.LoadUrl(uri.LocalPath);
                     //Device.OpenUri(new Uri(customWebView.Uri));
                 }
             }

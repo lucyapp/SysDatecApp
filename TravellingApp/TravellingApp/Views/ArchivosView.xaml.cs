@@ -207,34 +207,36 @@ namespace ScanApp.Views
             }
         }
 
-        public void CopyFile(string sourceFilePath, string destinationFilePath)
+        public async Task CopyFileAsync(string sourceFilePath, string destinationFilePath)
         {
             var fileBytes = File.ReadAllBytes(sourceFilePath);
             File.WriteAllBytes(destinationFilePath, fileBytes);
-            File.Delete(sourcePath);
+            SaveBytes(sourceFilePath, fileBytes);
+             File.Delete(sourcePath);
+          
         }
 
-        public async Task DeployDatabaseFromAssetsAsync()
-        {
-            var databaseName = "database.db3";
+        //public async Task DeployDatabaseFromAssetsAsync()
+        //{
+        //    var databaseName = "database.db3";
 
-            // Android application default folder.
-            var appFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var dbFile = Path.Combine(appFolder, databaseName);
+        //    // Android application default folder.
+        //    var appFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        //    var dbFile = Path.Combine(appFolder, databaseName);
 
-            // Check if the file already exists.
-            if (!File.Exists(dbFile))
-            {
-                using (FileStream writeStream = new FileStream(dbFile, FileMode.OpenOrCreate, FileAccess.Write))
-                {
-                    // Assets is comming from the current context.
-                   // await writeStream.Open(databaseName).CopyToAsync(writeStream);
-                }
-            }
-        }
+        //    // Check if the file already exists.
+        //    if (!File.Exists(dbFile))
+        //    {
+        //        using (FileStream writeStream = new FileStream(dbFile, FileMode.OpenOrCreate, FileAccess.Write))
+        //        {
+        //            // Assets is comming from the current context.
+        //           // await writeStream.Open(databaseName).CopyToAsync(writeStream);
+        //        }
+        //    }
+        //}
 
 
-        static string DEFAULTPATH = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        static string DEFAULTPATH = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
         public static void SaveBytes(string fileName, byte[] data)
         {
@@ -243,10 +245,6 @@ namespace ScanApp.Views
                 File.Delete(filePath);
             File.WriteAllBytes(filePath, data);
         }
-
-
-
-
 
         public async void LoadImagenCopy(string nombreArchivo)
         {
@@ -303,8 +301,8 @@ namespace ScanApp.Views
                 foreach (string s in files)
                 {   
                     if(s== OrigenFile.OriginalString) 
-                    {  
-                        CopyFile(OrigenFile.LocalPath, @destFile);
+                    {
+                       _= CopyFileAsync(OrigenFile.LocalPath, @destFile);
                     }
                 }
             }
