@@ -12,11 +12,11 @@ namespace OpenPdf
         public WebViewPage(string uri, bool isPdf)
         {
             InitializeComponent();
-            
+
             this.BindingContext = new WebViewPageViewModel(uri, isPdf);
 
         }
 
-        
+
     }
 }

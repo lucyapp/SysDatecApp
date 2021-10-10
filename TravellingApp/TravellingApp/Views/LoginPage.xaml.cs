@@ -22,30 +22,36 @@ namespace ScanApp.Views
 
         protected override void OnAppearing()
         {
-
+            //this.Clear();
             ActivarLoading();
+            try {
+                if (Application.Current.Properties["IsLoggedIn"].Equals(true))
+                {
+                    EntryUsername.Text = (string)Application.Current.Properties["username"];
+                    EntryPassword.Text = (string)Application.Current.Properties["password"];
 
-            if (Application.Current.Properties["IsLoggedIn"].Equals(true))
-            {
-                EntryUsername.Text = (string)Application.Current.Properties["username"];
-                EntryPassword.Text = (string)Application.Current.Properties["password"];
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
 
-                Device.BeginInvokeOnMainThread(async () =>
+
+                        await Task.Delay(1000).ConfigureAwait(true);
+                        DesactivarLoading();
+
+                        Application.Current.MainPage = new AppShell();
+                    });
+                    DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
+                }
+                else
                 {
 
-
-                    await Task.Delay(1000).ConfigureAwait(true);
                     DesactivarLoading();
+                }
 
-                    Application.Current.MainPage = new AppShell();
-                });
-                DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
-            }
-            else
+            } catch (Exception e) 
             {
-
                 DesactivarLoading();
             }
+            
             base.OnAppearing();
         }
 
@@ -133,7 +139,7 @@ namespace ScanApp.Views
                 //messageLabel.Text = "Login exitoso";
                 //await Navigation.PushAsync(new CarpetaListPage());
                 resultado = true;
-
+              
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     DesactivarLoading();

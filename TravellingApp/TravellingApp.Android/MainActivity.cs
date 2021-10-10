@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -16,12 +17,17 @@ namespace ScanApp.Droid
 
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+
+            var write = (new (string, bool)[] { (Manifest.Permission.WriteExternalStorage, true) });
+            var read = (new (string, bool)[] { (Manifest.Permission.ReadExternalStorage, true) });
+            var media = (new (string, bool)[] { (Manifest.Permission.MediaContentControl, true) });
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FormsVideoPlayer.Init();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-
+          
 
         }
 

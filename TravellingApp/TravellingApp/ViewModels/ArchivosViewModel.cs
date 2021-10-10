@@ -1,4 +1,8 @@
-﻿using Prism.Commands;
+﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using Prism.Services;
@@ -22,9 +26,6 @@ namespace ScanApp.ViewModels
         public static ArchivosViewModel Instance;
         public DelegateCommand ImageSeleccionCommand { get; set; }
         //fin navegacion
-
-
-
 
         public ObservableCollection<ArchivosRecientes> ArchivosRecientes { get; set; }
         public ObservableCollection<NombresCarpetas> NombresCarpetas { get; set; }
@@ -52,13 +53,30 @@ namespace ScanApp.ViewModels
             Console.WriteLine("");
         }
 
+        [Obsolete]
         public ArchivosViewModel()
         {
 
             Nombre = Application.Current.Properties["name"].ToString();
+            var p1 = CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+            var r1 = CrossPermissions.Current.RequestPermissionsAsync(Permission.Storage);
 
             DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
             Console.WriteLine("No search pattern returns:");
+            try
+            {
+                dirs = di.GetDirectories();
+                Console.WriteLine("el numero de directorios encontrados es de {0}.", dirs.Length);
+                
+            }
+            catch (Exception e)
+            {
+          
+                System.IO.Directory.CreateDirectory("/storage/emulated/0/Pictures/SysDatec/");
+                Console.WriteLine("El proceso fallo y no hay carpetas en SysDatec directorio, se mostrara el Directorio raiz {0}", e.ToString());
+            }
+
+
 
             foreach (var fi in di.GetFiles())
             {
@@ -71,11 +89,13 @@ namespace ScanApp.ViewModels
                 {
                     FileImage = "png";
                     NameImage = fi.Name.Replace(".png", " ");
+
                 }
                 else if (fi.Extension.Contains("pdf"))
                 {
                     FileImage = "pdf";
                     NameImage = fi.Name.Replace(".pdf", " ");
+                    //System.Diagnostics.Process.Start("/storage/emulated/0/Pictures/SysDatec/" + NameImage+"."+FileImage);
 
                 }
                 else

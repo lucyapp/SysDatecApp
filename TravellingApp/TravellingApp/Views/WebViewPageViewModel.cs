@@ -2,7 +2,7 @@
 
 namespace OpenPdf
 {
-    public class WebViewPageViewModel : INotifyPropertyChanged
+    public class WebViewPageViewModel : WebViewPageViewModelBase, INotifyPropertyChanged
     {
 
         public bool IsPdf { get; set; }
@@ -13,7 +13,5 @@ namespace OpenPdf
             Uri = uri;
             IsPdf = isPdf;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

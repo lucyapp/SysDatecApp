@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -28,7 +27,7 @@ namespace ScanApp.Views
         protected override void OnAppearing()
         {
 
-          if (Application.Current.Properties["IsLoggedIn"].Equals(true))
+            if (Application.Current.Properties["IsLoggedIn"].Equals(true))
             {
 
                 Device.BeginInvokeOnMainThread(async () =>
@@ -42,9 +41,9 @@ namespace ScanApp.Views
                      Application.Current.MainPage = new LoginPage();
 
                  });
-                
+
             }
-            
+
             base.OnAppearing();
         }
     }

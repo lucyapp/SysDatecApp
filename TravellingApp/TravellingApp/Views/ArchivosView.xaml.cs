@@ -6,25 +6,23 @@ using Prism.Navigation;
 using ScanApp.Models;
 using ScanApp.ViewModels;
 using System;
-using System.Drawing.Imaging;
 using System.IO;
-using System.Reflection;
-using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace ScanApp.Views
 {
     public partial class ArchivosView : ContentPage, INavigatedAware
     {
         public static ArchivosView Instance;
-
-        public async void SeleccionarImagen(string location,Image img)
+        private Stream stream { get; set; }
+        public string sourcePath = @"/storage/emulated/0/Pictures/SysDatec/";
+        public string targetPath = @"/storage/emulated/0/Android/data/com.plugin.mediatest/files/";
+        public async void SeleccionarImagen(string location)
         {
             var memoryStream = new MemoryStream();
-
-
             using (var source = System.IO.File.OpenRead(location))
             {
                 await source.CopyToAsync(memoryStream);
@@ -38,8 +36,7 @@ namespace ScanApp.Views
             }
         }
 
-
-
+        [Obsolete]
         public ArchivosView()
         {
             InitializeComponent();
@@ -99,9 +96,10 @@ namespace ScanApp.Views
                     _ = DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
                     return;
                 }
-                var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
                 {
                     PhotoSize = PhotoSize.Medium,
+
 
                 });
 
@@ -111,11 +109,12 @@ namespace ScanApp.Views
 
                 image.Source = ImageSource.FromStream(() =>
                 {
-                    var stream = file.GetStream();
+                    stream = file.GetStream();
                     file.Dispose();
                     return stream;
                 });
             };
+            
 
             /*takeVideo.Clicked += async (sender, args) =>
             {
@@ -198,27 +197,65 @@ namespace ScanApp.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            image.IsVisible = true;
-            image1.IsVisible = false;
             try
             {
-
                 await Sheet.OpenSheet();
             }
             catch (Exception ex)
             {
-                //image.Source = null;
                 ex.Log();
             }
         }
 
-        public void LoadImagenCopy(string nombreArchivo) {
-         
-         string FileImage="";
-         string NameImage="";
-        
-        DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
-        Console.WriteLine("No search pattern returns:");
+        public void CopyFile(string sourceFilePath, string destinationFilePath)
+        {
+            var fileBytes = File.ReadAllBytes(sourceFilePath);
+            File.WriteAllBytes(destinationFilePath, fileBytes);
+            File.Delete(sourcePath);
+        }
+
+        public async Task DeployDatabaseFromAssetsAsync()
+        {
+            var databaseName = "database.db3";
+
+            // Android application default folder.
+            var appFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var dbFile = Path.Combine(appFolder, databaseName);
+
+            // Check if the file already exists.
+            if (!File.Exists(dbFile))
+            {
+                using (FileStream writeStream = new FileStream(dbFile, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    // Assets is comming from the current context.
+                   // await writeStream.Open(databaseName).CopyToAsync(writeStream);
+                }
+            }
+        }
+
+
+        static string DEFAULTPATH = System.Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+
+        public static void SaveBytes(string fileName, byte[] data)
+        {
+            var filePath = Path.Combine(DEFAULTPATH, fileName);
+            if (!File.Exists(filePath))
+                File.Delete(filePath);
+            File.WriteAllBytes(filePath, data);
+        }
+
+
+
+
+
+        public async void LoadImagenCopy(string nombreArchivo)
+        {
+
+            string FileImage = "";
+            string NameImage = "";
+
+            DirectoryInfo di = new DirectoryInfo("/storage/emulated/0/Pictures/SysDatec/");
+            Console.WriteLine("No search pattern returns:");
 
             foreach (var fi in di.GetFiles())
             {
@@ -227,99 +264,74 @@ namespace ScanApp.Views
                     if (fi.Extension.Contains("jpg"))
                     {
                         FileImage = "jpg";
-                        NameImage = fi.Name.Replace(".jpg", " ");
+                        NameImage = fi.Name.Replace(".jpg", " ").Trim();
                     }
                     else if (fi.Extension.Contains("png"))
                     {
                         FileImage = "png";
-                        NameImage = fi.Name.Replace(".png", " ");
+                        NameImage = fi.Name.Replace(".png", " ").Trim();
                     }
                     else if (fi.Extension.Contains("pdf"))
                     {
                         FileImage = "pdf";
-                        NameImage = fi.Name.Replace(".pdf", " ");
+                        NameImage = fi.Name.Replace(".pdf", " ").Trim();
 
                     }
-                    else
-                    {
-                       NameImage = fi.Name;
-                       FileImage = "file";
-                    }
-
-                    //aqui realizar el copiado de un archivo a temporal
-
-                    //var imagenTemp = new Image
-                    //{
-                    //    Source = ImageSource.FromUri(new Uri("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo))
-                    //};
-
-                    Uri OrigenFile = new Uri("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo, UriKind.RelativeOrAbsolute);
-                    
-                    Image assignImageFromFile = new Image
-                    {
-                        Source = (Device.RuntimePlatform == Device.Android) ? ImageSource.FromFile(OrigenFile.LocalPath) : ImageSource.FromFile(OrigenFile.LocalPath),
-                        Aspect = Aspect.AspectFit
-                    };
-                    image.IsVisible = false;
-                    image1.IsVisible = true;
-                    image1.Source = OrigenFile;
-
-                    Application.Current.MainPage = new NavigationPage(new WebViewPage(OrigenFile.LocalPath, false));
-
-
-                    //image.HeightRequest = 500;
-                    //image.WidthRequest = 300;
-                    // image.Source = OrigenFile;
-
-                    //image.Source = new UriImageSource
-                    //{
-                    //    Uri = OrigenFile,
-                    //    CachingEnabled = false,
-                    //    CacheValidity = new TimeSpan(5, 0, 0, 0)
-                    //};
-                    //var fileName = System.IO.Path.GetFileName(fi.Name);
-                    //Image embeddedImage = new Image
-                    //{  
-                    //    Source = ImageSource.FromResource(nombreArchivo, typeof(ArchivosView).GetTypeInfo().Assembly)
-                    //};
-
-                    //var  destFile = System.IO.Path.Combine("/storage/emulated/0/Pictures/SysDatec/", fileName);
-                    //System.IO.File.Copy(nombreArchivo,"/storage/emulated/0/Pictures/SysDatec/", true);
+                  
                 }
-               
+
             }
             if (FileImage.Length == 0)
             {
                 Console.WriteLine("El archivo no se encontro : " + nombreArchivo);
             }
-            else {
+            else
+            {
                 Console.WriteLine("Archivo encontrado : " + nombreArchivo);
 
             }
-    }  
+
+           
+            Uri OrigenFile = new Uri("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo, UriKind.RelativeOrAbsolute);
+            image.Source = OrigenFile;
+            string sourceFile = System.IO.Path.Combine(sourcePath, OrigenFile.OriginalString);
+            string destFile = System.IO.Path.Combine(sourcePath, targetPath+nombreArchivo);
+       
+            if (System.IO.Directory.Exists(sourcePath))
+            {
+                string[] files = System.IO.Directory.GetFiles(sourcePath);
+                foreach (string s in files)
+                {   
+                    if(s== OrigenFile.OriginalString) 
+                    {  
+                        CopyFile(OrigenFile.LocalPath, @destFile);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Source path does not exist!");
+            }
+
+            string nn = destFile;
+            await Navigation.PushModalAsync(new WebViewPage(nn, true));
+
+        }
 
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-
-            //aqui se coloca cuando le da en el frame
-
             ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
-            LoadImagenCopy(tmpData.Name.Trim()+ tmpData.Description.Trim());
+            LoadImagenCopy(tmpData.Name.Trim() + tmpData.Description.Trim());
 
-            //ScanApp.Views.ArchivosView.Instance.SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + NameImage.Trim() + "." + FileImage);
-            //Uri resourceUri = new Uri("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + "." + tmpData.Description, UriKind.Relative);
-
-            //ScanApp.ViewModels.ArchivosViewModel.Instance= 
-            //image.Source = tmpData.Name.Trim() + tmpData.Description;
             try
             {
-                Sheet.HeightRequest = 700;
+                //await SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + tmpData.Description);
                 await Sheet.OpenSheet();
             }
             catch (Exception ex)
             {
-                image.IsVisible = false;
+
                 ex.Log();
             }
 

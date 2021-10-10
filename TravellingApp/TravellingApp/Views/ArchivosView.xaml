@@ -136,7 +136,7 @@
                            FontSize="18"/>
 
                     <Image x:Name="image" IsVisible="true"/>
-                    <Image x:Name="image1" IsVisible="true"/>
+                  
 
                 </StackLayout>
             </controls:BottomSheetControl.SheetContent>
