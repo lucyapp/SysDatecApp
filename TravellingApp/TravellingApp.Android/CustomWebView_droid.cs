@@ -55,10 +55,8 @@ namespace OpenPdf.Droid
                                       string.Format(customWebView.Uri, WebUtility.UrlEncode(customWebView.Uri))));
                     // Control.LoadUrl(uri);
                     //uri.AbsolutePath = customWebView.Uri.ToString();
-                    Control.LoadUrl(string.Format("file:///android_asset/pdfjs/web/viewer.html?file={0}", customWebView.Uri));
-                    //var AbrirArchivo = new UriBuilder() { Scheme = Uri.UriSchemeFile, Host = "", Path = "/data/user/0/com.plugin.mediatest/files/.local/share/2021-08-11.pdf" }.Uri.AbsoluteUri;
-
-                    Control.LoadUrl(customWebView.Uri);
+                    //Control.LoadUrl(string.Format("file:///android_asset/pdfjs/web/viewer.html?file={0}", customWebView.Uri));
+                    Control.LoadUrl(uri.LocalPath);
                     //Device.OpenUri(new Uri(customWebView.Uri));
                 }
             }

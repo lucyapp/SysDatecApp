@@ -7,11 +7,11 @@ using Xamarin.Forms.Xaml;
 namespace ScanApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OnboardingPage : ContentPage
+    public partial class Formulario : ContentPage
     {
         private string fileContents;
 
-        public OnboardingPage()
+        public Formulario()
         {
             ArchivosCarpetas();
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace ScanApp.Views
             return files;
         }
         public static void DirectorySearch(string dir)
-        {
+        {/// storage / emulated / 0 / Android / data / com.companyname.app / files / count.txt
 
 
             var lista = GetAllFilesFromFolder("/storage/emulated/0/Android/data/Pictures/SysDatec/", true);
@@ -79,6 +79,8 @@ namespace ScanApp.Views
 
         void ArchivosCarpetas()
         {
+
+
 
             DirectorySearch("SysDatec");
 

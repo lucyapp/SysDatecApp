@@ -5,12 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:videoplayer="clr-namespace:Octane.Xamarin.Forms.VideoPlayer;assembly=Octane.Xamarin.Forms.VideoPlayer"
              xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation" xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mc:Ignorable="d"
              x:Class="ScanApp.Views.PagosView"
              Title="Pagos">
-    <!--<ContentPage.Resources>-->
-        <!--<ResourceDictionary>
+    <ContentPage.Resources>
+        <ResourceDictionary>
 
             <Style x:Key="MostRecentStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
@@ -90,17 +90,17 @@
                 </pancakeview:PancakeView>
             </DataTemplate>
 
-        </ResourceDictionary>-->
-    <!--</ContentPage.Resources>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Shell.TitleView>
         <Grid>
             <Label 
                 Text="PAGOS MAS RECIENTES"
                 Style="{StaticResource MostRecentStyle}"/>
         </Grid>
-    --><!--</Shell.TitleView>--><!--
+    </Shell.TitleView>
     <Grid>
-        --><!-- BACKGROUND VIDEO --><!--
+        <!-- BACKGROUND VIDEO -->
         <videoplayer:VideoPlayer
             AutoPlay="True"
             DisplayControls="False"
@@ -125,7 +125,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                --><!-- HEADER INFO --><!--
+                <!-- HEADER INFO -->
                 <Grid
                 Grid.Row="0" 
                 HorizontalOptions="Start"
@@ -148,7 +148,7 @@
                     Color="{StaticResource WhiteColor}"
                     Margin="12, 0"/>
                 </Grid>
-                --><!-- DATE --><!--
+                <!-- DATE -->
                 <Grid
                 Grid.Row="1">
                     <Grid.Margin>
@@ -161,7 +161,7 @@
                     Text="{Binding CurrentPost.Date}"
                     Style="{StaticResource DateStyle}"/>
                 </Grid>
-                --><!-- CAROUSEL POSTS --><!--
+                <!-- CAROUSEL POSTS -->
                 <CarouselView 
                 Grid.Row="2"
                 CurrentItem="{Binding CurrentPost, Mode=TwoWay}"
@@ -188,7 +188,7 @@
                         ItemSpacing="14"/>
                     </CarouselView.ItemsLayout>
                 </CarouselView>
-                --><!-- FILTER --><!--
+                <!-- FILTER -->
                 <Grid
                 Grid.Row="3"
                 Margin="58, 0">
@@ -215,10 +215,6 @@
                     Style="{StaticResource FilterStyle}"/>
                 </Grid>
             </Grid>
-        </Grid>-->
-    <lottie:AnimationView 
-	    Animation="dados.json" 
-	    AutoPlay="true"
-	    VerticalOptions="FillAndExpand" 
-	    HorizontalOptions="FillAndExpand" />
+        </Grid>
+   
 </ContentPage>
