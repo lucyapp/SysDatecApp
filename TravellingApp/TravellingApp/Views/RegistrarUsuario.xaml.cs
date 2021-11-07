@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,7 +17,7 @@ namespace ScanApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegistrarUsuario : ContentPage
     {
-        private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        private const string Url = "http://servicios.sysdatec.com/WsAPABot01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
         private ObservableCollection<UsuarioModel> _post;
         private UsuarioModel user;
@@ -33,7 +34,10 @@ namespace ScanApp.Views
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Formulario());
+            if (VersionTracking.IsFirstLaunchEver)
+            {
+                Navigation.PushModalAsync(new OnboardingPage());
+            }
         }
 
         private void Button_Clicked_2(object sender, EventArgs e)

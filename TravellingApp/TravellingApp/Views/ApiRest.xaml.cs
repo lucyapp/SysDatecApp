@@ -10,7 +10,8 @@ namespace ScanApp
     public partial class ApiRest : ContentPage
     {
         public static ApiRest Instance;
-        private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        //private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        private const string Url = "http://servicios.sysdatec.com/WsAPABot01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
         public ObservableCollection<UsuarioModel> _post { get; private set; } //cambiar este por model ubicacion para poder traer el post de los datos de mapas ofertas
         //private ObservableCollection<Model_Ubicacion> _post;

@@ -52,6 +52,7 @@ namespace ScanApp.Controls
             typeof(BottomSheetControl),
             defaultValue: default(View),
             defaultBindingMode: BindingMode.TwoWay);
+   
 
         public View SheetContent
         {

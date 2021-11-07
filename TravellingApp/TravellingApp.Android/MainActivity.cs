@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
+using Plugin.CurrentActivity;
 
 namespace ScanApp.Droid
 {
@@ -18,16 +19,18 @@ namespace ScanApp.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
-            var write = (new (string, bool)[] { (Manifest.Permission.WriteExternalStorage, true) });
-            var read = (new (string, bool)[] { (Manifest.Permission.ReadExternalStorage, true) });
-            var media = (new (string, bool)[] { (Manifest.Permission.MediaContentControl, true) });
+            _ = (new (string, bool)[] { (Manifest.Permission.WriteExternalStorage, true) });
+            _ = (new (string, bool)[] { (Manifest.Permission.ReadExternalStorage, true) });
+            _ = (new (string, bool)[] { (Manifest.Permission.MediaContentControl, true) });
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             FormsVideoPlayer.Init();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             LoadApplication(new App());
-          
+
 
         }
 

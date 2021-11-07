@@ -1,4 +1,5 @@
 ﻿
+using DevEnvExe_LocalStorage;
 using Newtonsoft.Json;
 using ScanApp.Data;
 using ScanApp.Models;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ScanApp.Views
@@ -24,7 +26,8 @@ namespace ScanApp.Views
         {
             //this.Clear();
             ActivarLoading();
-            try {
+            try
+            {
                 if (Application.Current.Properties["IsLoggedIn"].Equals(true))
                 {
                     EntryUsername.Text = (string)Application.Current.Properties["username"];
@@ -37,7 +40,16 @@ namespace ScanApp.Views
                         await Task.Delay(1000).ConfigureAwait(true);
                         DesactivarLoading();
 
-                        Application.Current.MainPage = new AppShell();
+                        if (!VersionTracking.IsFirstLaunchEver)
+                        {
+                            Application.Current.MainPage = new OnboardingPage();
+                        }
+                        else
+                        {
+                            Application.Current.MainPage = new AppShell();
+                        }
+
+
                     });
                     DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
                 }
@@ -47,15 +59,17 @@ namespace ScanApp.Views
                     DesactivarLoading();
                 }
 
-            } catch (Exception e) 
+            }
+            catch (Exception e)
             {
                 DesactivarLoading();
             }
-            
+
             base.OnAppearing();
         }
 
-        private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+       // private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        private const string Url = "http://servicios.sysdatec.com/WsAPABot01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
         private ObservableCollection<UsuarioModel> _post;
         private UsuarioModel user;
@@ -139,7 +153,7 @@ namespace ScanApp.Views
                 //messageLabel.Text = "Login exitoso";
                 //await Navigation.PushAsync(new CarpetaListPage());
                 resultado = true;
-              
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     DesactivarLoading();
@@ -159,7 +173,17 @@ namespace ScanApp.Views
                 Application.Current.Properties["email"] = xx.Email;
                 Application.Current.Properties["IsLoggedIn"] = true;
 
-                Application.Current.MainPage = new AppShell();
+                if (VersionTracking.IsFirstLaunchEver)
+                {
+                    Application.Current.MainPage = new OnboardingPage();
+                }
+                else
+                {
+                    Application.Current.MainPage = new AppShell();
+                }
+
+
+
             }
 
         }

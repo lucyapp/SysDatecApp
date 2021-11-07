@@ -30,4 +30,19 @@ namespace ScanApp.Models
     }
     public class responseLogin { public int result { get; set; } }
 
+
+    public class OnboardingModel
+    {
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string ImageUrl { get; set; }
+    }
+
+
+    public class PdfDocEntity
+    {
+        public string FileName { get; set; }
+        public string Url { get; set; }
+    }
+
 }

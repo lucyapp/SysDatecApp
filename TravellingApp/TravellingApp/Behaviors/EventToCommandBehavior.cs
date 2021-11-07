@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Prism.Behaviors;
+using System;
 using System.Reflection;
 using System.Windows.Input;
-
 using Xamarin.Forms;
 
-namespace ScanApp.Behaviors
+namespace EventToCommandBehavior
 {
     public class EventToCommandBehavior : BehaviorBase<View>
     {

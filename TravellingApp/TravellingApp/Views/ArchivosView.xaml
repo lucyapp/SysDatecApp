@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:controls="clr-namespace:ScanApp.Controls" xmlns:viewmodel="clr-namespace:ScanApp.ViewModels"
+             xmlns:controls="clr-namespace:ScanApp.Controls" 
+             xmlns:viewmodel="clr-namespace:ScanApp.ViewModels"
              mc:Ignorable="d"
              Background="white"
              x:Class="ScanApp.Views.ArchivosView"
@@ -104,11 +103,9 @@
            
  
         </ScrollView>
-        
         <controls:BottomSheetControl x:Name="Sheet"  SheetHeight="350">
             <controls:BottomSheetControl.SheetContent>
                 <StackLayout>
-
                     <OnPlatform x:TypeArguments="View">
                         <On Platform="iOS">
                             <Grid>
@@ -129,18 +126,15 @@
                             </Grid>
                         </On>
                     </OnPlatform>
-
                     <Label HorizontalTextAlignment="Center"
                            Margin="0,20"
                            Text="Imagen seleccionada"
                            FontSize="18"/>
-
                     <Image x:Name="image" IsVisible="true"/>
-                  
-
                 </StackLayout>
             </controls:BottomSheetControl.SheetContent>
         </controls:BottomSheetControl>
+
         <Button Grid.Row="0" x:Name="pickPhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30"  VerticalOptions ="End" HorizontalOptions ="EndAndExpand"  Image="file2.png"  />
         <Button Grid.Row="1" x:Name="takePhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30" Image="camara.png" VerticalOptions ="End"  HorizontalOptions ="EndAndExpand"/>
 

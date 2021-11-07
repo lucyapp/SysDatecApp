@@ -441,6 +441,10 @@
     <AndroidAsset Include="Assets\pdfjs\web\standard_fonts\LICENSE_FOXIT" />
     <AndroidAsset Include="Assets\pdfjs\web\standard_fonts\LICENSE_LIBERATION" />
     <AndroidAsset Include="Assets\pdfjs\web\compressed.tracemonkey-pldi-09.pdf" />
+    <AndroidAsset Include="Assets\dados.json" />
+    <AndroidAsset Include="Assets\loading.json" />
+    <AndroidAsset Include="Assets\dates.json" />
+    <AndroidAsset Include="Assets\security.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

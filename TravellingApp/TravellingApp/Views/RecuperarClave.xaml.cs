@@ -15,7 +15,7 @@ namespace ScanApp.Views
     public partial class RecuperarClave : ContentPage
     {
 
-        private string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        private string Url = "http://servicios.sysdatec.com/WsAPABot01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
         private ObservableCollection<UsuarioModel> _post;
         private UsuarioModel user;
