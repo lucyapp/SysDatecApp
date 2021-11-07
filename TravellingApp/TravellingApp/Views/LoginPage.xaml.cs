@@ -1,4 +1,5 @@
 ﻿
+using DevEnvExe_LocalStorage;
 using Newtonsoft.Json;
 using ScanApp.Data;
 using ScanApp.Models;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ScanApp.Views
@@ -36,8 +38,17 @@ namespace ScanApp.Views
 
                         await Task.Delay(1000).ConfigureAwait(true);
                         DesactivarLoading();
+                        
+                        if (!VersionTracking.IsFirstLaunchEver)
+                        {
+                            Application.Current.MainPage = new OnboardingPage();
+                        }
+                        else
+                        {
+                            Application.Current.MainPage = new AppShell();
+                        }
 
-                        Application.Current.MainPage = new AppShell();
+                        
                     });
                     DisplayAlert("Autenticacion", "El usuario '" + Application.Current.Properties["name"] + "' ya se encuentra autenticado, presione para continuar", "Ok").ConfigureAwait(false);
                 }
@@ -55,7 +66,7 @@ namespace ScanApp.Views
             base.OnAppearing();
         }
 
-        private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        private const string Url = "http://servicios.sysdatec.com/WsAPABot01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
         private ObservableCollection<UsuarioModel> _post;
         private UsuarioModel user;
@@ -159,7 +170,16 @@ namespace ScanApp.Views
                 Application.Current.Properties["email"] = xx.Email;
                 Application.Current.Properties["IsLoggedIn"] = true;
 
-                Application.Current.MainPage = new AppShell();
+                if (VersionTracking.IsFirstLaunchEver)
+                {
+                    Application.Current.MainPage = new OnboardingPage();
+                }else
+                {
+                    Application.Current.MainPage = new AppShell();
+                }
+
+                
+               
             }
 
         }

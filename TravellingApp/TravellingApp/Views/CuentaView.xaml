@@ -4,13 +4,18 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:segmentControl="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             Background="black"
+             Background="white"
              x:Class="ScanApp.Views.CuentaView"
              Title="Cuenta">
     <lottie:AnimationView 
-	    Animation="empty.json" 
+	    Animation="dates.json" 
 	    AutoPlay="true"
 	    VerticalOptions="FillAndExpand" 
 	    HorizontalOptions="FillAndExpand" />
+
+    
+
 </ContentPage>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ScanApp.Views.OnboardingPage"
+             xmlns:local="clr-namespace:ScanApp.ViewModels"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:controls="clr-namespace:ScanApp.Renderers"
+             xmlns:models="clr-namespace:ScanApp.Models"
+             Title="Registro de formulario"
+             ios:Page.UseSafeArea="true">
+    
+                <ContentPage.BindingContext>
+                    <local:OnboardingViewModel />
+                </ContentPage.BindingContext>
+                <ContentPage.Resources>
+                    <ResourceDictionary>
+                        <Color x:Key="BlueColor">#071D92</Color>
+                        <Style TargetType="Label">
+                            <Setter Property="TextColor" Value="{StaticResource BlueColor}" />
+                            <Setter Property="HorizontalTextAlignment" Value="Center" />
+                            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                        </Style>
+                    </ResourceDictionary>
+                </ContentPage.Resources>
+                <ContentPage.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0"
+                    HorizontalOptions="EndAndExpand"
+                    Margin="10,10,10,10"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    BackgroundColor="Transparent"
+                    TextColor="LightSteelBlue"
+                    Text="{Binding SkipButtonText}"
+                    Command="{Binding SkipCommand}"/>
+                        <CarouselView x:Name="onBoardingCarousel"
+                          Grid.Row="1"
+                          Margin="20"
+                          ItemsSource="{Binding Items}"                          
+                          VerticalOptions="Center"
+                          Position="{Binding Position}">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="models:OnboardingModel">
+                                    <ContentView>
+                                        <FlexLayout Direction="Column"
+                                    JustifyContent="SpaceEvenly">
+                                            <Label Text="{Binding Title}"
+                                       TextColor="CornflowerBlue"
+                                       FontAttributes="Bold"
+                                       FontSize="Title" />
+                                            <ffimageloadingsvg:SvgCachedImage                                  
+                                       Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       WidthRequest="300" 
+                                       FlexLayout.AlignSelf="Center"/>
+                                            <Label Text="{Binding Content}"
+                                       FontSize="Body"/>
+                                            <Grid >
+                                                <Label 
+                                        Grid.Column="0"
+                                        Margin="0"
+                                        FontSize="14"
+                                        Text=""
+                                        VerticalOptions="Center" />
+                                                <ImageButton
+                                        BackgroundColor="LightBlue"
+                                        Grid.Column="1"
+                                        Padding="14"
+                                        Source="NextButtonIcon"
+                                        CornerRadius="16"
+                                        HeightRequest="50"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Center"
+                                        WidthRequest="50" />
+                                            </Grid>
+                                        </FlexLayout>
+
+                                    </ContentView>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+
+                        </CarouselView>
+
+                    <IndicatorView
+                        Grid.Row="2"
+                        
+                        IndicatorsShape="Circle"
+                        IndicatorColor="{StaticResource BlueColor}"
+                        SelectedIndicatorColor="DarkGray"
+                        HorizontalOptions="Center"/>    
+                </Grid>
+                </ContentPage.Content>
+</ContentPage>

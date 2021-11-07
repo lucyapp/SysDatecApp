@@ -116,6 +116,9 @@
     <PackageReference Include="Xamarin.Android.Support.Vector.Drawable">
       <Version>28.0.0.3</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
     <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
@@ -441,6 +444,10 @@
     <AndroidAsset Include="Assets\pdfjs\web\standard_fonts\LICENSE_FOXIT" />
     <AndroidAsset Include="Assets\pdfjs\web\standard_fonts\LICENSE_LIBERATION" />
     <AndroidAsset Include="Assets\pdfjs\web\compressed.tracemonkey-pldi-09.pdf" />
+    <AndroidAsset Include="Assets\dados.json" />
+    <AndroidAsset Include="Assets\dates.json" />
+    <AndroidAsset Include="Assets\loading.json" />
+    <AndroidAsset Include="Assets\security.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -669,6 +676,15 @@
     <AndroidAsset Include="Assets\pdfjs\web\images\toolbarButton-zoomOut.svg" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-collapsed.svg" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded.svg" />
+    <AndroidResource Include="Resources\drawable\NextButtonIcon.png" />
+    <AndroidResource Include="Resources\drawable\TabIcon3.png" />
+    <AndroidResource Include="Resources\drawable\TabIcon4.png" />
+    <AndroidResource Include="Resources\drawable\TabPlus.png" />
+    <AndroidResource Include="Resources\drawable\time.svg" />
+    <AndroidResource Include="Resources\drawable\visual_data.svg" />
+    <AndroidResource Include="Resources\drawable\healthy_habits.svg" />
+    <AndroidResource Include="Resources\drawable\LaunchMaps.png" />
+    <AndroidResource Include="Resources\drawable\MapIndicator.png" />
     <Content Include="res\xml\network_security_config..xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

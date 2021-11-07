@@ -1,5 +1,6 @@
 ﻿using DarkIce.Toolkit.Core.Utilities;
 using OpenPdf;
+using PCLStorage;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Navigation;
@@ -8,9 +9,8 @@ using ScanApp.ViewModels;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
+
 
 namespace ScanApp.Views
 {
@@ -207,34 +207,27 @@ namespace ScanApp.Views
             }
         }
 
+       
         public async Task CopyFileAsync(string sourceFilePath, string destinationFilePath)
         {
-            var fileBytes = File.ReadAllBytes(sourceFilePath);
-            File.WriteAllBytes(destinationFilePath, fileBytes);
-            SaveBytes(sourceFilePath, fileBytes);
-             File.Delete(sourcePath);
-          
+            //var fileBytes = File.ReadAllBytes(sourceFilePath);
+            
+
+            //File.WriteAllBytes(destinationFilePath, fileBytes);
+            //SaveBytes(sourceFilePath, fileBytes);
+           
+            //var f1 = PCLStorage.FileSystem.Current.GetFileFromPathAsync(destinationFilePath);
+            //var d1 = PCLStorage.FileSystem.Current.LocalStorage;
+
+            //var tempFolder = PCLStorage.FileSystem.Current.LocalStorage;
+            //var rootFolder1 = Xamarin.Essentials.FileSystem.AppDataDirectory;
+            IFolder rootFolder = await PCLStorage.FileSystem.Current.GetFolderFromPathAsync("/storage/emulated/0/Pictures/SysDatec");
+            //var file = await rootFolder.CreateFileAsync("/storage/emulated/0/Android/data/com.plugin.mediatest/files/2021-08-11.pdf", PCLStorage.CreationCollisionOption.ReplaceExisting);
+            //var copiedFile = await rootFolder.CreateFileAsync("/storage/emulated/0/Android/data/com.plugin.mediatest/files",  PCLStorage.CreationCollisionOption.ReplaceExisting);
+            // File.Delete(sourcePath);
+
+           
         }
-
-        //public async Task DeployDatabaseFromAssetsAsync()
-        //{
-        //    var databaseName = "database.db3";
-
-        //    // Android application default folder.
-        //    var appFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        //    var dbFile = Path.Combine(appFolder, databaseName);
-
-        //    // Check if the file already exists.
-        //    if (!File.Exists(dbFile))
-        //    {
-        //        using (FileStream writeStream = new FileStream(dbFile, FileMode.OpenOrCreate, FileAccess.Write))
-        //        {
-        //            // Assets is comming from the current context.
-        //           // await writeStream.Open(databaseName).CopyToAsync(writeStream);
-        //        }
-        //    }
-        //}
-
 
         static string DEFAULTPATH = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
@@ -273,9 +266,9 @@ namespace ScanApp.Views
                     {
                         FileImage = "pdf";
                         NameImage = fi.Name.Replace(".pdf", " ").Trim();
-
+                        
                     }
-                  
+
                 }
 
             }
@@ -290,41 +283,80 @@ namespace ScanApp.Views
             }
 
            
-            Uri OrigenFile = new Uri("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo, UriKind.RelativeOrAbsolute);
-            image.Source = OrigenFile;
-            string sourceFile = System.IO.Path.Combine(sourcePath, OrigenFile.OriginalString);
-            string destFile = System.IO.Path.Combine(sourcePath, targetPath+nombreArchivo);
-       
-            if (System.IO.Directory.Exists(sourcePath))
-            {
-                string[] files = System.IO.Directory.GetFiles(sourcePath);
-                foreach (string s in files)
-                {   
-                    if(s== OrigenFile.OriginalString) 
-                    {
-                       _= CopyFileAsync(OrigenFile.LocalPath, @destFile);
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("Source path does not exist!");
-            }
+            Uri OrigenFile = new Uri("storage/emulated/0/Pictures/SysDatec/" + nombreArchivo, UriKind.RelativeOrAbsolute);
+            //image.Source = OrigenFile;
+           
 
-            string nn = destFile;
-            await Navigation.PushModalAsync(new WebViewPage(nn, true));
+
+            string sourceFile = System.IO.Path.Combine(sourcePath, OrigenFile.OriginalString);
+            //string destFile = System.IO.Path.Combine(sourcePath, targetPath + nombreArchivo);
+
+            //if (System.IO.Directory.Exists(sourcePath))
+            //{
+            //    string[] files = System.IO.Directory.GetFiles(sourcePath);
+            //    foreach (string s in files)
+            //    {   
+            //        if(s== OrigenFile.OriginalString) 
+            //        {
+            //           _= CopyFileAsync(OrigenFile.LocalPath, @destFile);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Source path does not exist!");
+            //}
+
+            //string nn = destFile;
+            //await Navigation.PushModalAsync(new WebViewPage(nn, true));
 
         }
+        public static void SetFileReadAccess(string FileName, bool SetReadOnly)
+        {
+            // Create a new FileInfo object.
+            FileInfo fInfo = new FileInfo(FileName);
 
+            // Set the IsReadOnly property.
+            //fInfo.IsReadOnly = SetReadOnly;
+        }
+
+        // Returns wether a file is read-only.
+        public static bool IsFileReadOnly(string FileName)
+        {
+            // Create a new FileInfo object.
+            FileInfo fInfo = new FileInfo(FileName);
+
+            // Return the IsReadOnly property value.
+            return fInfo.IsReadOnly;
+        }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
+              ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
+              string sourcePath = @"\\storage\\emulated\\0\\Pictures\\SysDatec\\"+tmpData.Name.Trim() + '.' + tmpData.Picture;
+              string targetPath = @"\\storage\\emulated\\0\\Android\\data\\com.plugin.mediatest\\files\\";
+            string destFile =System.IO.Path.Combine(sourcePath, targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture);
+            string path = sourcePath;
+            //string path2 = @"file:///android_asset/pdfjs/web";
+            string path2 = @targetPath + tmpData.Name.Trim() + '.'+ tmpData.Picture;
+
+            FileInfo fi1 = new FileInfo(path);
+            SetFileReadAccess(fi1.ToString(), true);
+            FileInfo fi2 = new FileInfo(path2);
+            SetFileReadAccess(fi2.ToString(), true);
+            using (FileStream fs = fi1.OpenRead())
+            {
+                
+            }
+            fi1.CopyTo(targetPath+tmpData.Name.Trim() + '.' + tmpData.Picture, true);
+          
+
+
             LoadImagenCopy(tmpData.Name.Trim() + tmpData.Description.Trim());
 
             try
             {
-                //await SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + tmpData.Description);
+                //await SeleccionarImagen(" / storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + tmpData.Description);
                 await Sheet.OpenSheet();
             }
             catch (Exception ex)

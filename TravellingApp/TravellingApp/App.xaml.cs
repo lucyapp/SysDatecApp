@@ -1,4 +1,5 @@
 ﻿using ScanApp.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ScanApp
@@ -17,7 +18,7 @@ namespace ScanApp
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            VersionTracking.Track();
         }
 
         protected override void OnSleep()
