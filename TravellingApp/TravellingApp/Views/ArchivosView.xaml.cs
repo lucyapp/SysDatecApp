@@ -20,7 +20,8 @@ namespace ScanApp.Views
         private Stream stream { get; set; }
         public string sourcePath = @"/storage/emulated/0/Pictures/SysDatec/";
         public string targetPath = @"/storage/emulated/0/Android/data/com.plugin.mediatest/files/";
-        public async void SeleccionarImagen(string location)
+        public async         Task
+SeleccionarImagen(string location)
         {
             var memoryStream = new MemoryStream();
             using (var source = System.IO.File.OpenRead(location))
@@ -333,27 +334,44 @@ namespace ScanApp.Views
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
-            string sourcePath = @"\\storage\\emulated\\0\\Pictures\\SysDatec\\" + tmpData.Name.Trim() + '.' + tmpData.Picture;
-            string targetPath = @"\\storage\\emulated\\0\\Android\\data\\com.plugin.mediatest\\files\\";
-            string destFile = System.IO.Path.Combine(sourcePath, targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture);
-            string path = sourcePath;
-            //string path2 = @"file:///android_asset/pdfjs/web";
-            string path2 = @targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture;
+            string sourcePath1 = @"\\storage\\emulated\\0\\Pictures\\SysDatec\\" + tmpData.Name.Trim() + '.' + tmpData.Picture;
+            string targetPath1 = @"\\storage\\emulated\\0\\Android\\data\\com.plugin.mediatest\\files\\";
+            //string destFile = System.IO.Path.Combine(sourcePath, targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture);
+            //string path = sourcePath;
+            ////string path2 = @"file:///android_asset/pdfjs/web";
+            //string path2 = @targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture;
 
-            FileInfo fi1 = new FileInfo(path);
-            SetFileReadAccess(fi1.ToString(), true);
-            FileInfo fi2 = new FileInfo(path2);
-            SetFileReadAccess(fi2.ToString(), true);
-            using (FileStream fs = fi1.OpenRead())
+            //FileInfo fi1 = new FileInfo(path);
+            //SetFileReadAccess(fi1.ToString(), true);
+            //FileInfo fi2 = new FileInfo(path2);
+            //SetFileReadAccess(fi2.ToString(), true);
+            //using (FileStream fs = fi1.OpenWrite())
+            //{
+
+            //}
+            //fi1.CopyTo(targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture, true);
+
+            IFileSystem fileSystem = FileSystem.Current;
+            IFolder rootFolder = fileSystem.LocalStorage;
+            IFile reportsFolder = await rootFolder.GetFileAsync(sourcePath + tmpData.Name.Trim() + '.' + tmpData.Picture);
+
+            var txtFile = await rootFolder.CreateFileAsync("report.pdf", CreationCollisionOption.ReplaceExisting);
+
+            using (StreamWriter streamWriter = new StreamWriter(txtFile.Path))
             {
-
+                //foreach (var ce in CategoryExpensesCollection)
+                //{
+                //    streamWriter.WriteLine($"{ce.Category} - {ce.ExpensesPercentage:p}");
+                //}
             }
-            fi1.CopyTo(targetPath + tmpData.Name.Trim() + '.' + tmpData.Picture, true);
+
+
+
             LoadImagenCopy(tmpData.Name.Trim() + tmpData.Description.Trim());
 
             try
             {
-                //await SeleccionarImagen(" / storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + tmpData.Description);
+                await SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + tmpData.Description);
                 await Sheet.OpenSheet();
             }
             catch (Exception ex)

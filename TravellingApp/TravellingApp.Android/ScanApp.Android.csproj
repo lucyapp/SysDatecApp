@@ -445,6 +445,10 @@
     <AndroidAsset Include="Assets\loading.json" />
     <AndroidAsset Include="Assets\dates.json" />
     <AndroidAsset Include="Assets\security.json" />
+    <AndroidAsset Include="Assets\bot.json" />
+    <AndroidAsset Include="Assets\mobilepay.json" />
+    <AndroidAsset Include="Assets\questions.json" />
+    <AndroidAsset Include="Assets\senora.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -673,6 +677,17 @@
     <AndroidAsset Include="Assets\pdfjs\web\images\toolbarButton-zoomOut.svg" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-collapsed.svg" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded.svg" />
+    <AndroidResource Include="Resources\drawable\LaunchMaps.png" />
+    <AndroidResource Include="Resources\drawable\MapIndicator.png" />
+    <AndroidResource Include="Resources\drawable\NextButtonIcon.png" />
+    <AndroidResource Include="Resources\drawable\save.png" />
+    <AndroidResource Include="Resources\drawable\TabIcon3.png" />
+    <AndroidResource Include="Resources\drawable\TabIcon4.png" />
+    <AndroidResource Include="Resources\drawable\TabPlus.png" />
+    <AndroidResource Include="Resources\drawable\time.svg" />
+    <AndroidResource Include="Resources\drawable\visual_data.svg" />
+    <AndroidResource Include="Resources\drawable\abPlus.png" />
+    <AndroidResource Include="Resources\drawable\healthy_habits.svg" />
     <Content Include="res\xml\network_security_config..xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
