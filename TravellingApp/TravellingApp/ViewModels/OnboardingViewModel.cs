@@ -1,4 +1,5 @@
 ﻿using ScanApp.Models;
+using ScanApp.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -27,21 +28,27 @@ namespace ScanApp.ViewModels
             {
                 new OnboardingModel
                 {
-                    Title = "Bienvenidos al App",
+                    Title = "Bienvenidos a ApaBot",
                     Content = "Sr(a), Debes deligenciar el formulario para poder continuar y procesar la información.",
-                    ImageUrl = "healthy_habits.svg"
+                    ImageUrl = "bot.json",
+                    Opcion0=true,
+                    Opcion1=false
                 },
                 new OnboardingModel
                 {
                     Title = "1. Datos Personales",
                     Content = "Sr(a),Ingresa tus datos personales para seguir en el proceso y asi poder registrarse.",
-                    ImageUrl = "time.svg"
+                    ImageUrl = "time.svg",
+                    Opcion0=false,
+                    Opcion1=true
                 },
                 new OnboardingModel
                 {
                     Title = "2. Información personal",
                     Content = "Sr(a), Deberá llenar los items necesarios para que el sistema conozca un poco de ti.",
-                    ImageUrl = "visual_data.svg"
+                    ImageUrl = "visual_data.svg",
+                    Opcion0=false,
+                    Opcion1=true
                 }
             };
         }
@@ -62,7 +69,10 @@ namespace ScanApp.ViewModels
         }
 
         private static void ExitOnBoarding()
-            => Application.Current.MainPage = new AppShell();
+        {
+            // _ = Application.Current.MainPage.Navigation.PushAsync(new InformacionPersonal());
+             _ = Application.Current.MainPage = new InformacionPersonal();
+        }
 
         private void MoveToNextPosition()
         {

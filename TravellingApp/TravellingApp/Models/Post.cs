@@ -36,6 +36,8 @@ namespace ScanApp.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public string ImageUrl { get; set; }
+        public bool Opcion0 { get; set; }
+        public bool Opcion1 { get; set; }
     }
 
 

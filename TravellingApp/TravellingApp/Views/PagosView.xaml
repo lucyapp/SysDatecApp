@@ -9,11 +9,13 @@
              mc:Ignorable="d"
              x:Class="ScanApp.Views.PagosView"
              Title="Pagos">
-    
-     
-            <lottie:AnimationView 
+
+
+        <lottie:AnimationView 
 	    Animation="dados.json" 
 	    AutoPlay="true"
 	    VerticalOptions="FillAndExpand" 
 	    HorizontalOptions="FillAndExpand" />
+      
+
 </ContentPage>

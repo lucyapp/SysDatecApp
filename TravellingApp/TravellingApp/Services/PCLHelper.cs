@@ -2,7 +2,9 @@
 using ScanApp.Models;
 using ScanApp.Services;
 using System;
+using System.IO;
 using System.Threading.Tasks;
+using FileAccess = PCLStorage.FileAccess;
 
 namespace DevEnvExe_LocalStorage
 {
@@ -124,6 +126,15 @@ namespace DevEnvExe_LocalStorage
                 return null;
             }
             return await openAsync;
+        }
+
+        public static async Task Save(string path, string content)
+        {  //realizar con este
+            IFileSystem fileSystem = FileSystem.Current;
+            IFolder rootFolder = fileSystem.LocalStorage;
+            var subFolder = await rootFolder.CreateFolderAsync(Path.GetDirectoryName(path), CreationCollisionOption.OpenIfExists);
+            var file = await subFolder.CreateFileAsync(Path.GetFileName(path), CreationCollisionOption.ReplaceExisting);
+            await file.WriteAllTextAsync(content);
         }
 
         public static async Task SaveFileAsync(string fileName, System.IO.MemoryStream inputStream)

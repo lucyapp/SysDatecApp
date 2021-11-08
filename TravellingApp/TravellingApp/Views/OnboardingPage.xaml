@@ -6,10 +6,9 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:controls="clr-namespace:ScanApp.Renderers"
-             xmlns:models="clr-namespace:ScanApp.Models"
+             xmlns:models="clr-namespace:ScanApp.Models" xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              Title="Registro de formulario"
              ios:Page.UseSafeArea="true">
-
     <ContentPage.BindingContext>
         <local:OnboardingViewModel />
     </ContentPage.BindingContext>
@@ -37,6 +36,7 @@
                     FontAttributes="Bold"
                     BackgroundColor="Transparent"
                     TextColor="LightSteelBlue"
+                    IsVisible="true"
                     Text="{Binding SkipButtonText}"
                     Command="{Binding SkipCommand}"/>
             <CarouselView x:Name="onBoardingCarousel"
@@ -54,11 +54,18 @@
                                        TextColor="CornflowerBlue"
                                        FontAttributes="Bold"
                                        FontSize="Title" />
+                                <lottie:AnimationView 
+	                                Animation="{Binding ImageUrl}" 
+	                                AutoPlay="true"
+                                    HeightRequest="300"
+                                    InputTransparent="True"
+	                                VerticalOptions="Center" 
+	                                HorizontalOptions="CenterAndExpand" IsVisible="{Binding Opcion0}" />    
                                 <ffimageloadingsvg:SvgCachedImage                                  
                                        Source="{Binding ImageUrl}"
                                        Aspect="AspectFill"
                                        WidthRequest="300" 
-                                       FlexLayout.AlignSelf="Center"/>
+                                       FlexLayout.AlignSelf="Center"  IsVisible="{Binding Opcion1}"/>
                                 <Label Text="{Binding Content}"
                                        FontSize="Body"/>
                                 <Grid >
@@ -66,7 +73,6 @@
                                         Grid.Column="0"
                                         Margin="0"
                                         FontSize="14"
-                                        Text=""
                                         VerticalOptions="Center" />
                                     <ImageButton
                                         BackgroundColor="LightBlue"
