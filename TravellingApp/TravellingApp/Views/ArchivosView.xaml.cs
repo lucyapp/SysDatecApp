@@ -20,8 +20,7 @@ namespace ScanApp.Views
         private Stream stream { get; set; }
         public string sourcePath = @"/storage/emulated/0/Pictures/SysDatec/";
         public string targetPath = @"/storage/emulated/0/Android/data/com.plugin.mediatest/files/";
-        public async         Task
-SeleccionarImagen(string location)
+        public async Task SeleccionarImagen(string location)
         {
             var memoryStream = new MemoryStream();
             using (var source = System.IO.File.OpenRead(location))
@@ -42,7 +41,14 @@ SeleccionarImagen(string location)
         {
             InitializeComponent();
             CrossMedia.Current.Initialize();
-            Nombre.Text = Application.Current.Properties["name"].ToString();
+            try {
+                Nombre.Text = Application.Current.Properties["Nombre"].ToString() + " " + Application.Current.Properties["Apellido"].ToString();
+
+            }
+            catch (Exception) {
+                Nombre.Text = Application.Current.Properties["username"].ToString();
+
+            }
             NavigationPage.SetBackButtonTitle(this, "");
             Instance = this;
 
@@ -268,6 +274,10 @@ SeleccionarImagen(string location)
                         FileImage = "pdf";
                         NameImage = fi.Name.Replace(".pdf", " ").Trim();
 
+                    }
+                    else {
+                        FileImage = "txt";
+                        NameImage = fi.Name.Replace(".txt", " ").Trim();
                     }
 
                 }

@@ -11,6 +11,7 @@ using Xamarin.Forms;
 using Label = System.Reflection.Emit.Label;
 
 using Xamarin.Forms.Xaml;
+using PCLStorage;
 
 namespace ScanApp.Views
 {
@@ -304,6 +305,19 @@ namespace ScanApp.Views
             }
         }
 
+      
+        public async Task<IFolder> CrearCarpetasEnDispositivo(string folderPath, string carpetaNueva )
+        {
+
+            //IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(folderPath );
+            //IFolder folder = await rootFolder.CreateFolderAsync("/storage/emulated/0/Pictures/SysDatec/"+carpetaNueva, CreationCollisionOption.OpenIfExists); 
+            //IFile file = await folder.CreateFileAsync("archivopdf.pdf", CreationCollisionOption.ReplaceExisting);
+            //IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(folderPath );
+            IFolder folder = await FileSystem .Current.GetFolderFromPathAsync(folderPath);
+            folder = await folder.CreateFolderAsync(carpetaNueva, CreationCollisionOption.ReplaceExisting);
+            return folder;
+        } 
+
         private void Entrada11_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -412,13 +426,94 @@ namespace ScanApp.Views
             }
         }
 
+        public async Task<IFolder> ListaGuardarDispositivoAsync(List<string> Lista, string opcion, string path)
+        {
+
+            int count = Lista.Count();
+            string carpeta = "";
+            for (int j = 0; j < count; j++)
+            {
+                carpeta = Lista[j];
+
+                return await CrearCarpetasEnDispositivo(path, carpeta);
+            }
+            return null;
+        }
+
+
+
         private void btnGuardarInformacionPersonal_Clicked(object sender, EventArgs e)
         {
+            if (Application.Current.Properties["PagaServicios"].ToString() != null)
+            {
+                var uno = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Servicios");
+                var Result = Convertir_StringSplit_ToList(Entrada11.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "Servicios", "/storage/emulated/0/Pictures/SysDatec/Servicios");
+            }
+            
+            if (Application.Current.Properties["CreditoViviendaArriendo"].ToString() != null)
+            {
+                var dos = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "CDT-Vivienda");
+                var Result = Convertir_StringSplit_ToList(Entrada13.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "CDT-Vivienda", "/storage/emulated/0/Pictures/SysDatec/CDT-Vivienda");
+            }
+            
+            if (Application.Current.Properties["PoseeVehiculo"].ToString() != null)
+            {
+                var tres = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Vehiculos");
+                var Result = Convertir_StringSplit_ToList(Entrada23.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos");
+            }
+            
+            if (Application.Current.Properties["CreditoVehicular"].ToString() != null)
+            {
+                var cuatro = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec/Vehiculos", "CDT-Vehiculos");
+                var Result = Convertir_StringSplit_ToList(Entrada15.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "CDT-Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos/CDT-Vehiculos");
+            }
+            
+            if (Application.Current.Properties["EntidadesFinancieras"].ToString() != null)
+            {
+                var cinco = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "ENT-Financieras");
+                var Result = Convertir_StringSplit_ToList(Entrada17.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "ENT-Financieras", "/storage/emulated/0/Pictures/SysDatec/ENT-Financieras");
+            }
+            
+            if (Application.Current.Properties["TieneHijos"].ToString() != null)
+            {
+                var seis = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Hijos");
+                var Result = Convertir_StringSplit_ToList(Entrada7.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "Hijos", "/storage/emulated/0/Pictures/SysDatec/Hijos");
+            }
+            
+            if (Application.Current.Properties["TieneMascotas"].ToString() != null)
+            {
+                var siete = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Mascotas");
+                var Result = Convertir_StringSplit_ToList(Entrada9.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "Mascotas", "/storage/emulated/0/Pictures/SysDatec/Mascotas");
+            }
+            
+            if (Application.Current.Properties["EducacionFormal"].ToString() != null)
+            {
+                var ocho = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "ACA-Educacion");
+                var Result = Convertir_StringSplit_ToList(Entrada19.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "ACA-Educacion", "/storage/emulated/0/Pictures/SysDatec/ACA-Educacion");
+            }
+            
+            if (Application.Current.Properties["Labora"].ToString() != null)
+            {
+                var nueve = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "SIT-Laboral");
+                var Result = Convertir_StringSplit_ToList(Entrada21.Text);
+                _ = ListaGuardarDispositivoAsync(Result, "SIT-Laboral", "/storage/emulated/0/Pictures/SysDatec/SIT-Laboral");
+
+            }
+
             try {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         _ = DisplayAlert("Infomacion", "El usuario '" + Application.Current.Properties["Nombre"] + " " + Application.Current.Properties["Apellido"] + "' ya guardo sus datos.", "Ok").ConfigureAwait(false);
                         await Task.Delay(1000).ConfigureAwait(true);
+                       
 
                     });
                 } catch (Exception) 
@@ -426,15 +521,16 @@ namespace ScanApp.Views
                     _ = DisplayAlert("Error", "Ha ocurrido un error al procesar la informacion, repita nuevamente!" , "Ok").ConfigureAwait(false);
                     Application.Current.MainPage = new InformacionPersonal();
                 }
-
-            //Application.Current.MainPage = new AppShell();
+          
         }
+
 
         private void ValidarDatos_MostrarBoton()
         {
             if (cantidadDatos >= 9)
             {
                 btnGuardarInformacionPersonal.IsVisible = true;
+                
             }
            
         }

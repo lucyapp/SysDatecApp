@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              mc:Ignorable="d"
-             Background="black"
+             Background="white"
              x:Class="ScanApp.Views.AyudaView"
              Title="Ayuda">
     <ContentPage.Content>
@@ -28,8 +28,7 @@
         </AbsoluteLayout>
     </ContentPage.Content>-->
         <lottie:AnimationView 
-	    Animation="empty.json" 
-	    
+	    Animation="senora.json" 
 	    AutoPlay="true"
 	    VerticalOptions="FillAndExpand" 
 	    HorizontalOptions="FillAndExpand" />

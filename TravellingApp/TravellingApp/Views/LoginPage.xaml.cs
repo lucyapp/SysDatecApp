@@ -40,7 +40,7 @@ namespace ScanApp.Views
                         await Task.Delay(1000).ConfigureAwait(true);
                         DesactivarLoading();
 
-                        if (VersionTracking.IsFirstLaunchEver)
+                        if (!VersionTracking.IsFirstLaunchEver)
                         {
                             Application.Current.MainPage = new OnboardingPage();
                         }

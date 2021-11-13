@@ -98,9 +98,10 @@ namespace ScanApp.ViewModels
                     //System.Diagnostics.Process.Start("/storage/emulated/0/Pictures/SysDatec/" + NameImage+"."+FileImage);
 
                 }
-                else
+                else if (fi.Extension.Contains("txt"))
                 {
                     FileImage = "file";
+                    NameImage = fi.Name.Replace(".txt", " ");
                 }
 
                 ListaArchivosSysdatec.Add(new ArchivosRecientes() { Name = NameImage, Fecha = fi.CreationTime, Picture = FileImage, Description = fi.Extension });
