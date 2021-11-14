@@ -87,6 +87,10 @@ namespace ScanApp.Views
 
                 lbl7.IsVisible = true;
                 Entrada7.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var seis = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Hijos");
+                });
             }
             else
             {
@@ -105,6 +109,10 @@ namespace ScanApp.Views
 
                 lbl8.IsVisible = true;
                 Entrada9.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var siete = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Mascotas");
+                });
             }
             else
             {
@@ -123,6 +131,10 @@ namespace ScanApp.Views
 
                 lbl9.IsVisible = true;
                 Entrada11.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var uno = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Servicios");
+                });
             }
             else
             {
@@ -141,6 +153,10 @@ namespace ScanApp.Views
 
                 lbl10.IsVisible = true;
                 Entrada13.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var dos = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "CDT-Vivienda");
+                });
             }
             else
             {
@@ -159,6 +175,10 @@ namespace ScanApp.Views
 
                 lbl11.IsVisible = true;
                 Entrada15.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                     var cuatro = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec/Vehiculos", "CDT-Vehiculos");
+                });
             }
             else
             {
@@ -177,6 +197,10 @@ namespace ScanApp.Views
 
                 lbl12.IsVisible = true;
                 Entrada17.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var cinco = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "ENT-Financieras");
+                });
             }
             else
             {
@@ -195,6 +219,10 @@ namespace ScanApp.Views
 
                 lbl13.IsVisible = true;
                 Entrada19.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var cinco = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "ACA-Educacion");
+                });
             }
             else
             {
@@ -212,6 +240,10 @@ namespace ScanApp.Views
             {
                 lbl14.IsVisible = true;
                 Entrada21.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var nueve = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "SIT-Laboral");
+                });
             }
             else
             {
@@ -229,6 +261,10 @@ namespace ScanApp.Views
             {
                 lbl15.IsVisible = true;
                 Entrada23.IsVisible = true;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                   var tres = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Vehiculos");
+                });
             }
             else
             {
@@ -305,18 +341,18 @@ namespace ScanApp.Views
             }
         }
 
-      
-        public async Task<IFolder> CrearCarpetasEnDispositivo(string folderPath, string carpetaNueva )
+
+        public async Task<IFolder> CrearCarpetasEnDispositivo(string folderPath, string carpetaNueva)
         {
 
             //IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(folderPath );
             //IFolder folder = await rootFolder.CreateFolderAsync("/storage/emulated/0/Pictures/SysDatec/"+carpetaNueva, CreationCollisionOption.OpenIfExists); 
             //IFile file = await folder.CreateFileAsync("archivopdf.pdf", CreationCollisionOption.ReplaceExisting);
             //IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(folderPath );
-            IFolder folder = await FileSystem .Current.GetFolderFromPathAsync(folderPath);
+            IFolder folder = await FileSystem.Current.GetFolderFromPathAsync(folderPath);
             folder = await folder.CreateFolderAsync(carpetaNueva, CreationCollisionOption.ReplaceExisting);
             return folder;
-        } 
+        }
 
         private void Entrada11_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -426,17 +462,32 @@ namespace ScanApp.Views
             }
         }
 
-        public async Task<IFolder> ListaGuardarDispositivoAsync(List<string> Lista, string opcion, string path)
+        public async Task<IFolder> ListaGuardarDispositivo(List<string> Lista, string opcion, string path)
         {
+            bool existeFolder = await DevEnvExe_LocalStorage.PCLHelper.IsFolderExistAsync(path);
+           
+            if (existeFolder == true)
+            {
+                Console.WriteLine("Si existe");
+            }
+            else
+            {
+                Console.WriteLine("No existe");
+                Uri uri = new Uri(path);
+                string lastSegment = uri.Segments.Last();
+                 await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(lastSegment, await FileSystem.Current.GetFolderFromPathAsync(path))).ConfigureAwait(false);
+                //var uno = CrearCarpetasEnDispositivo(path, lastSegment).ConfigureAwait(false);
+            }
 
             int count = Lista.Count();
             string carpeta = "";
             for (int j = 0; j < count; j++)
             {
                 carpeta = Lista[j];
-
-                return await CrearCarpetasEnDispositivo(path, carpeta);
+                var x= await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(carpeta, await FileSystem.Current.GetFolderFromPathAsync(path).ContinueWith(x=> x.Result)));
+                
             }
+           
             return null;
         }
 
@@ -446,93 +497,128 @@ namespace ScanApp.Views
         {
             if (Application.Current.Properties["PagaServicios"].ToString() != null)
             {
-                var uno = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Servicios");
+               
                 var Result = Convertir_StringSplit_ToList(Entrada11.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "Servicios", "/storage/emulated/0/Pictures/SysDatec/Servicios");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ =  ListaGuardarDispositivo(Result, "Servicios", "/storage/emulated/0/Pictures/SysDatec/Servicios").ConfigureAwait(false));
+                });
+                
             }
-            
+
             if (Application.Current.Properties["CreditoViviendaArriendo"].ToString() != null)
             {
-                var dos = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "CDT-Vivienda");
+              
                 var Result = Convertir_StringSplit_ToList(Entrada13.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "CDT-Vivienda", "/storage/emulated/0/Pictures/SysDatec/CDT-Vivienda");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ =  ListaGuardarDispositivo(Result, "CDT-Vivienda", "/storage/emulated/0/Pictures/SysDatec/CDT-Vivienda").ConfigureAwait(false)); 
+                });
             }
-            
+
             if (Application.Current.Properties["PoseeVehiculo"].ToString() != null)
             {
-                var tres = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Vehiculos");
+
                 var Result = Convertir_StringSplit_ToList(Entrada23.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos").ConfigureAwait(false));
+                });
             }
-            
+
             if (Application.Current.Properties["CreditoVehicular"].ToString() != null)
             {
-                var cuatro = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec/Vehiculos", "CDT-Vehiculos");
+
                 var Result = Convertir_StringSplit_ToList(Entrada15.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "CDT-Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos/CDT-Vehiculos");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "CDT-Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos/CDT-Vehiculos").ConfigureAwait(false));
+                });
             }
-            
+
+
+
             if (Application.Current.Properties["EntidadesFinancieras"].ToString() != null)
             {
-                var cinco = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "ENT-Financieras");
+
                 var Result = Convertir_StringSplit_ToList(Entrada17.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "ENT-Financieras", "/storage/emulated/0/Pictures/SysDatec/ENT-Financieras");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "ENT-Financieras", "/storage/emulated/0/Pictures/SysDatec/ENT-Financieras").ConfigureAwait(false));
+                });
             }
-            
+
             if (Application.Current.Properties["TieneHijos"].ToString() != null)
             {
-                var seis = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Hijos");
+
                 var Result = Convertir_StringSplit_ToList(Entrada7.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "Hijos", "/storage/emulated/0/Pictures/SysDatec/Hijos");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "Hijos", "/storage/emulated/0/Pictures/SysDatec/Hijos").ConfigureAwait(false));
+                });
             }
-            
+
             if (Application.Current.Properties["TieneMascotas"].ToString() != null)
             {
-                var siete = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Mascotas");
+
                 var Result = Convertir_StringSplit_ToList(Entrada9.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "Mascotas", "/storage/emulated/0/Pictures/SysDatec/Mascotas");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "Mascotas", "/storage/emulated/0/Pictures/SysDatec/Mascotas").ConfigureAwait(false));
+                });
+
             }
-            
+
             if (Application.Current.Properties["EducacionFormal"].ToString() != null)
             {
-                var ocho = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "ACA-Educacion");
+
                 var Result = Convertir_StringSplit_ToList(Entrada19.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "ACA-Educacion", "/storage/emulated/0/Pictures/SysDatec/ACA-Educacion");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "ACA-Educacion", "/storage/emulated/0/Pictures/SysDatec/ACA-Educacion").ConfigureAwait(false));
+                });
+
             }
-            
+
+
             if (Application.Current.Properties["Labora"].ToString() != null)
             {
-                var nueve = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "SIT-Laboral");
+
                 var Result = Convertir_StringSplit_ToList(Entrada21.Text);
-                _ = ListaGuardarDispositivoAsync(Result, "SIT-Laboral", "/storage/emulated/0/Pictures/SysDatec/SIT-Laboral");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await (_ = ListaGuardarDispositivo(Result, "SIT-Laboral", "/storage/emulated/0/Pictures/SysDatec/SIT-Laboral").ConfigureAwait(false));
+                });
 
             }
 
-            try {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        _ = DisplayAlert("Infomacion", "El usuario '" + Application.Current.Properties["Nombre"] + " " + Application.Current.Properties["Apellido"] + "' ya guardo sus datos.", "Ok").ConfigureAwait(false);
-                        await Task.Delay(1000).ConfigureAwait(true);
-                       
-
-                    });
-                } catch (Exception) 
+            try
+            {
+                Device.BeginInvokeOnMainThread(async () =>
                 {
-                    _ = DisplayAlert("Error", "Ha ocurrido un error al procesar la informacion, repita nuevamente!" , "Ok").ConfigureAwait(false);
-                    Application.Current.MainPage = new InformacionPersonal();
-                }
-          
+                    _ = DisplayAlert("Infomacion", "El usuario '" + Application.Current.Properties["Nombre"] + " " + Application.Current.Properties["Apellido"] + "' ya guardo sus datos.", "Ok").ConfigureAwait(false);
+                    await Task.Delay(1000).ConfigureAwait(true);
+
+
+                });
+            }
+            catch (Exception)
+            {
+                _ = DisplayAlert("Error", "Ha ocurrido un error al procesar la informacion, repita nuevamente!", "Ok").ConfigureAwait(false);
+                Application.Current.MainPage = new InformacionPersonal();
+            }
+
         }
 
 
         private void ValidarDatos_MostrarBoton()
         {
-            if (cantidadDatos >= 9)
+            if (cantidadDatos >= 8)
             {
                 btnGuardarInformacionPersonal.IsVisible = true;
-                
+
             }
-           
+
         }
     }
 }

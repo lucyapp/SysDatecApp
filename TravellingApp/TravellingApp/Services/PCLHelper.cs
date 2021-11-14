@@ -39,7 +39,7 @@ namespace DevEnvExe_LocalStorage
             return false;
         }
 
-        public async static Task<IFolder> CreateFolder(this string folderName, IFolder rootFolder = null)
+        public async static Task<IFolder> CreateFolder(this string folderName, IFolder rootFolder)
         {
             IFolder folder = rootFolder ?? FileSystem.Current.LocalStorage;
             folder = await folder.CreateFolderAsync(folderName, CreationCollisionOption.ReplaceExisting);
