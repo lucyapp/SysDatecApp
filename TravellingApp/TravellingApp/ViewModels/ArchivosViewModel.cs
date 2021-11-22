@@ -95,8 +95,6 @@ namespace ScanApp.ViewModels
                 {
                     FileImage = "pdf";
                     NameImage = fi.Name.Replace(".pdf", " ");
-                    //System.Diagnostics.Process.Start("/storage/emulated/0/Pictures/SysDatec/" + NameImage+"."+FileImage);
-
                 }
                 else if (fi.Extension.Contains("txt"))
                 {

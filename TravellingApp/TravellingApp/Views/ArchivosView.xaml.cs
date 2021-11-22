@@ -198,9 +198,7 @@ namespace ScanApp.Views
               file.Dispose();
             };*/
 
-
-
-            
+    
             //var byteArray = Convert.FromBase64String("IMG_20210922_200031.jpg");
             //stream = new MemoryStream(byteArray);
             //var imageSource = ImageSource.FromStream(() => stream);                                           
@@ -214,8 +212,6 @@ namespace ScanApp.Views
             //} else {
             //    Console.WriteLine("Si Archivo >" + filePath);
             //}
-
-
             BindingContext = new ArchivosViewModel();
         }
 
@@ -382,12 +378,10 @@ namespace ScanApp.Views
                 ImagenGuardada = Application.Current.Properties["ImagenFile"];
                 ImagenSource = Application.Current.Properties["ImagenSource"];
             }
-            else { 
+            else {
+              
                 //significa que no tiene datos de imagen
             }
-
-            
-             
 
 
             var ImagenCargada = await (_ = DevEnvExe_LocalStorage.PCLHelper.GetFileStreamAsync("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo)).ConfigureAwait(false);
@@ -401,8 +395,6 @@ namespace ScanApp.Views
             {   var imagen = new MemoryStream(myBinary);
                 return imagen;
             });
-
-            
 
             //string sourceFile = System.IO.Path.Combine(sourcePath, OrigenFile.OriginalString);
             //string destFile = System.IO.Path.Combine(sourcePath, targetPath + nombreArchivo);

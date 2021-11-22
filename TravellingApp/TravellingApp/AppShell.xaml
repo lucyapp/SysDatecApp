@@ -28,49 +28,49 @@
                     Value="{StaticResource TabBarUnselectedColor}" />
         </Style>
     </Shell.Resources>
-    <TabBar >
+    <TabBar  >
         <Tab 
             Icon="home.png"
             Title="Inicio">
-            <ShellContent NavigationPage.HasNavigationBar="False">
-                <local:ScanView />
+            <ShellContent NavigationPage.HasNavigationBar="True">
+                <local:ScanView  />
             </ShellContent>
         </Tab>
         <Tab         
             Icon="bills.png"
             Title="Archivos">
-            <ShellContent>
+            <ShellContent  NavigationPage.HasNavigationBar="True">
                 <local:ArchivosView />
             </ShellContent>
         </Tab>
         <Tab    
             Icon="pagos.png"
             Title="Pagos">
-            <ShellContent>
+            <ShellContent  NavigationPage.HasNavigationBar="True">
                 <local:PagosView />
             </ShellContent>
         </Tab>
         <Tab    
             Icon="account.png"
             Title="Cuenta">
-            <ShellContent>
+            <ShellContent  NavigationPage.HasNavigationBar="True">
                 <local:CuentaView />
             </ShellContent>
         </Tab>
         <Tab                
             Icon="tab_about.png"
             Title="Ayuda">
-            <ShellContent>
+            <ShellContent  NavigationPage.HasNavigationBar="True">
                 <local:AyudaView />
             </ShellContent>
         </Tab>
     </TabBar>
 
-    <FlyoutItem Title="Inicio" Icon="home.png" >
-        <ShellContent ContentTemplate="{DataTemplate local:ScanView}" />
+    <FlyoutItem Title="Inicio" Icon="home.png"  NavigationPage.HasNavigationBar="True" >
+        <ShellContent ContentTemplate="{DataTemplate local:ScanView}"   />
     </FlyoutItem>
 
-    <FlyoutItem Title="Mi perfil"  Icon="usuario.png">
+    <FlyoutItem Title="Mi perfil"  Icon="usuario.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
@@ -78,31 +78,31 @@
         <ShellContent ContentTemplate="{DataTemplate local:CarpetaListPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Documentos"  Icon="documentos.png">
+    <FlyoutItem Title="Documentos"  Icon="documentos.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Imagenes"  Icon="pictures.png">
+    <FlyoutItem Title="Imagenes"  Icon="pictures.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Agenda"  Icon="agenda2.png">
+    <FlyoutItem Title="Agenda"  Icon="agenda2.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Cuentas"  Icon="cuentas.png">
+    <FlyoutItem Title="Cuentas"  Icon="cuentas.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Transacciones"  Icon="transaccion.png">
+    <FlyoutItem Title="Transacciones"  Icon="transaccion.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Configuracion"  Icon="configuracion2.png">
+    <FlyoutItem Title="Configuracion"  Icon="configuracion2.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:ArchivosView}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Cerrar session"  Icon="cerrarsesion2.png">
+    <FlyoutItem Title="Cerrar session"  Icon="cerrarsesion2.png"  NavigationPage.HasNavigationBar="True">
         <ShellContent ContentTemplate="{DataTemplate local:Logout}" />
     </FlyoutItem>
 

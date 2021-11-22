@@ -6,13 +6,13 @@
     <StackLayout Margin="20"
                  VerticalOptions="StartAndExpand">
         <Label Text="Nombre Carpeta" />
-        <Entry Text="{Binding Name}" />
+        <Entry x:Name="Nombre" Text="{Binding Name}" />
         <Label Text="Descripción de la Carpeta" />
-        <Entry Text="{Binding Notes}" />
+        <Entry x:Name="Descripcion" Text="{Binding Notes}" />
         <Label Text="Publico" />
-        <Switch IsToggled="{Binding Done}" />
+        <Switch x:Name="Publico" IsToggled="{Binding Done}" />
         <Button Text="Save"
-                Clicked="OnSaveClicked" />
+                Clicked="OnSaveClicked"  />
         <Button Text="Delete"
                 Clicked="OnDeleteClicked" />
         <Button Text="Cancel"

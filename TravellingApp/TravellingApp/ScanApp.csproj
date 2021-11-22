@@ -15,6 +15,7 @@
  
   <ItemGroup>
     <Compile Remove="Services\LoginService.cs" />
+    <Compile Remove="Services\MockPostService.cs" />
    </ItemGroup>
 
 

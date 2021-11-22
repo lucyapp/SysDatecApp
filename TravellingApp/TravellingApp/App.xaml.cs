@@ -12,6 +12,7 @@ namespace ScanApp
             InitializeComponent();
             //MainPage = new AppShell();
             Plugin.Media.CrossMedia.Current.Initialize();
+            //MainPage = new NavigationPage(new CarpetaListPage());
             MainPage = new NavigationPage(new LoginPage());
 
         }
