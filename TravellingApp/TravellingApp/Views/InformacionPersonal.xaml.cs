@@ -476,7 +476,6 @@ namespace ScanApp.Views
                 Uri uri = new Uri(path);
                 string lastSegment = uri.Segments.Last();
                  await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(lastSegment, await FileSystem.Current.GetFolderFromPathAsync(path))).ConfigureAwait(false);
-                //var uno = CrearCarpetasEnDispositivo(path, lastSegment).ConfigureAwait(false);
             }
 
             int count = Lista.Count();
@@ -536,8 +535,6 @@ namespace ScanApp.Views
                 });
             }
 
-
-
             if (Application.Current.Properties["EntidadesFinancieras"].ToString() != null)
             {
 
@@ -580,7 +577,6 @@ namespace ScanApp.Views
 
             }
 
-
             if (Application.Current.Properties["Labora"].ToString() != null)
             {
 
@@ -598,8 +594,7 @@ namespace ScanApp.Views
                 {
                     _ = DisplayAlert("Infomacion", "El usuario '" + Application.Current.Properties["Nombre"] + " " + Application.Current.Properties["Apellido"] + "' ya guardo sus datos.", "Ok").ConfigureAwait(false);
                     await Task.Delay(1000).ConfigureAwait(true);
-
-
+                    Application.Current.MainPage = new AppShell();
                 });
             }
             catch (Exception)

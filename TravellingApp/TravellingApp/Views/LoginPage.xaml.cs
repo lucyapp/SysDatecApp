@@ -40,7 +40,7 @@ namespace ScanApp.Views
                         await Task.Delay(1000).ConfigureAwait(true);
                         DesactivarLoading();
 
-                        if (!VersionTracking.IsFirstLaunchEver)
+                        if (VersionTracking.IsFirstLaunchEver)
                         {
                             Application.Current.MainPage = new OnboardingPage();
                         }
@@ -167,23 +167,27 @@ namespace ScanApp.Views
 
                 });
 
-                Application.Current.Properties["username"] = user.Username;
-                Application.Current.Properties["password"] = user.Password;
-                Application.Current.Properties["name"] = xx.Name;
-                Application.Current.Properties["email"] = xx.Email;
-                Application.Current.Properties["IsLoggedIn"] = true;
-
-                if (VersionTracking.IsFirstLaunchEver)
+                if (xx is null)
                 {
-                    Application.Current.MainPage = new OnboardingPage();
+                    await DisplayAlert("Error", ", Deberá llenar los campos necesarios para poder loguearse", "Ok").ConfigureAwait(true);
+
                 }
-                else
-                {
-                    Application.Current.MainPage = new AppShell();
+                else { 
+                    Application.Current.Properties["username"] = user.Username;
+                    Application.Current.Properties["password"] = user.Password;
+                    Application.Current.Properties["name"] = xx.Name;
+                    Application.Current.Properties["email"] = xx.Email;
+                    Application.Current.Properties["IsLoggedIn"] = true;
+                    if (VersionTracking.IsFirstLaunchEver)
+                    {
+                        Application.Current.MainPage = new OnboardingPage();
+                    }
+                    else
+                    {
+                        Application.Current.MainPage = new AppShell();
+                    }
                 }
-
-
-
+                
             }
 
         }

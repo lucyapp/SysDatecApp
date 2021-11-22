@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:ScanApp.Controls" 
-             xmlns:viewmodel="clr-namespace:ScanApp.ViewModels"
+             xmlns:customimage="clr-namespace:ScanApp.CustomControl"
+             xmlns:viewmodel="clr-namespace:ScanApp.ViewModels" xmlns:custonImage="http://xamarin.com/schemas/2014/forms"
              mc:Ignorable="d"
              Background="white"
              x:Class="ScanApp.Views.ArchivosView"
@@ -54,7 +56,7 @@
                                         <Grid RowDefinitions="*,Auto,Auto" ColumnDefinitions="*,Auto">
                                            
                                             <Frame Grid.ColumnSpan="2" Grid.Row="0" IsClippedToBounds="True" CornerRadius="25" HasShadow="False" Padding="0" >
-                                                <Image Source="{Binding Picture}" Aspect="AspectFill"/>
+                                                <customimage:CustomImage Source="{Binding Picture}" LongPressed="CustomImage_LongPressed"  CommandParameter="{Binding Name}" Aspect="AspectFill"/>
                                             </Frame>
                                             <Label Grid.Column="0" Grid.Row="1" Text="{Binding CantidadArchivos}" HorizontalTextAlignment="Center" TextColor="Brown" FontAttributes="Bold"/>
                                             <Label Grid.Column="0" Grid.Row="1" Text="{Binding Name}" FontAttributes="Bold" Padding="0,15,0,0"/>
@@ -81,16 +83,18 @@
                                     <Frame Margin="0,0,10,0" HasShadow="False" CornerRadius="20"  >
                                         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*,Auto">
                                             <Frame Grid.Column="0" Grid.RowSpan="3" Margin="0,0,5,0"  VerticalOptions="CenterAndExpand" WidthRequest="75" HeightRequest="75" HasShadow="False" CornerRadius="10" Padding="0" IsClippedToBounds="True">
-                                                <Image Source="{Binding Picture}" Aspect="Fill"/>
+                                                <customimage:CustomImage  LongPressed="ImageButton_Pressed"  Source="{Binding Picture}" CommandParameter="{Binding Name}" Aspect="Fill">
+                                                      
+                                                </customimage:CustomImage>
                                             </Frame>
                                             <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" FontAttributes="Bold" FontSize="13"/>
                                             <Label Grid.Column="1" Grid.Row="1" Text="{Binding Description}" TextColor="Silver" FontAttributes="Bold"/>
                                             <Label Grid.Column="1" Grid.Row="2" Text="{Binding .}"  FontSize="12" />
-                                            <ImageButton  Grid.Column="2" Grid.RowSpan="3" BackgroundColor="Transparent" Aspect="AspectFit" Source="DetailsArrow" Clicked="Button_Clicked" />
+                                            <ImageButton Grid.Column="2" Grid.RowSpan="3" BackgroundColor="Transparent" Aspect="AspectFit" Source="DetailsArrow" Clicked="Button_Clicked" />
                                             
                                         </Grid>
                                         <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizer_Tapped" />
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"  Tapped="TapGestureRecognizer_Tapped"  />
                                         </Frame.GestureRecognizers>
                                     </Frame>
                                 </StackLayout>

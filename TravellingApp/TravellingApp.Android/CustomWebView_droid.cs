@@ -1,14 +1,11 @@
 ﻿using Android.Content;
-using Android.Content.Res;
 using OpenPdf;
 using OpenPdf.Droid;
 using System;
 using System.IO;
 using System.Net;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using FileSystem = Xamarin.Essentials.FileSystem;
 
 [assembly: ExportRenderer(typeof(CustomWebView), typeof(CustomWebViewRenderer))]
 namespace OpenPdf.Droid

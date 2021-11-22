@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
 using Plugin.CurrentActivity;
+using Plugin.Permissions;
 
 namespace ScanApp.Droid
 {
@@ -19,9 +20,13 @@ namespace ScanApp.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
 
-            _ = (new (string, bool)[] { (Manifest.Permission.WriteExternalStorage, true) });
-            _ = (new (string, bool)[] { (Manifest.Permission.ReadExternalStorage, true) });
-            _ = (new (string, bool)[] { (Manifest.Permission.MediaContentControl, true) });
+            var p1 = new (string, bool)[] { (Manifest.Permission.WriteExternalStorage, true) };
+            var p2 = new (string, bool)[] { (Manifest.Permission.ReadExternalStorage, true) };
+            var p3 = new (string, bool)[] { (Manifest.Permission.MediaContentControl, true) };
+
+            var permissions = new string[] {
+                Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage
+            };
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
@@ -35,10 +40,12 @@ namespace ScanApp.Droid
         }
 
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
+            RequestPermissions(permissions, 77);
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
