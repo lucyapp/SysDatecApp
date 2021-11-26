@@ -10,44 +10,7 @@
              Title="Autenticación">
     <ContentPage.Content>
         <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <!--     <StackLayout>
-
-            <StackLayout Padding="30"
-                 VerticalOptions="Start">
-                <Label Text="Nombre de usuario"
-               HorizontalOptions="Start"/>
-                <Entry Text="" TextChanged="Label_BindingContextChanged"
-               x:Name="EntryUsername"/>
-                <Label Text="Contraseña de usuario"
-               HorizontalOptions="Start"/>
-                <Entry Text=""
-               x:Name="EntryPassword" TextChanged="Label_BindingContextChanged"
-               IsPassword="True"/>
-
-                <Button Text="Ingresar"
-                TextColor="White"
-                BackgroundColor="#22A7F0"
-                x:Name="ButtonLogin"
-                Clicked="ButtonLogin_Clicked"/>
-
-                <Button Text="Registrarse"
-                TextColor="White"
-                BackgroundColor="DodgerBlue"
-                x:Name="ButtonRegister" 
-                Clicked="ButtonRegistrarse_Clicked"/>
-
-                <Button Text="Recuperar clave"
-                TextColor="White"
-                BackgroundColor="LightGreen"
-                x:Name="ButtonRecuperarClave" 
-                Clicked="ButtonRecuperarClave_Clicked"/>
-
-                <Label x:Name="messageLabel" Text=""
-                VerticalOptions="CenterAndExpand" TextColor="Red"
-                HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
-        </StackLayout>-->
-
+           
             <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout >
                     <StackLayout  Margin="0,0,0,0"  Orientation="Horizontal">

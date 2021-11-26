@@ -25,7 +25,7 @@ namespace ScanApp.Views
             await Navigation.PushAsync(new CarpetaItemPage
             {
                 BindingContext = new CarpetaItemPage()
-            });
+            }).ConfigureAwait(false);
         }
 
         async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -35,7 +35,7 @@ namespace ScanApp.Views
                 await Navigation.PushAsync(new CarpetaItemPage
                 {
                     BindingContext = e.SelectedItem as CarpetaItem
-                });
+                }).ConfigureAwait(false);
             }
         }
     }

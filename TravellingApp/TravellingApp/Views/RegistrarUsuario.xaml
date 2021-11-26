@@ -3,14 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              x:Class="ScanApp.Views.RegistrarUsuario"
              Title="Registro de usuario">
-   <!-- <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Registrar Usuarios"
-                VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" />
-            
-        </StackLayout>
-    </ContentPage.Content>!-->
+
 
     <ContentPage.Content>
         <ScrollView>
@@ -37,18 +30,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
-
-
-                <!--<StackLayout Grid.Row="2" HorizontalOptions="Center">
-                    <Label
-                    Text="Datos de usuario"
-                            TextColor="Black"
-                            Font="Montserrat-Medium.otf"
-                            FontSize="{OnPlatform Android=20,iOS=23}"
-                            WidthRequest="300"
-                   
-                </StackLayout> -->
 
                 <StackLayout Grid.Row="3" HorizontalOptions="Center" WidthRequest="{OnPlatform iOS=300,Android=300}" Orientation="Vertical"  >
                     <Label 
@@ -189,7 +170,7 @@
                             TextColor="Black"
                             Font="Montserrat-Medium.otf"
                             FontSize="{OnPlatform Android=20,iOS=23}"
-                            WidthRequest="300" 
+                            WidthRequest="300"  IsVisible="false"
                     />
                     <Button IsVisible="false"
                      Text="Diligenciar formulario"

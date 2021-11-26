@@ -1,6 +1,5 @@
-﻿
-using DevEnvExe_LocalStorage;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Plugin.Permissions;
 using ScanApp.Data;
 using ScanApp.Models;
 using System;
@@ -18,16 +17,19 @@ namespace ScanApp.Views
     {
         public LoginPage()
         {
+          
             InitializeComponent();
-
+          
         }
 
         protected override void OnAppearing()
         {
             //this.Clear();
+           
             ActivarLoading();
             try
             {
+               
                 if (Application.Current.Properties["IsLoggedIn"].Equals(true))
                 {
                     EntryUsername.Text = (string)Application.Current.Properties["username"];
@@ -36,12 +38,13 @@ namespace ScanApp.Views
                     Device.BeginInvokeOnMainThread(async () =>
                     {
 
-
+                        
                         await Task.Delay(1000).ConfigureAwait(true);
                         DesactivarLoading();
 
-                        if (!VersionTracking.IsFirstLaunchEver)
+                        if (VersionTracking.IsFirstLaunchEver)
                         {
+                           
                             Application.Current.MainPage = new OnboardingPage();
                         }
                         else
@@ -68,7 +71,7 @@ namespace ScanApp.Views
             base.OnAppearing();
         }
 
-       // private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
+        // private const string Url = "http://lucy.sysdatec.com/WsLucy01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private const string Url = "http://servicios.sysdatec.com/WsAPABot01/api/UserDetailCredentials"; //modificar el modelo dependiendo de la url los campos
         private readonly HttpClient client = new HttpClient();
         private ObservableCollection<UsuarioModel> _post;
@@ -119,6 +122,7 @@ namespace ScanApp.Views
         }
         public void ActivarLoading()
         {
+           
             popupLoadingView.IsVisible = true;
             activityIndicator.IsRunning = true;
         }
@@ -153,36 +157,41 @@ namespace ScanApp.Views
                 //messageLabel.Text = "Login exitoso";
                 //await Navigation.PushAsync(new CarpetaListPage());
                 resultado = true;
-
+                
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     DesactivarLoading();
-                    await DisplayAlert("Autenticacion", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(true);
+                    await DisplayAlert("Autenticacion", "Su acceso al sistema ha sido satisfactorio, desea ir pagina principal", "Ok").ConfigureAwait(false);
 
                     //await Navigation.PopAsync().ConfigureAwait(true); //para el main 
                     //await Navigation.PushAsync(new CarpetaListPage());   //para una nueva ventana
 
 
-                    await Task.Delay(2000).ConfigureAwait(true);
+                    await Task.Delay(2000).ConfigureAwait(false);
 
                 });
 
-                Application.Current.Properties["username"] = user.Username;
-                Application.Current.Properties["password"] = user.Password;
-                Application.Current.Properties["name"] = xx.Name;
-                Application.Current.Properties["email"] = xx.Email;
-                Application.Current.Properties["IsLoggedIn"] = true;
-
-                if (VersionTracking.IsFirstLaunchEver)
+                if (xx is null)
                 {
-                    Application.Current.MainPage = new OnboardingPage();
+                    await DisplayAlert("Error", ", Deberá llenar los campos necesarios para poder loguearse", "Ok").ConfigureAwait(true);
+
                 }
                 else
                 {
-                    Application.Current.MainPage = new AppShell();
+                    Application.Current.Properties["username"] = user.Username;
+                    Application.Current.Properties["password"] = user.Password;
+                    Application.Current.Properties["name"] = xx.Name;
+                    Application.Current.Properties["email"] = xx.Email;
+                    Application.Current.Properties["IsLoggedIn"] = true;
+                    if (VersionTracking.IsFirstLaunchEver)
+                    {
+                        Application.Current.MainPage = new OnboardingPage();
+                    }
+                    else
+                    {
+                        Application.Current.MainPage = new AppShell();
+                    }
                 }
-
-
 
             }
 

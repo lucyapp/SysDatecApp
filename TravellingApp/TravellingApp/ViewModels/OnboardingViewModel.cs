@@ -24,6 +24,7 @@ namespace ScanApp.ViewModels
 
         private void InitializeOnBoarding()
         {
+           
             Items = new ObservableCollection<OnboardingModel>
             {
                 new OnboardingModel
@@ -64,6 +65,7 @@ namespace ScanApp.ViewModels
                 else
                 {
                     MoveToNextPosition();
+                    
                 }
             });
         }
@@ -71,7 +73,7 @@ namespace ScanApp.ViewModels
         private static void ExitOnBoarding()
         {
             // _ = Application.Current.MainPage.Navigation.PushAsync(new InformacionPersonal());
-             _ = Application.Current.MainPage = new InformacionPersonal();
+            _ = Application.Current.MainPage = new InformacionPersonal();
         }
 
         private void MoveToNextPosition()

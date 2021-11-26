@@ -1,5 +1,4 @@
-﻿using System;
-namespace ScanApp.Helper
+﻿namespace ScanApp.Helper
 {
     public interface IExport
     {

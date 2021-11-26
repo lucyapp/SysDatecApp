@@ -22,6 +22,17 @@ namespace ScanApp.Models
         public string LoginTime { get; set; }
         public string Device { get; set; }
     }
+
+    public class ImagenesModel
+    {
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        //public string NombreFile { get; set; }
+        public object FilePath { get; set; }
+        public byte[] ImageSource { get; set; }
+
+    }
+
     public class InformacionPersonalModel
     {
         [PrimaryKey, AutoIncrement]

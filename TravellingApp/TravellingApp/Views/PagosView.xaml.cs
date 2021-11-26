@@ -9,7 +9,7 @@ namespace ScanApp.Views
         {
             InitializeComponent();
             BindingContext = new PagosViewModel();
-            
+
         }
     }
 }

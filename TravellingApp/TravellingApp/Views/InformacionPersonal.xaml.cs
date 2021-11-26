@@ -1,23 +1,20 @@
-﻿using System;
+﻿using PCLStorage;
+using Plugin.Permissions;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.CommunityToolkit.UI.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
-using Label = System.Reflection.Emit.Label;
-
 using Xamarin.Forms.Xaml;
-using PCLStorage;
+using FileAccess = PCLStorage.FileAccess;
 
 namespace ScanApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InformacionPersonal : ContentPage
     {
+
         //private string _myCity;
         //public List<City> CitiesList { get; set; }
         //public string MyCity
@@ -47,16 +44,27 @@ namespace ScanApp.Views
         //        }
         //    }
         //}
+
+        public interface IReadWritePermission
+        {
+            Task<PermissionStatus> CheckStatusAsync();
+            Task<PermissionStatus> RequestAsync();
+        }
         public bool tieneSeleccionado { get; set; }
         public int cantidadDatos { get; set; }
         public InformacionPersonal()
         {
             InitializeComponent();
-            //BindingContext = new InformacionPersonal();
-            //tieneSeleccionado = false;
-            //CitiesList = GetCities().OrderBy(t => t.Value).ToList();
-            //MyCity = "Seleccione una ciudad";
-        }
+
+           
+          
+             
+
+        //BindingContext = new InformacionPersonal();
+        //tieneSeleccionado = false;
+        //CitiesList = GetCities().OrderBy(t => t.Value).ToList();
+        //MyCity = "Seleccione una ciudad";
+    }
         public List<City> GetCities()
         {
             var cities = new List<City>()
@@ -177,7 +185,7 @@ namespace ScanApp.Views
                 Entrada15.IsVisible = true;
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                     var cuatro = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec/Vehiculos", "CDT-Vehiculos");
+                    var cuatro = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec/Vehiculos", "CDT-Vehiculos");
                 });
             }
             else
@@ -263,7 +271,7 @@ namespace ScanApp.Views
                 Entrada23.IsVisible = true;
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                   var tres = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Vehiculos");
+                    var tres = CrearCarpetasEnDispositivo("/storage/emulated/0/Pictures/SysDatec", "Vehiculos");
                 });
             }
             else
@@ -349,9 +357,17 @@ namespace ScanApp.Views
             //IFolder folder = await rootFolder.CreateFolderAsync("/storage/emulated/0/Pictures/SysDatec/"+carpetaNueva, CreationCollisionOption.OpenIfExists); 
             //IFile file = await folder.CreateFileAsync("archivopdf.pdf", CreationCollisionOption.ReplaceExisting);
             //IFolder rootFolder = await FileSystem.Current.GetFolderFromPathAsync(folderPath );
-            IFolder folder = await FileSystem.Current.GetFolderFromPathAsync(folderPath);
-            folder = await folder.CreateFolderAsync(carpetaNueva, CreationCollisionOption.ReplaceExisting);
-            return folder;
+            
+                    
+                IFolder folder = await PCLStorage.FileSystem.Current.GetFolderFromPathAsync(folderPath);
+                folder = await folder.CreateFolderAsync(carpetaNueva, CreationCollisionOption.ReplaceExisting);
+                return folder;
+           
+
+
+
+
+
         }
 
         private void Entrada11_TextChanged(object sender, TextChangedEventArgs e)
@@ -464,8 +480,8 @@ namespace ScanApp.Views
 
         public async Task<IFolder> ListaGuardarDispositivo(List<string> Lista, string opcion, string path)
         {
-            bool existeFolder = await DevEnvExe_LocalStorage.PCLHelper.IsFolderExistAsync(path);
-           
+            bool existeFolder = await DevEnvExe_LocalStorage.PCLHelper.IsFolderExistAsync(path).ConfigureAwait(false);
+
             if (existeFolder == true)
             {
                 Console.WriteLine("Si existe");
@@ -475,8 +491,7 @@ namespace ScanApp.Views
                 Console.WriteLine("No existe");
                 Uri uri = new Uri(path);
                 string lastSegment = uri.Segments.Last();
-                 await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(lastSegment, await FileSystem.Current.GetFolderFromPathAsync(path))).ConfigureAwait(false);
-                //var uno = CrearCarpetasEnDispositivo(path, lastSegment).ConfigureAwait(false);
+                await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(lastSegment, await PCLStorage.FileSystem.Current.GetFolderFromPathAsync(path))).ConfigureAwait(false);
             }
 
             int count = Lista.Count();
@@ -484,10 +499,10 @@ namespace ScanApp.Views
             for (int j = 0; j < count; j++)
             {
                 carpeta = Lista[j];
-                var x= await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(carpeta, await FileSystem.Current.GetFolderFromPathAsync(path).ContinueWith(x=> x.Result)));
-                
+                var x = await (_ = DevEnvExe_LocalStorage.PCLHelper.CreateFolder(carpeta, await PCLStorage.FileSystem.Current.GetFolderFromPathAsync(path).ContinueWith(x => x.Result)));
+
             }
-           
+
             return null;
         }
 
@@ -497,22 +512,22 @@ namespace ScanApp.Views
         {
             if (Application.Current.Properties["PagaServicios"].ToString() != null)
             {
-               
+
                 var Result = Convertir_StringSplit_ToList(Entrada11.Text);
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await (_ =  ListaGuardarDispositivo(Result, "Servicios", "/storage/emulated/0/Pictures/SysDatec/Servicios").ConfigureAwait(false));
+                    await (_ = ListaGuardarDispositivo(Result, "Servicios", "/storage/emulated/0/Pictures/SysDatec/Servicios").ConfigureAwait(false));
                 });
-                
+
             }
 
             if (Application.Current.Properties["CreditoViviendaArriendo"].ToString() != null)
             {
-              
+
                 var Result = Convertir_StringSplit_ToList(Entrada13.Text);
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await (_ =  ListaGuardarDispositivo(Result, "CDT-Vivienda", "/storage/emulated/0/Pictures/SysDatec/CDT-Vivienda").ConfigureAwait(false)); 
+                    await (_ = ListaGuardarDispositivo(Result, "CDT-Vivienda", "/storage/emulated/0/Pictures/SysDatec/CDT-Vivienda").ConfigureAwait(false));
                 });
             }
 
@@ -535,8 +550,6 @@ namespace ScanApp.Views
                     await (_ = ListaGuardarDispositivo(Result, "CDT-Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos/CDT-Vehiculos").ConfigureAwait(false));
                 });
             }
-
-
 
             if (Application.Current.Properties["EntidadesFinancieras"].ToString() != null)
             {
@@ -580,7 +593,6 @@ namespace ScanApp.Views
 
             }
 
-
             if (Application.Current.Properties["Labora"].ToString() != null)
             {
 
@@ -597,9 +609,8 @@ namespace ScanApp.Views
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     _ = DisplayAlert("Infomacion", "El usuario '" + Application.Current.Properties["Nombre"] + " " + Application.Current.Properties["Apellido"] + "' ya guardo sus datos.", "Ok").ConfigureAwait(false);
-                    await Task.Delay(1000).ConfigureAwait(true);
-
-
+                    await Task.Delay(1000).ConfigureAwait(false);
+                    Application.Current.MainPage = new AppShell();
                 });
             }
             catch (Exception)

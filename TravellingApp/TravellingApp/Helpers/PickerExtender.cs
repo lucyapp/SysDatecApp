@@ -15,7 +15,7 @@ namespace ScanApp.Helpers
         public static readonly BindableProperty ErrorTextProperty =
             BindableProperty.Create(nameof(ErrorText), typeof(string), typeof(PickerExtender), string.Empty);
 
-        public static readonly BindableProperty FontSizeProperty =
+        public static new readonly BindableProperty FontSizeProperty =
             BindableProperty.Create(nameof(FontSize), typeof(int), typeof(PickerExtender),
                 10, BindingMode.Default);
 
@@ -48,7 +48,7 @@ namespace ScanApp.Helpers
             set => SetValue(ErrorTextProperty, value);
         }
 
-        public int FontSize
+        public new int FontSize
         {
             get => (int)GetValue(FontSizeProperty);
             set => SetValue(FontSizeProperty, value);

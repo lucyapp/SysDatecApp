@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Plugin.Permissions;
+using Xamarin.Forms;
 
 namespace ScanApp
 {
@@ -6,7 +7,9 @@ namespace ScanApp
     {
         public AppShell()
         {
+           
             InitializeComponent();
+           
         }
     }
 }

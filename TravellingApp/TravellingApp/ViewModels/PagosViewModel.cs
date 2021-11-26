@@ -13,7 +13,7 @@ namespace ScanApp.ViewModels
 
         public PagosViewModel()
         {
-            
+
             LoadPosts();
 
         }

@@ -124,6 +124,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderer\CustomImageRenderer.cs" />
     <Compile Include="CustomWebView_droid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Redenders\BorderlessEntryRenderer.cs" />

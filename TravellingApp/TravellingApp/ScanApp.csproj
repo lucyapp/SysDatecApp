@@ -3,17 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>ScanApp</PackageId>
     <Authors>ScanApp</Authors>
     <Product>ScanApp</Product>
     <AssemblyName>ScanApp</AssemblyName>
     <RootNamespace>ScanApp</RootNamespace>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
  
   <ItemGroup>
     <Compile Remove="Services\LoginService.cs" />
+    <Compile Remove="Services\MockPostService.cs" />
    </ItemGroup>
 
 

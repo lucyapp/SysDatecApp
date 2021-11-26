@@ -1,6 +1,4 @@
-﻿using Plugin.Media;
-using Plugin.Media.Abstractions;
-using Plugin.Permissions;
+﻿using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Prism.Commands;
 using Prism.Events;
@@ -67,11 +65,11 @@ namespace ScanApp.ViewModels
             {
                 dirs = di.GetDirectories();
                 Console.WriteLine("el numero de directorios encontrados es de {0}.", dirs.Length);
-                
+
             }
             catch (Exception e)
             {
-          
+
                 System.IO.Directory.CreateDirectory("/storage/emulated/0/Pictures/SysDatec/");
                 Console.WriteLine("El proceso fallo y no hay carpetas en SysDatec directorio, se mostrara el Directorio raiz {0}", e.ToString());
             }
@@ -95,8 +93,6 @@ namespace ScanApp.ViewModels
                 {
                     FileImage = "pdf";
                     NameImage = fi.Name.Replace(".pdf", " ");
-                    //System.Diagnostics.Process.Start("/storage/emulated/0/Pictures/SysDatec/" + NameImage+"."+FileImage);
-
                 }
                 else if (fi.Extension.Contains("txt"))
                 {
@@ -144,11 +140,6 @@ namespace ScanApp.ViewModels
             ArchivosRecientes = new ObservableCollection<ArchivosRecientes>(ListaArchivosSysdatec);
 
         }
-
-
-
-
-
 
         public void OnNavigatedFrom(INavigationParameters parameters)
         {
