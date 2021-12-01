@@ -92,7 +92,7 @@
                                             
                                         </Grid>
                                         <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer CommandParameter="{Binding .}"  Tapped="TapGestureRecognizer_Tapped"  />
+                                            <TapGestureRecognizer CommandParameter="{Binding .}"  Tapped="TapGestureRecognizer_TappedAsync"  />
                                         </Frame.GestureRecognizers>
                                     </Frame>
                                 </StackLayout>

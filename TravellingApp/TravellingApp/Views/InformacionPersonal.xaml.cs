@@ -513,9 +513,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["PagaServicios"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada11.Text);
+              
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada11.Text);
                     await (_ = ListaGuardarDispositivo(Result, "Servicios", "/storage/emulated/0/Pictures/SysDatec/Servicios").ConfigureAwait(false));
                 });
 
@@ -524,9 +525,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["CreditoViviendaArriendo"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada13.Text);
+               
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada13.Text);
                     await (_ = ListaGuardarDispositivo(Result, "CDT-Vivienda", "/storage/emulated/0/Pictures/SysDatec/CDT-Vivienda").ConfigureAwait(false));
                 });
             }
@@ -534,9 +536,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["PoseeVehiculo"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada23.Text);
+              
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada23.Text);
                     await (_ = ListaGuardarDispositivo(Result, "Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos").ConfigureAwait(false));
                 });
             }
@@ -544,9 +547,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["CreditoVehicular"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada15.Text);
+               
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada15.Text);
                     await (_ = ListaGuardarDispositivo(Result, "CDT-Vehiculos", "/storage/emulated/0/Pictures/SysDatec/Vehiculos/CDT-Vehiculos").ConfigureAwait(false));
                 });
             }
@@ -554,9 +558,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["EntidadesFinancieras"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada17.Text);
+               
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada17.Text);
                     await (_ = ListaGuardarDispositivo(Result, "ENT-Financieras", "/storage/emulated/0/Pictures/SysDatec/ENT-Financieras").ConfigureAwait(false));
                 });
             }
@@ -564,9 +569,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["TieneHijos"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada7.Text);
+              
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada7.Text);
                     await (_ = ListaGuardarDispositivo(Result, "Hijos", "/storage/emulated/0/Pictures/SysDatec/Hijos").ConfigureAwait(false));
                 });
             }
@@ -574,9 +580,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["TieneMascotas"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada9.Text);
+                
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada9.Text);
                     await (_ = ListaGuardarDispositivo(Result, "Mascotas", "/storage/emulated/0/Pictures/SysDatec/Mascotas").ConfigureAwait(false));
                 });
 
@@ -585,9 +592,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["EducacionFormal"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada19.Text);
+               
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada19.Text);
                     await (_ = ListaGuardarDispositivo(Result, "ACA-Educacion", "/storage/emulated/0/Pictures/SysDatec/ACA-Educacion").ConfigureAwait(false));
                 });
 
@@ -596,9 +604,10 @@ namespace ScanApp.Views
             if (Application.Current.Properties["Labora"].ToString() != null)
             {
 
-                var Result = Convertir_StringSplit_ToList(Entrada21.Text);
+               
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    var Result = Convertir_StringSplit_ToList(Entrada21.Text);
                     await (_ = ListaGuardarDispositivo(Result, "SIT-Laboral", "/storage/emulated/0/Pictures/SysDatec/SIT-Laboral").ConfigureAwait(false));
                 });
 
@@ -610,7 +619,7 @@ namespace ScanApp.Views
                 {
                     _ = DisplayAlert("Infomacion", "El usuario '" + Application.Current.Properties["Nombre"] + " " + Application.Current.Properties["Apellido"] + "' ya guardo sus datos.", "Ok").ConfigureAwait(false);
                     await Task.Delay(1000).ConfigureAwait(false);
-                    Application.Current.MainPage = new AppShell();
+                   
                 });
             }
             catch (Exception)
@@ -618,17 +627,20 @@ namespace ScanApp.Views
                 _ = DisplayAlert("Error", "Ha ocurrido un error al procesar la informacion, repita nuevamente!", "Ok").ConfigureAwait(false);
                 Application.Current.MainPage = new InformacionPersonal();
             }
-
+            Application.Current.MainPage = new AppShell();
         }
 
 
         private void ValidarDatos_MostrarBoton()
         {
-            if (cantidadDatos >= 8)
+            if (cantidadDatos >= 2)
             {
                 btnGuardarInformacionPersonal.IsVisible = true;
 
             }
+            //else {
+            //   DisplayAlert("Información", "Para poder guardar debe al menos tener (2) check activos!", "Ok");
+           // }
 
         }
     }

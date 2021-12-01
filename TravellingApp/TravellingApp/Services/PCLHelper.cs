@@ -220,7 +220,7 @@ namespace DevEnvExe_LocalStorage
             {
             }
             else {
-                await App.Current.MainPage.DisplayAlert("Acceso", "Deberá aceptar los permisos de escritura", "OK");
+                //await App.Current.MainPage.DisplayAlert("Acceso", "Deberá aceptar los permisos de escritura", "OK");
                 status = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>().ConfigureAwait(false);
                
             }

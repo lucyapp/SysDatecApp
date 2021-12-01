@@ -34,9 +34,12 @@ namespace ScanApp.Views
         public async Task SeleccionarImagen(string location)
         {
 
-
+            string cadena = location;
+            string[] Separado = cadena.Split('/');
+            string Final = Separado[Separado.Length - 1];
             var memoryStream = new MemoryStream();
-            using var source = System.IO.File.OpenRead(location);
+
+            using var source = System.IO.File.OpenRead(targetPath+Final);
             await source.CopyToAsync(memoryStream);
             try
             {
@@ -395,20 +398,9 @@ namespace ScanApp.Views
             else
             {
                 Console.WriteLine("Archivo encontrado : " + nombreArchivo);
-
             }
-            if ((bool)Application.Current.Properties["ImagenFile"])
-            {
-                ImagenGuardada = Application.Current.Properties["ImagenFile"];
-                ImagenSource = Application.Current.Properties["ImagenSource"];
-            }
-            else
-            {
-
-                //significa que no tiene datos de imagen
-            }
-
-
+          
+           
             var ImagenCargada = await (_ = DevEnvExe_LocalStorage.PCLHelper.GetFileStreamAsync("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo)).ConfigureAwait(false);
             byte[] myBinary = new byte[ImagenCargada.Length];
             _ = CopiarFile_GuardarAsync(nombreArchivo, sourcePath, targetPath, myBinary);
@@ -446,20 +438,22 @@ namespace ScanApp.Views
 
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void TapGestureRecognizer_TappedAsync(object sender, EventArgs e)
         {
             ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
-            LoadImagenCopy(tmpData.Name.Trim() + tmpData.Description.Trim());
+            //LoadImagenCopy(tmpData.Name.Trim() + tmpData.Description.Trim());
+            var LoadImage = DevEnvExe_LocalStorage.PCLHelper.GetFilePathFromRoot(DEFAULTPATH+"/" + tmpData.Name.Trim() + tmpData.Description.Trim());
+            Console.WriteLine(LoadImage);
 
-            //try
-            //{
-            //    await SeleccionarImagen("/storage/emulated/0/Pictures/SysDatec/" + tmpData.Name.Trim() + tmpData.Description);
-            //    await Sheet.OpenSheet();
-            //}
-            //catch (Exception ex)
-            //{
-            //    ex.Log();
-            //}
+            try
+            {
+                _ = SeleccionarImagen(DEFAULTPATH  + tmpData.Name.Trim() + tmpData.Description).ConfigureAwait(false);
+                _ = Sheet.OpenSheet().ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                ex.Log();
+            }
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
@@ -522,6 +516,7 @@ namespace ScanApp.Views
             var carpeta = (CustomImage)sender;
             Console.WriteLine("Presionado");
             string action = await DisplayActionSheet("Eliminar carpeta: Esta seguro?", "Cancelar", "Aceptar", carpeta.CommandParameter.ToString());
+            
             if (action == "Aceptar")
             {
                 string file = carpeta.CommandParameter.ToString().Trim();
