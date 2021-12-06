@@ -10,6 +10,7 @@ using ScanApp.Models;
 using ScanApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,9 +27,11 @@ namespace ScanApp.Views
         private object ImagenSource { get; set; }
 
         private Stream stream { get; set; }
+        public string sourcePathInicial { get; set; } = @"/storage/emulated/0/Pictures/SysDatec/";
         public string sourcePath { get; set; } = @"/storage/emulated/0/Pictures/SysDatec/";
         public string targetPath { get; set; } = @"/storage/emulated/0/Android/data/com.plugin.mediatest/files/";
-
+        public string targetPath2 { get; set; } = @"/storage/emulated/0/Android/data/com.plugin.mediatest/files/Pictures/SysDatec";
+        public int contador { get; set; } = 0;
 
         string DEFAULTPATH { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public async Task SeleccionarImagen(string location)
@@ -39,7 +42,7 @@ namespace ScanApp.Views
             string Final = Separado[Separado.Length - 1];
             var memoryStream = new MemoryStream();
 
-            using var source = System.IO.File.OpenRead(targetPath+Final);
+            using var source = System.IO.File.OpenRead(targetPath + Final);
             await source.CopyToAsync(memoryStream);
             try
             {
@@ -54,6 +57,9 @@ namespace ScanApp.Views
             List<string> stringList = Lista.Split(',').ToList();
             return stringList;
         }
+        public ArchivosView ContentPage { get; private set; }
+
+
 
 
         public string GetFileNameFromUrl(string url)
@@ -86,14 +92,75 @@ namespace ScanApp.Views
 
             takePhoto.Clicked += async (sender, args) =>
             {
-
+                
+               
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
                     _ = DisplayAlert("No hay Camara", "No hay camara disponible.", "OK");
                     return;
                 }
 
+                var Lista = DevEnvExe_LocalStorage.PCLHelper.ListaDirectorios();
+                ObservableCollection<ListadosMedia> Lista1 = DevEnvExe_LocalStorage.PCLHelper.ListaDirectoriosAll();
 
+                string CarpetaRaiz = "";
+
+
+                string action = await DisplayActionSheet("Guardar en Carpeta?", "Cancel", null, Lista.Select(device => device.ToString()).ToArray());
+
+
+                if (action != null && action != "Cancel")
+                {
+                    foreach (var lc in Lista1)
+                    {
+
+                        if (lc.Carpetas.Count >= 0)
+                        {
+
+                            for (int i = 0; i < lc.Carpetas.Count(); i++)
+                            {
+                                if (lc.Carpetas[i].Name.Equals(action))
+                                {
+                                    //significa que solo son carpetas y no subcarpetas
+                                    CarpetaRaiz = sourcePath + action;
+                                }
+
+
+                            }
+
+                        }
+                    }
+
+                    if (CarpetaRaiz == "")
+                    {
+
+                        foreach (var lsc in Lista1)
+                        {
+
+                            if (lsc.Subcarpetas.Count() >= 0)
+                            {
+                                for (int i = 0; i < lsc.Subcarpetas.Count(); i++)
+                                {
+                                    if (lsc.Subcarpetas[i].Name.Equals(action))
+                                    {
+                                        //significa que solo son carpetas y no subcarpetas
+                                        CarpetaRaiz = @sourcePath + lsc.Subcarpetas[i].DirectorioPadre + "/" + lsc.Subcarpetas[i].Name;
+                                    }
+
+
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    CarpetaRaiz = "SysDatec";
+                }
+
+              
 
                 var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
                 {
@@ -103,7 +170,8 @@ namespace ScanApp.Views
                     CustomPhotoSize = 50,
                     PhotoSize = PhotoSize.MaxWidthHeight,
                     MaxWidthHeight = 2000,
-                    DefaultCamera = CameraDevice.Rear
+                    DefaultCamera = CameraDevice.Rear,
+
                 });
 
                 if (file == null)
@@ -117,31 +185,45 @@ namespace ScanApp.Views
                     Application.Current.Properties["ImagenFileString"] = file.Path;
                 }
 
-                _ = DisplayAlert("Archivo guardado", file.Path, "OK");
-
+                var respuesta = await DisplayActionSheet("carpeta Destino", CarpetaRaiz, "OK");
+              
+                File.WriteAllText(targetPath + "File.txt", file.Path);
                 image.Source = ImageSource.FromStream(() =>
-                 {
-                     var stream = file.GetStream();
-                     file.Dispose();
-                     return stream;
-                 });
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
 
                 if (image.Source != null)
                 {
 
                     Application.Current.Properties["ImagenSource"] = image.Source;
+                    String[] Card = System.IO.File.ReadAllLines(targetPath + "File.txt");
+ 
+                    string lastPart = Card[0].Split('/').Last();
+
+                    if (respuesta != null)
+                    {
+                        sourcePath = CarpetaRaiz;
+                        bool Estadocopiado = CopiarFile(lastPart);
+                        if (Estadocopiado == false)
+                        {
+                            await DisplayActionSheet("Error", "Se produjo un error al intentar guardar el archivo", "OK");
+                        }
+                        else {
+                            await DisplayActionSheet("Exito al guardar", CarpetaRaiz+ lastPart, "OK");
+                        }
+                    }
+             
                     //GuardarImagenDatabase((string)Application.Current.Properties["ImagenFileString"], Application.Current.Properties["ImagenSource"]);
                 }
-
-
 
                 BindingContext = new ArchivosViewModel();
             };
 
             pickPhoto.Clicked += async (sender, args) =>
             {
-               
-
                 if (!CrossMedia.Current.IsPickPhotoSupported)
                 {
                     _ = DisplayAlert("Fotos no soportada", "No hay permisos garantizados para fotos.", "OK");
@@ -150,9 +232,10 @@ namespace ScanApp.Views
                 var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
                 {
                     PhotoSize = PhotoSize.Medium,
-                    
+
 
                 });
+
 
 
                 if (file == null)
@@ -164,6 +247,9 @@ namespace ScanApp.Views
                     file.Dispose();
                     return stream;
                 });
+
+
+
 
 
                 //Application.Current.Properties["ImagenFile"] = file.Path;
@@ -308,8 +394,6 @@ namespace ScanApp.Views
             }
         }
 
-        public ArchivosView ContentPage { get; private set; }
-
         private async void Button_Clicked(object sender, EventArgs e)
         {
 
@@ -352,6 +436,49 @@ namespace ScanApp.Views
                 File.Delete(filePath);
             File.WriteAllBytes(filePath, data);
         }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+        public static byte[] ConvertirStringToByte(string cadena)
+        {
+            byte[] l_Data = Convert.FromBase64String(cadena);
+            return l_Data;
+        }
+        public bool CopiarFile(string filename)
+        {
+            string sourceFile  = Path.Combine(targetPath2, filename);
+            string destFile = Path.Combine(sourcePath, filename);
+          
+            // To copy a folder's contents to a new location:
+            // Create a new target folder, if necessary.
+            if (!Directory.Exists(targetPath))
+            {
+                Directory.CreateDirectory(targetPath);
+            }
+
+            // To copy a file to another location and 
+            // overwrite the destination file if it already exists.
+            try
+            {
+                File.Copy(sourceFile , destFile, true);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            sourcePath = sourcePathInicial;
+            File.Delete(sourcePath+filename);
+            return true;
+        }
+
 
         public async void LoadImagenCopy(string nombreArchivo)
         {
@@ -399,21 +526,25 @@ namespace ScanApp.Views
             {
                 Console.WriteLine("Archivo encontrado : " + nombreArchivo);
             }
-          
-           
-            var ImagenCargada = await (_ = DevEnvExe_LocalStorage.PCLHelper.GetFileStreamAsync("/storage/emulated/0/Pictures/SysDatec/" + nombreArchivo)).ConfigureAwait(false);
-            byte[] myBinary = new byte[ImagenCargada.Length];
-            _ = CopiarFile_GuardarAsync(nombreArchivo, sourcePath, targetPath, myBinary);
-            var lect = ImagenCargada.Read(myBinary, 0, (int)ImagenCargada.Length);
-            var LoadImage = await (_ = DevEnvExe_LocalStorage.PCLHelper.LoadImage(myBinary, nombreArchivo, await FileSystem.Current.GetFolderFromPathAsync("storage/emulated/0/Pictures/SysDatec/"))).ConfigureAwait(false);
-            //SaveBytes(targetPath, myBinary);
-            var stream1 = new MemoryStream(myBinary);
-            image.Source = ImageSource.FromStream(() =>
-            {
-                var imagen = new MemoryStream(myBinary);
-                return imagen;
-            });
 
+            var Imagen64 = DevEnvExe_LocalStorage.PCLHelper.ImageToBase64(nombreArchivo);
+            if (Imagen64 != null)
+            {
+                var ImagenCargada = await DevEnvExe_LocalStorage.PCLHelper.GetFileStreamAsync(nombreArchivo).ConfigureAwait(false);
+                byte[] myBinary = new byte[ImagenCargada.Length];
+                string cadenaString = System.Text.Encoding.UTF8.GetString(myBinary, 0, myBinary.Length);
+                string resBase = Base64Encode(cadenaString);
+                File.WriteAllText(targetPath + "Base64.txt", resBase);
+                var lect = ImagenCargada.Read(myBinary, 0, (int)ImagenCargada.Length);
+                var LoadImage = await (_ = DevEnvExe_LocalStorage.PCLHelper.LoadImage(myBinary, nombreArchivo, await FileSystem.Current.GetFolderFromPathAsync("storage/emulated/0/Pictures/SysDatec/"))).ConfigureAwait(false);
+                //SaveBytes(targetPath, myBinary);
+                var stream1 = new MemoryStream(myBinary);
+                image.Source = ImageSource.FromStream(() =>
+                {
+                    var imagen = new MemoryStream(myBinary);
+                    return imagen;
+                });
+            }
             //string sourceFile = System.IO.Path.Combine(sourcePath, OrigenFile.OriginalString);
             //string destFile = System.IO.Path.Combine(sourcePath, targetPath + nombreArchivo);
 
@@ -441,13 +572,13 @@ namespace ScanApp.Views
         private async void TapGestureRecognizer_TappedAsync(object sender, EventArgs e)
         {
             ArchivosRecientes tmpData = (ArchivosRecientes)((TappedEventArgs)e).Parameter;
-            //LoadImagenCopy(tmpData.Name.Trim() + tmpData.Description.Trim());
-            var LoadImage = DevEnvExe_LocalStorage.PCLHelper.GetFilePathFromRoot(DEFAULTPATH+"/" + tmpData.Name.Trim() + tmpData.Description.Trim());
+
+            var LoadImage = DevEnvExe_LocalStorage.PCLHelper.GetFilePathFromRoot(DEFAULTPATH + "/" + tmpData.Name.Trim() + tmpData.Description.Trim());
             Console.WriteLine(LoadImage);
 
             try
             {
-                _ = SeleccionarImagen(DEFAULTPATH  + tmpData.Name.Trim() + tmpData.Description).ConfigureAwait(false);
+                _ = SeleccionarImagen(DEFAULTPATH + tmpData.Name.Trim() + tmpData.Description).ConfigureAwait(false);
                 _ = Sheet.OpenSheet().ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -480,12 +611,12 @@ namespace ScanApp.Views
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                         Task.Delay(1000);
+                        Task.Delay(1000);
                         _ = DisplayAlert("Eliminación", "El archivo seleccionado ha sido eliminado", "Ok").ConfigureAwait(false);
                         BindingContext = new ArchivosViewModel();
                     });
-                    
-                     
+
+
                 }
                 else
                 {
@@ -493,21 +624,21 @@ namespace ScanApp.Views
                     {
                         _ = Task.Delay(1000);
                         _ = DisplayAlert("Eliminación", "El archivo no se logro eliminar", "Ok");
-                      
+
                     });
-                   
+
 
                 }
-                
+
             }
 
-          
+
         }
 
         [Obsolete]
         private void PageNavigationSource(ArchivosViewModel archivosViewModel)
         {
-            BindingContext =  archivosViewModel;
+            BindingContext = archivosViewModel;
         }
 
         [Obsolete]
@@ -516,7 +647,7 @@ namespace ScanApp.Views
             var carpeta = (CustomImage)sender;
             Console.WriteLine("Presionado");
             string action = await DisplayActionSheet("Eliminar carpeta: Esta seguro?", "Cancelar", "Aceptar", carpeta.CommandParameter.ToString());
-            
+
             if (action == "Aceptar")
             {
                 string file = carpeta.CommandParameter.ToString().Trim();
@@ -536,14 +667,14 @@ namespace ScanApp.Views
                 else
                 {
                     Device.BeginInvokeOnMainThread(() =>
-                   {
-                       Task.Delay(1000).ConfigureAwait(false);
-                       _ = DisplayAlert("Eliminación", "La carpeta no se pudo eliminar", "Ok").ConfigureAwait(false);
-                   });
+                    {
+                        Task.Delay(1000).ConfigureAwait(false);
+                        _ = DisplayAlert("Eliminación", "La carpeta no se pudo eliminar", "Ok").ConfigureAwait(false);
+                    });
                 }
             }
 
         }
     }
-    
+
 }

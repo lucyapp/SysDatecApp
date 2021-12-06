@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" package="com.plugin.mediatest" android:versionCode="1" android:versionName="1">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="30" />
-	<application android:label="LucyApp" android:icon="@drawable/icon" android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true" android:grantUriPermissions="true">
+	<application android:label="ApaBot" android:icon="@drawable/icon" android:usesCleartextTraffic="true" android:requestLegacyExternalStorage="true" android:grantUriPermissions="true">
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.plugin.mediatest.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>
 		</provider>

@@ -74,8 +74,6 @@ namespace ScanApp.ViewModels
                 Console.WriteLine("El proceso fallo y no hay carpetas en SysDatec directorio, se mostrara el Directorio raiz {0}", e.ToString());
             }
 
-
-
             foreach (var fi in di.GetFiles())
             {
                 if (fi.Extension.Contains("jpg"))
@@ -125,11 +123,7 @@ namespace ScanApp.ViewModels
 
             }
 
-            //Console.WriteLine("realizar filtros de los archivos");
-            //foreach (var fi in di.GetFiles("*", SearchOption.AllDirectories))
-            //{
-            //    Console.WriteLine(fi.Name);
-            //}
+            
 
             if (dirs.Length <= 0)
             {

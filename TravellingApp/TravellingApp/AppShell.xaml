@@ -9,7 +9,7 @@
        mc:Ignorable="d"  
        NavigationPage.HasNavigationBar="True"
        x:Class="ScanApp.AppShell"
-       Title="LucyApp"
+       Title="ApaBot"
        FlyoutBehavior="Flyout">
     <Shell.Resources>
    
