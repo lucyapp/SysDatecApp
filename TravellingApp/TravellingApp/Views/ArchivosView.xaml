@@ -23,8 +23,8 @@
         </Grid.RowDefinitions>
         <ScrollView Grid.Row="0">
            
-                <StackLayout Spacing="10" Padding="10" VerticalOptions="FillAndExpand" Visual="Default">
-                <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" ColumnDefinitions="*,Auto" VerticalOptions="StartAndExpand" Padding="30,60,30,15">
+                <StackLayout Spacing="10" Padding="10" VerticalOptions="EndAndExpand" Visual="Default">
+                <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" ColumnDefinitions="*,Auto" VerticalOptions="StartAndExpand" Padding="30,30,30,15" BackgroundColor="Transparent">
 
                     <!-- 3. Header-->
                     <Grid Grid.Row="0" Grid.ColumnSpan="2" RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,Auto">
@@ -38,12 +38,13 @@
                     </Grid>
                     <!--Search & Action Button-->
                     <SearchBar Grid.Column="0" Grid.Row="1" Margin="-5,10,0,10" BackgroundColor="White"/>
-                    <Button Grid.Column="1" Grid.Row="1" BackgroundColor="{StaticResource MainColor}" CornerRadius="9" VerticalOptions="Center" HorizontalOptions="End" WidthRequest="50" ImageSource="List"/>
+                    
+                    <Button Grid.Column="1" Grid.Row="1" BackgroundColor="{StaticResource MainColor}" CornerRadius="9" VerticalOptions="Center" HorizontalOptions="End" WidthRequest="50" ImageSource="List" Clicked="TapGestureRecognizer_OnTapped"/>
 
                     <!-- 4. Popular-->
                     <Label Grid.Column="0" Grid.Row="2" Text="Mis carpetas" TextColor="#858788" FontSize="20" FontAttributes="Bold" />
                     <Label Grid.Column="1" Grid.Row="2" Text="Mostrar todos" HorizontalTextAlignment="End" FontAttributes="Bold" TextColor="Silver" VerticalTextAlignment="Center"/>
-
+                     
                     <CollectionView x:Name="ListadoCarpetas" Grid.ColumnSpan="2" Grid.Row="3" HorizontalScrollBarVisibility="Never"
                                  ItemsSource="{Binding NombresCarpetas}"
                                  Margin="-20,0,-25,0"
@@ -100,12 +101,13 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Grid>
-              
+
+ 
             </StackLayout>
            
  
         </ScrollView>
-        <controls:BottomSheetControl x:Name="Sheet"  SheetHeight="350">
+        <controls:BottomSheetControl x:Name="Sheet"  SheetHeight="300">
             <controls:BottomSheetControl.SheetContent>
                 <StackLayout>
                     <OnPlatform x:TypeArguments="View">
@@ -137,12 +139,16 @@
             </controls:BottomSheetControl.SheetContent>
         </controls:BottomSheetControl>
 
-        <Button Grid.Row="0" x:Name="pickPhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30"  VerticalOptions ="End" HorizontalOptions ="EndAndExpand"  Image="file2.png"  />
-        <Button Grid.Row="1" x:Name="takePhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30" Image="camara.png" VerticalOptions ="End"  HorizontalOptions ="EndAndExpand"/>
+        <Button Grid.Row="0" x:Name="pickPhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30"  VerticalOptions ="End" HorizontalOptions ="End" Image="file2.png"/>
+        <Button Grid.Row="1" x:Name="takePhoto" BorderWidth="1" WidthRequest="60" HeightRequest="60" BackgroundColor="LightBlue" BorderRadius="30"  VerticalOptions ="End" HorizontalOptions ="End" Image="camara.png"/>
 
 
 
     </Grid>
+
+
+
+   
 
 
 </ContentPage>

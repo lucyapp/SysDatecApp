@@ -27028,64 +27028,70 @@ namespace ScanApp.Droid
 			public const int seleccionar = 2131165392;
 			
 			// aapt resource value: 0x7F0700D1
-			public const int shop = 2131165393;
+			public const int share = 2131165393;
 			
 			// aapt resource value: 0x7F0700D2
-			public const int splash_logo = 2131165394;
+			public const int share2 = 2131165394;
 			
 			// aapt resource value: 0x7F0700D3
-			public const int splash_screen = 2131165395;
-			
-			// aapt resource value: 0x7F0700D6
-			public const int TabIcon3 = 2131165398;
-			
-			// aapt resource value: 0x7F0700D7
-			public const int TabIcon4 = 2131165399;
-			
-			// aapt resource value: 0x7F0700D8
-			public const int TabPlus = 2131165400;
+			public const int shop = 2131165395;
 			
 			// aapt resource value: 0x7F0700D4
-			public const int tab_about = 2131165396;
+			public const int splash_logo = 2131165396;
 			
 			// aapt resource value: 0x7F0700D5
-			public const int tab_feed = 2131165397;
+			public const int splash_screen = 2131165397;
+			
+			// aapt resource value: 0x7F0700D8
+			public const int TabIcon3 = 2131165400;
 			
 			// aapt resource value: 0x7F0700D9
-			public const int test_custom_background = 2131165401;
+			public const int TabIcon4 = 2131165401;
 			
 			// aapt resource value: 0x7F0700DA
-			public const int time = 2131165402;
+			public const int TabPlus = 2131165402;
+			
+			// aapt resource value: 0x7F0700D6
+			public const int tab_about = 2131165398;
+			
+			// aapt resource value: 0x7F0700D7
+			public const int tab_feed = 2131165399;
 			
 			// aapt resource value: 0x7F0700DB
-			public const int tooltip_frame_dark = 2131165403;
+			public const int test_custom_background = 2131165403;
 			
 			// aapt resource value: 0x7F0700DC
-			public const int tooltip_frame_light = 2131165404;
+			public const int time = 2131165404;
 			
 			// aapt resource value: 0x7F0700DD
-			public const int transaccion = 2131165405;
+			public const int tooltip_frame_dark = 2131165405;
 			
 			// aapt resource value: 0x7F0700DE
-			public const int twitter = 2131165406;
+			public const int tooltip_frame_light = 2131165406;
 			
 			// aapt resource value: 0x7F0700DF
-			public const int txt = 2131165407;
+			public const int transaccion = 2131165407;
 			
 			// aapt resource value: 0x7F0700E0
-			public const int txt1 = 2131165408;
+			public const int twitter = 2131165408;
 			
 			// aapt resource value: 0x7F0700E1
-			public const int usuario = 2131165409;
+			public const int txt = 2131165409;
 			
 			// aapt resource value: 0x7F0700E2
-			public const int visual_data = 2131165410;
+			public const int txt1 = 2131165410;
 			
 			// aapt resource value: 0x7F0700E3
-			public const int Women = 2131165411;
+			public const int usuario = 2131165411;
 			
 			// aapt resource value: 0x7F0700E4
-			public const int xamarin_logo = 2131165412;
+			public const int visual_data = 2131165412;
+			
+			// aapt resource value: 0x7F0700E5
+			public const int Women = 2131165413;
+			
+			// aapt resource value: 0x7F0700E6
+			public const int xamarin_logo = 2131165414;
 			
 			static Drawable()
 			{

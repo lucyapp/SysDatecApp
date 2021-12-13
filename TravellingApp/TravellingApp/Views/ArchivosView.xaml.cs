@@ -9,6 +9,7 @@ using ScanApp.Data;
 using ScanApp.Models;
 using ScanApp.ViewModels;
 using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -16,6 +17,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using FileSystem = PCLStorage.FileSystem;
+using TestAppSharePlugin.Interfaces;
 
 namespace ScanApp.Views
 {
@@ -36,13 +40,12 @@ namespace ScanApp.Views
         string DEFAULTPATH { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public async Task SeleccionarImagen(string location)
         {
-
             string cadena = location;
             string[] Separado = cadena.Split('/');
             string Final = Separado[Separado.Length - 1];
             var memoryStream = new MemoryStream();
 
-            using var source = System.IO.File.OpenRead(targetPath + Final);
+            var source = System.IO.File.OpenRead(targetPath + Final);
             await source.CopyToAsync(memoryStream);
             try
             {
@@ -184,10 +187,12 @@ namespace ScanApp.Views
 
                     Application.Current.Properties["ImagenFileString"] = file.Path;
                 }
-
-                var respuesta = await DisplayActionSheet("carpeta Destino", CarpetaRaiz, "OK");
+               
+                var respuesta = await DisplayActionSheet("carpeta Destino", CarpetaRaiz, null);
               
                 File.WriteAllText(targetPath + "File.txt", file.Path);
+             
+
                 image.Source = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();
@@ -206,19 +211,31 @@ namespace ScanApp.Views
                     if (respuesta != null)
                     {
                         sourcePath = CarpetaRaiz;
+
                         bool Estadocopiado = CopiarFile(lastPart);
-                        if (Estadocopiado == false)
+                        if (CarpetaRaiz != "SysDatec")
                         {
-                            await DisplayActionSheet("Error", "Se produjo un error al intentar guardar el archivo", "OK");
+                            if (Estadocopiado == false)
+                            {
+                                 await DisplayActionSheet("Error", "Se produjo un error al intentar guardar el archivo", "OK");
+                            }
+                            else
+                            {
+                                await DisplayActionSheet("Exito al guardar", CarpetaRaiz + "/" + lastPart, "OK");
+                            }
                         }
-                        else {
-                            await DisplayActionSheet("Exito al guardar", CarpetaRaiz+ lastPart, "OK");
-                        }
+                        var imageByte = System.IO.File.ReadAllBytes(Card[0].ToString());
+                        ShareVentana(imageByte);
                     }
-             
+                  
+                        
+                        
+
+
+                  
                     //GuardarImagenDatabase((string)Application.Current.Properties["ImagenFileString"], Application.Current.Properties["ImagenSource"]);
                 }
-
+                
                 BindingContext = new ArchivosViewModel();
             };
 
@@ -340,7 +357,7 @@ namespace ScanApp.Views
             // Create a new target folder.
             // If the directory already exists, this method does not create a new directory.
 
-            PermissionStatus permisos = await (_ = DevEnvExe_LocalStorage.PCLHelper.VerificarPermisos()).ConfigureAwait(false);
+            Plugin.Permissions.Abstractions.PermissionStatus permisos = await (_ = DevEnvExe_LocalStorage.PCLHelper.VerificarPermisos()).ConfigureAwait(false);
 
             DirectoryInfo dir = System.IO.Directory.CreateDirectory(carpetaInicial + "temp");
 
@@ -536,7 +553,7 @@ namespace ScanApp.Views
                 string resBase = Base64Encode(cadenaString);
                 File.WriteAllText(targetPath + "Base64.txt", resBase);
                 var lect = ImagenCargada.Read(myBinary, 0, (int)ImagenCargada.Length);
-                var LoadImage = await (_ = DevEnvExe_LocalStorage.PCLHelper.LoadImage(myBinary, nombreArchivo, await FileSystem.Current.GetFolderFromPathAsync("storage/emulated/0/Pictures/SysDatec/"))).ConfigureAwait(false);
+                var LoadImage = await (_ = DevEnvExe_LocalStorage.PCLHelper.LoadImage(myBinary, nombreArchivo, await PCLStorage.FileSystem.Current.GetFolderFromPathAsync("storage/emulated/0/Pictures/SysDatec/"))).ConfigureAwait(false);
                 //SaveBytes(targetPath, myBinary);
                 var stream1 = new MemoryStream(myBinary);
                 image.Source = ImageSource.FromStream(() =>
@@ -675,6 +692,42 @@ namespace ScanApp.Views
             }
 
         }
+
+
+        private bool isOpen = false;
+        private void TapGestureRecognizer_OnTapped(object sender, EventArgs e)
+        {
+
+            isOpen = true;
+
+          
+
+            if (isOpen == false)
+            {
+              
+
+            }
+            else
+            {
+              
+
+               
+            }
+
+        }
+
+
+        public void ShareVentana(byte[] image) {
+
+            //var screenshot = DependencyService.Get<IScreenshotService>().Capture();
+            MemoryStream ms = new MemoryStream(image);
+            ImageSource imageSource = ImageSource.FromStream(() => { return ms; });
+
+            DependencyService.Get<IShareService>().Share("ApaBot", "Imagen Share - SysDatec", imageSource);
+        }
+
+
+       
     }
 
 }

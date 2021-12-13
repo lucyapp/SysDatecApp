@@ -6,6 +6,8 @@ using Android.Runtime;
 using Octane.Xamarin.Forms.VideoPlayer.Android;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
+using TestAppSharePlugin.Droid.Services;
+using Xamarin.Forms;
 
 namespace ScanApp.Droid
 {
@@ -35,7 +37,9 @@ namespace ScanApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             LoadApplication(new App());
-
+            DependencyService.Register<ScreenshotService>();
+            DependencyService.Get<ScreenshotService>().SetActivity(this);
+            DependencyService.Register<ShareService>();
 
         }
 
