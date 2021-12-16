@@ -42,8 +42,6 @@ namespace ScanApp.Droid
             DependencyService.Register<ShareService>();
 
         }
-
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             RequestPermissions(permissions, 77);

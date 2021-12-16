@@ -146,7 +146,7 @@ namespace ScanApp.Views
                                 {
                                     if (lsc.Subcarpetas[i].Name.Equals(action))
                                     {
-                                        //significa que solo son carpetas y no subcarpetas
+                                      
                                         CarpetaRaiz = @sourcePath + lsc.Subcarpetas[i].DirectorioPadre + "/" + lsc.Subcarpetas[i].Name;
                                     }
 
@@ -224,15 +224,17 @@ namespace ScanApp.Views
                                 await DisplayActionSheet("Exito al guardar", CarpetaRaiz + "/" + lastPart, "OK");
                             }
                         }
-                        var imageByte = System.IO.File.ReadAllBytes(Card[0].ToString());
-                        ShareVentana(imageByte);
+
+                        var respuesta1 = await DisplayActionSheet("Desea compartir?", CarpetaRaiz, null);
+                        if (respuesta1 != null)
+                        {
+                            var imageByte = System.IO.File.ReadAllBytes(Card[0].ToString());
+                            ShareVentana(imageByte);
+                        }
+                        
                     }
                   
-                        
-                        
 
-
-                  
                     //GuardarImagenDatabase((string)Application.Current.Properties["ImagenFileString"], Application.Current.Properties["ImagenSource"]);
                 }
                 
@@ -264,10 +266,6 @@ namespace ScanApp.Views
                     file.Dispose();
                     return stream;
                 });
-
-
-
-
 
                 //Application.Current.Properties["ImagenFile"] = file.Path;
                 //Application.Current.Properties["ImagenSource"] = image.Source;
@@ -311,8 +309,6 @@ namespace ScanApp.Views
               DisplayAlert("Video Seleccionado", "Localizacion: " + file.Path, "OK");
               file.Dispose();
             };*/
-
-
             //var byteArray = Convert.FromBase64String("IMG_20210922_200031.jpg");
             //stream = new MemoryStream(byteArray);
             //var imageSource = ImageSource.FromStream(() => stream);                                           
@@ -700,8 +696,6 @@ namespace ScanApp.Views
 
             isOpen = true;
 
-          
-
             if (isOpen == false)
             {
               
@@ -709,9 +703,7 @@ namespace ScanApp.Views
             }
             else
             {
-              
-
-               
+     
             }
 
         }
@@ -725,9 +717,18 @@ namespace ScanApp.Views
 
             DependencyService.Get<IShareService>().Share("ApaBot", "Imagen Share - SysDatec", imageSource);
         }
+        public ImageSource MostrarImagen(byte[] image)
+        {
 
+            //var screenshot = DependencyService.Get<IScreenshotService>().Capture();
+            MemoryStream ms = new MemoryStream(image);
+            ImageSource imageSource = ImageSource.FromStream(() => { 
+                return ms; 
+            });
+            return imageSource;
+            
+        }
 
-       
     }
 
 }
